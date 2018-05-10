@@ -44,9 +44,13 @@ namespace Logacell
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeProductosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuProgresoServicios = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.listaDeServiciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.listaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,10 +58,6 @@ namespace Logacell
             this.corteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuProgresoServicios = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.nuevoServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -70,9 +70,9 @@ namespace Logacell
             this.usuarioToolStripMenuItem,
             this.inicioToolStripMenuItem,
             this.toolStripMenuItem7,
+            this.toolStripMenuItem1,
             this.toolStripMenuItem6,
             this.toolStripMenuItem5,
-            this.toolStripMenuItem1,
             this.toolStripMenuItem4});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -156,6 +156,30 @@ namespace Logacell
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(130, 36);
             this.toolStripMenuItem6.Text = "Servicios";
+            this.toolStripMenuItem6.Visible = false;
+            // 
+            // nuevoServicioToolStripMenuItem
+            // 
+            this.nuevoServicioToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.nuevoServicioToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.nuevoServicioToolStripMenuItem.Name = "nuevoServicioToolStripMenuItem";
+            this.nuevoServicioToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
+            this.nuevoServicioToolStripMenuItem.Text = "Nuevo Servicio";
+            this.nuevoServicioToolStripMenuItem.Click += new System.EventHandler(this.nuevoServicioToolStripMenuItem_Click);
+            // 
+            // toolStripMenuProgresoServicios
+            // 
+            this.toolStripMenuProgresoServicios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.toolStripMenuProgresoServicios.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuProgresoServicios.Name = "toolStripMenuProgresoServicios";
+            this.toolStripMenuProgresoServicios.Size = new System.Drawing.Size(256, 28);
+            this.toolStripMenuProgresoServicios.Text = "Progeso de servicios";
+            this.toolStripMenuProgresoServicios.Click += new System.EventHandler(this.btnProgresoServicios_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(253, 6);
             // 
             // listaDeServiciosToolStripMenuItem
             // 
@@ -179,6 +203,7 @@ namespace Logacell
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(112, 36);
             this.toolStripMenuItem5.Text = "Ventas";
+            this.toolStripMenuItem5.Visible = false;
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // nuevaVentaToolStripMenuItem
@@ -189,6 +214,11 @@ namespace Logacell
             this.nuevaVentaToolStripMenuItem.Size = new System.Drawing.Size(189, 28);
             this.nuevaVentaToolStripMenuItem.Text = "Nueva Venta";
             this.nuevaVentaToolStripMenuItem.Click += new System.EventHandler(this.nuevaVentaToolStripMenuItem_Click_1);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
             // 
             // listaToolStripMenuItem
             // 
@@ -210,6 +240,7 @@ namespace Logacell
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 36);
             this.toolStripMenuItem1.Text = "Clientes";
+            this.toolStripMenuItem1.Visible = false;
             // 
             // listaDeClientesToolStripMenuItem
             // 
@@ -231,6 +262,7 @@ namespace Logacell
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(91, 36);
             this.toolStripMenuItem4.Text = "Caja";
+            this.toolStripMenuItem4.Visible = false;
             // 
             // corteDeCajaToolStripMenuItem
             // 
@@ -259,34 +291,6 @@ namespace Logacell
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
-            // 
-            // toolStripMenuProgresoServicios
-            // 
-            this.toolStripMenuProgresoServicios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
-            this.toolStripMenuProgresoServicios.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuProgresoServicios.Name = "toolStripMenuProgresoServicios";
-            this.toolStripMenuProgresoServicios.Size = new System.Drawing.Size(256, 28);
-            this.toolStripMenuProgresoServicios.Text = "Progeso de servicios";
-            this.toolStripMenuProgresoServicios.Click += new System.EventHandler(this.btnProgresoServicios_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(186, 6);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(253, 6);
-            // 
-            // nuevoServicioToolStripMenuItem
-            // 
-            this.nuevoServicioToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
-            this.nuevoServicioToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.nuevoServicioToolStripMenuItem.Name = "nuevoServicioToolStripMenuItem";
-            this.nuevoServicioToolStripMenuItem.Size = new System.Drawing.Size(256, 28);
-            this.nuevoServicioToolStripMenuItem.Text = "Nuevo Servicio";
-            this.nuevoServicioToolStripMenuItem.Click += new System.EventHandler(this.nuevoServicioToolStripMenuItem_Click);
             // 
             // Main
             // 
