@@ -1,4 +1,4 @@
-﻿using Logacell.DataObject;
+﻿    using Logacell.DataObject;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace Logacell.Control
         string userID = "logacell_logamel";
         string password = "Logamel82";
         string database = "logacell_logamysql";
+        //string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
@@ -270,6 +271,40 @@ namespace Logacell.Control
             }
 
         }
+        public int consultarUltimoIDProducto()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID FROM producto ORDER BY ID DESC LIMIT 1";
+                conn.Open();
+                int id;
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        id = reader.GetInt32(0);
+                        conn.Close();
+                        return id;
+                    }
+                    conn.Close();
+                    return 0;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
 
         //-------------------stock--------------------//
         public bool actualizarStockProducto(string id, int cantidad)
@@ -284,7 +319,7 @@ namespace Logacell.Control
                     //cmd.CommandText = "SELECT * FROM Productos";
                     conn.Open();
                     int rowsAfected = cmd.ExecuteNonQuery();
-                    cmd.CommandText= "INSERT INTO stockPV (Cantidad, Producto, PuntoVenta) VALUES (" + cantidad + ", " + id + "," + idPV.id + ")";
+                    cmd.CommandText= "INSERT INTO stockPV (Cantidad, Producto, PuntoVenta) VALUES (" + cantidad + ", " + id + ", '" + idPV.id + "')";
                     rowsAfected = cmd.ExecuteNonQuery();
                     //MySqlDataReader reader = cmd.ExecuteReader();
                     conn.Close();
@@ -1076,11 +1111,11 @@ namespace Logacell.Control
             }
 
         }
-
         public void setCurrentUser(string user)
         {
             currentUser = consultarUsuario(user);
         }
+        
         //------------------VENTA------------------//
         public bool agregarVenta(Venta venta)
         {
@@ -1302,18 +1337,16 @@ namespace Logacell.Control
 
         }
 
-       
-        //-------------------SERVICIOCLIENTE------------------//
-        public bool agregarServiciosClientes(ServicioCliente servicioCliente)
+        //-------------------SOLICITUD SERVICIO------------------//
+        public bool agregarSolicitudServicios(SolicitudServicio servicio)
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO servicioCliente (Descripcion,Estado, Servicio, Cliente, Presupuesto,Activo) value ('"
-                    + servicioCliente.descripcion + "','" + servicioCliente.estado + "','"
-                    + servicioCliente.servicio + "','" + servicioCliente.cliente + "','"
-                    + servicioCliente.presupuesto + "',1)";
+                cmd.CommandText = "INSERT INTO solicitudServicio (Folio, NombreCliente, TelefonoCliente, Total, Anticipo, Pendiente, IDPuntoVenta) values ('"
+                        + servicio.Folio + "','" + servicio.nombreCliente + "','" + servicio.telefonoCliente + "',"
+                        + Convert.ToInt32(servicio.total) + "," + Convert.ToInt32(servicio.anticipo) + "," + Convert.ToInt32(servicio.pendiente) + ", '"+idPV.id+"' )";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -1321,10 +1354,15 @@ namespace Logacell.Control
                     int rowsAfected = cmd.ExecuteNonQuery();
                     //MySqlDataReader reader = cmd.ExecuteReader();
                     conn.Close();
-                    if (rowsAfected > 0)
+                    if (rowsAfected > 0) { 
+                        foreach (ServicioCliente serv in servicio.servicios)
+                        {
+                            agregarServiciosClientes(servicio.Folio, serv);
+                        }
                         return true;
+                    }
                     else
-                        return false;
+                        throw new Exception("Error..! Error al agregar la solicitud de servicio a la Base de Datos");
                 }
                 catch (Exception e)
                 {
@@ -1336,6 +1374,49 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
+        public SolicitudServicio consultarSolicitudServicio(string folio)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM SolicitudServicio WHERE Folio='" + folio + "'";
+                conn.Open();
+                try
+                {
+
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    SolicitudServicio sc = null;
+                    while (reader.Read())
+                    {
+                        sc = new SolicitudServicio();
+                        sc.Folio = reader.GetString(0);
+                        sc.nombreCliente = reader.GetString(1);
+                        sc.telefonoCliente = reader.GetString(2);
+                        sc.total = reader.GetInt32(3).ToString();
+                        sc.anticipo = reader.GetInt32(4).ToString();
+                        sc.pendiente = reader.GetInt32(5).ToString();
+
+                    }
+                    if (sc != null)
+                        return sc;
+                    else
+                        return null;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Servicio Cliente de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
         public MySqlDataAdapter obtenerServiciosClientesTable()
         {
             try
@@ -1344,13 +1425,13 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT ID, Descripcion, Estado, Servicio, Cliente, Presupuesto FROM servicioCliente WHERE Activo=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono de Cliente', S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S  WHERE IDPuntoVenta = '" + idPV.id + "'", conn);
                     conn.Close();
                     return mdaDatos;
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error al obtener datos de Servicio Cliente de la Base de Datos");
+                    throw new Exception("Error al obtener datos de Servicios solicitados de la Base de Datos");
                 }
             }
             catch (Exception e)
@@ -1366,13 +1447,10 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT ID, Descripcion, Estado, Servicio, Cliente, Presupuesto FROM servicioCliente WHERE (" +
-                                        "ID LIKE '%" + parametro + "%' or" +
-                                        "Descripcion LIKE '%" + parametro + "%' or" +
-                                        "Estado LIKE '%" + parametro + "%' or" +
-                                        "Servicio LIKE '%" + parametro + "%' or" +
-                                        "Cliente LIKE '%" + parametro + "%' or" +
-                                        "Presupuesto LIKE '%" + parametro + "%') and Activo = 1";
+                    string sqlQuery = "SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono de Cliente', S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S WHERE " +
+                                        "( S.Folio LIKE '%" + parametro + "%' or " +
+                                        "S.NombreCliente LIKE '%" + parametro + "%' or " +
+                                        "S.TelefonoCliente LIKE '%" + parametro + "%') and S.IDPuntoVenta = '" + idPV.id + "'";
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
                     conn.Close();
                     return mdaDatos;
@@ -1387,13 +1465,92 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
-        public ServicioCliente consultarServicioCliente(string id)
+        public List<ServicioCliente> obtenerServiciosClientes(string folio)
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM servicioCliente WHERE id='" + id + "'";
+                cmd.CommandText = "SELECT * FROM servicioCliente where Folio = '" + folio + "'";
+                conn.Open();
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<ServicioCliente> aux = new List<ServicioCliente>();
+                    while (reader.Read())
+                    {
+                        ServicioCliente sc = new ServicioCliente();
+
+                        sc.folio = reader.GetString(0);
+                        sc.descripcion = reader.GetString(1);
+                        sc.estado = reader.GetString(2);
+                        sc.presupuesto = reader.GetString(3);
+                        sc.contrasena = reader.GetString(4);
+                        sc.patron = reader.GetString(5);
+                        sc.pila = reader.GetBoolean(6);
+                        sc.tapa = reader.GetBoolean(7);
+                        sc.memoria = reader.GetBoolean(8);
+                        sc.chip = reader.GetBoolean(9);
+
+                        aux.Add(sc);
+                    }
+                    conn.Close();
+                    if (aux.Count != 0) return aux;
+                    else return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Servicio Cliente de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+
+        //-------------------SERVICIO CLIENTE------------------//
+        public bool agregarServiciosClientes(string folio, ServicioCliente servicio)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO servicioCliente (Folio, Descripcion, Estado, Presupuesto, Contrasena, Patron, Pila, Tapa, Memoria, Chip) values ('"
+                        + folio + "','" + servicio.descripcion + "','" + servicio.estado + "','"
+                        + servicio.presupuesto + "','" + servicio.contrasena + "','" + servicio.patron +  "'," + servicio.pila + ","
+                        + servicio.tapa + "," + servicio.memoria + "," + servicio.chip + " )";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        throw new Exception("Error..! Error al agregar Servicio '"+ servicio.descripcion + "' a la Base de Datos");
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Servicio Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public ServicioCliente consultarServicioCliente(string folio)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM servicioCliente WHERE Folio='" + folio + "'";
                 conn.Open();
                 try
                 {
@@ -1425,53 +1582,13 @@ namespace Logacell.Control
             }
 
         }
-        public List<ServicioCliente> obtenerServiciosClientes()
+        public bool actualizarEstadoServicioCliente(string id, string estado)
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT * FROM servicioCliente";
-                conn.Open();
-                try
-                {
-                    //int rowsAfected = cmd.ExecuteNonQuery();
-                    MySqlDataReader reader = cmd.ExecuteReader();
-                    List<ServicioCliente> aux = new List<ServicioCliente>();
-                    while (reader.Read())
-                    {
-                        ServicioCliente sc = new ServicioCliente();
-
-                        sc.id = reader.GetInt32(0);
-                        sc.descripcion = reader.GetString(1);
-                        sc.estado = reader.GetString(2);
-                        sc.servicio = reader.GetInt32(3);
-                        sc.cliente = reader.GetString(4);
-                        sc.presupuesto = reader.GetString(4);
-                        aux.Add(sc);
-                    }
-                    conn.Close();
-                    if (aux.Count != 0) return aux;
-                    else return null;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Error al obtener datos de Servicio Cliente de la Base de Datos");
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error al establecer conexión con el servidor");
-            }
-
-        }
-        public bool eliminarServicioCliente(string id)
-        {
-            try
-            {
-                conn = new MySqlConnection(builder.ToString());
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE servicioCliente WHERE SET Activo=0 WHERE ID = '" + id + "'";
+                cmd.CommandText = "UPDATE servicioCliente WHERE SET Estado= '"+ estado +"' WHERE ID = '" + id + "'";
                 conn.Open();
                 try
                 {
@@ -1486,7 +1603,7 @@ namespace Logacell.Control
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error..! Error al eliminar Servicio Cliente de la Base de Datos");
+                    throw new Exception("Error..! Error al actualizar estado de Servicio de la Base de Datos");
                 }
             }
             catch (Exception e)
@@ -1501,9 +1618,10 @@ namespace Logacell.Control
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "UPDATE servicioCliente SET Descripcion= '" + servicioCliente.descripcion +
-                "',Estado='" + servicioCliente.estado + "',Servicio='" + servicioCliente.servicio +
-                "',Cliente='" + servicioCliente.cliente + ",Presupuesto='" + servicioCliente.presupuesto +
-                "', Activo = 1 WHERE ID='" + servicioCliente.id + "'";
+                "',Estado='" + servicioCliente.estado +",Presupuesto='" + servicioCliente.presupuesto +
+                "',Contrasena='" + servicioCliente.contrasena + "',Patron='" + servicioCliente.patron +
+                "',Pila='" + servicioCliente.pila + "',Tapa='" + servicioCliente.tapa + "',Memoria='" + servicioCliente.memoria +
+                "',Chip='" + servicioCliente.chip + "' WHERE ID='" + servicioCliente.id + "'";
                 try
                 {
                     //cmd.CommandText = "SELECT * FROM Servicios";
@@ -1527,40 +1645,32 @@ namespace Logacell.Control
             }
 
         }
-        public bool actualizarEstadoServicioCliente(String id, String estado)
+        public MySqlDataAdapter obtenerDetalleServiciosClientesTable(string folio)
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE servicioCliente SET Estado='" + estado +
-                "', Activo = 1 WHERE ID='" + id + "'";
+                conn.Open();
                 try
                 {
-                    //cmd.CommandText = "SELECT * FROM Servicios";
-                    conn.Open();
-                    int rowsAfected = cmd.ExecuteNonQuery();
-                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * from servicioCliente where Folio = '"+folio+"'", conn);
                     conn.Close();
-                    if (rowsAfected > 0)
-                        return true;
-                    else
-                        return false;
+                    return mdaDatos;
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error..! Error al actualizar el estado del Servicio en la Base de Datos");
+                    throw new Exception("Error al obtener datos de Servicios solicitados de la Base de Datos");
                 }
             }
             catch (Exception e)
             {
                 throw new Exception("Error al establecer conexión con el servidor");
             }
-
         }
 
 
-        //-------------------SERVICIOCLIENTE------------------//
+
+        //-------------------CREDITO CLIENTE------------------//
         public bool agregarCreaditoClientes(CreditoCliente creditoCliente)
         {
             try
@@ -1826,6 +1936,7 @@ namespace Logacell.Control
                     {
                         return sr.ReadLine();
                     }
+                    line = sr.ReadLine();
                 }
                 //close the file
                 sr.Close();
@@ -1853,7 +1964,7 @@ namespace Logacell.Control
                 if (idPV != null)
                 {
                     sw.WriteLine("pv");
-                    sw.WriteLine(idPV);
+                    sw.WriteLine(idPV.id);
                 }
                 //Close the file
                 sw.Close();

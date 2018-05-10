@@ -21,6 +21,8 @@ namespace Logacell
             InitializeComponent();
             usuarioToolStripMenuItem.Text = ControlLogacell.currentUser.usuario;
             this.Text = ControlLogacell.idPV.nombre;
+            ControlLogacell.getInstance().escribirDoc();
+            
         }
         public static Main getInstance(string usuario)
         {
@@ -152,6 +154,21 @@ namespace Logacell
             pictureBox1.Location = new Point((this.Width/2)-105, 7);
         }
 
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void nuevoServicioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormServicioCliente fsc = new FormServicioCliente();
+            fsc.Show();
+        }
+
+        private void nuevaVentaToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            //FormVenta fv = new FormVenta();
+            //fv.Show();
+        }
     }
 }
