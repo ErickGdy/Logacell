@@ -78,6 +78,7 @@
     <Compile Include="DataObject\Producto.cs" />
     <Compile Include="DataObject\PuntoVenta.cs" />
     <Compile Include="DataObject\Servicio.cs" />
+    <Compile Include="DataObject\SolicitudServicio.cs" />
     <Compile Include="DataObject\ServicioCliente.cs" />
     <Compile Include="DataObject\StockPuntoVenta.cs" />
     <Compile Include="DataObject\Usuario.cs" />
@@ -105,6 +106,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormServicio.designer.cs">
       <DependentUpon>FormServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\DetalleSolicitudServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\DetalleSolicitudServicios.designer.cs">
+      <DependentUpon>DetalleSolicitudServicios.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Login\Login.cs">
       <SubType>Form</SubType>
@@ -179,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormServicio.resx">
       <DependentUpon>FormServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\DetalleSolicitudServicios.resx">
+      <DependentUpon>DetalleSolicitudServicios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

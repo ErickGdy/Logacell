@@ -125,7 +125,7 @@ namespace Logacell.Presentacion
                 {
                     if (control.agregarProducto(p))
                     {
-                        if (control.actualizarStockProducto(txtID.Text, Convert.ToInt32(existNum.Value)))
+                        if (control.actualizarStockProducto(control.consultarUltimoIDProducto().ToString(), Convert.ToInt32(existNum.Value)))
                             return true;
                         else
                             throw new Exception("Error al actualizar stock");

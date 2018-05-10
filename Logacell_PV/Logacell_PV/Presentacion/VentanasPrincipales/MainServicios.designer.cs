@@ -363,7 +363,7 @@
             this.dataGridViewServicios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewServicios.Size = new System.Drawing.Size(785, 384);
             this.dataGridViewServicios.TabIndex = 41;
-            this.dataGridViewServicios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServicios_CellClick);
+            this.dataGridViewServicios.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewServicios_CellClick);
             // 
             // btnAgregarServicios
             // 

@@ -196,5 +196,6 @@ namespace Logacell
         {
             panelDetalles.Height = this.Height;
         }
+
     }
 }
