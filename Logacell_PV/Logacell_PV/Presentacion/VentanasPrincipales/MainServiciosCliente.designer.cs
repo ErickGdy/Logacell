@@ -48,6 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -55,7 +56,7 @@
             // 
             // pnMenus
             // 
-            this.pnMenus.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.pnMenus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(91)))), ((int)(((byte)(157)))));
             this.pnMenus.Location = new System.Drawing.Point(-2, 0);
             this.pnMenus.Name = "pnMenus";
             this.pnMenus.Size = new System.Drawing.Size(190, 508);
@@ -106,6 +107,7 @@
             this.estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
             this.estadoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.estadoToolStripMenuItem.Text = "Estado";
+            this.estadoToolStripMenuItem.Click += new System.EventHandler(this.estadoToolStripMenuItem_Click);
             // 
             // esperaToolStripMenuItem
             // 
@@ -138,7 +140,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(777, 105);
+            this.pictureBox2.Location = new System.Drawing.Point(747, 47);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -150,7 +152,7 @@
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(856, 69);
+            this.btnAgregar.Location = new System.Drawing.Point(826, 11);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(160, 31);
             this.btnAgregar.TabIndex = 43;
@@ -162,7 +164,7 @@
             // txtBuscar
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtBuscar.Location = new System.Drawing.Point(807, 105);
+            this.txtBuscar.Location = new System.Drawing.Point(777, 47);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(218, 26);
             this.txtBuscar.TabIndex = 44;
@@ -172,7 +174,7 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(376, 530);
+            this.lblTotal.Location = new System.Drawing.Point(346, 472);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(18, 20);
             this.lblTotal.TabIndex = 42;
@@ -182,7 +184,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label3.Location = new System.Drawing.Point(242, 530);
+            this.label3.Location = new System.Drawing.Point(212, 472);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 20);
             this.label3.TabIndex = 41;
@@ -192,7 +194,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.label2.Location = new System.Drawing.Point(233, 41);
+            this.label2.Location = new System.Drawing.Point(269, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(286, 39);
             this.label2.TabIndex = 40;
@@ -206,13 +208,28 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ContextMenuStrip = this.menuTabla;
-            this.dataGridView1.Location = new System.Drawing.Point(240, 137);
+            this.dataGridView1.Location = new System.Drawing.Point(210, 79);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(785, 384);
             this.dataGridView1.TabIndex = 33;
+            // 
+            // btnActualizarTabla
+            // 
+            this.btnActualizarTabla.AutoSize = true;
+            this.btnActualizarTabla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActualizarTabla.BackColor = System.Drawing.Color.Transparent;
+            this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
+            this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
+            this.btnActualizarTabla.Location = new System.Drawing.Point(210, 46);
+            this.btnActualizarTabla.Name = "btnActualizarTabla";
+            this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
+            this.btnActualizarTabla.TabIndex = 46;
+            this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            this.btnActualizarTabla.Click += new System.EventHandler(this.btnActualizarTabla_Click);
             // 
             // MainServiciosCliente
             // 
@@ -221,6 +238,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1100, 580);
             this.ControlBox = false;
+            this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtBuscar);
@@ -236,6 +254,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
+            this.SizeChanged += new System.EventHandler(this.MainServiciosCliente_SizeChanged);
             this.menuTabla.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -263,5 +282,6 @@
         private System.Windows.Forms.ToolStripMenuItem enProgresoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
+        private System.Windows.Forms.Button btnActualizarTabla;
     }
 }

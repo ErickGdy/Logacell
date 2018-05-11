@@ -40,6 +40,7 @@ namespace Logacell
                 {
                     instance = new MainServiciosCliente();
                 }
+
                 return instance;
         }
 
@@ -63,11 +64,11 @@ namespace Logacell
                 dataGridView1.DataSource = dtDatos;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
                 lblTotal.Text = dataGridView1.RowCount.ToString();
-                dataGridView1.Columns[0].Width = 65;
-                dataGridView1.Columns[1].Width = 150;
-                dataGridView1.Columns[2].Width = 185;
-                dataGridView1.Columns[3].Width = 120;
-                dataGridView1.Columns[4].Width = 140;
+                dataGridView1.Columns[0].Width = 100;
+                dataGridView1.Columns[1].Width = 210;
+                dataGridView1.Columns[2].Width = 150;
+                dataGridView1.Columns[3].Width = 100;
+                dataGridView1.Columns[4].Width = 100;
                 dataGridView1.Columns[5].Width = 100;
             }
             catch(Exception e)
@@ -90,8 +91,15 @@ namespace Logacell
 
         private void consultarToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            String id  = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            MessageBox.Show("aqui se mostraran los datos relevantes del servicio: "+id);
+            SolicitudServicio sc = new SolicitudServicio();
+            sc.Folio  = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            sc.nombreCliente = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            sc.telefonoCliente = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            sc.total = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            sc.anticipo = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            sc.pendiente = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            DetalleSolicitudServicios dt = new DetalleSolicitudServicios(sc);
+            dt.Show();
         }
 
         private void modificaToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -209,6 +217,21 @@ namespace Logacell
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void MainServiciosCliente_SizeChanged(object sender, EventArgs e)
+        {
+            pnMenus.Height = this.Height;
+        }
+
+        private void estadoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnActualizarTabla_Click(object sender, EventArgs e)
+        {
+            actualizarTabla(control.obtenerServiciosClientesTable());
         }
     }
 }

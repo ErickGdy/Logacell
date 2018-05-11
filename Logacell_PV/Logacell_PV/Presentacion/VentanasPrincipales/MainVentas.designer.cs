@@ -44,9 +44,8 @@
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnFirstPage = new System.Windows.Forms.Button();
             this.btnPrevPage = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cmbNumByPag = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -72,7 +71,7 @@
             // 
             this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.consultarToolStripMenuItem.Tag = "Mostrar Detalle De Venta";
             this.consultarToolStripMenuItem.Text = "Consultar";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click_1);
@@ -176,31 +175,6 @@
             this.btnPrevPage.Text = "<";
             this.btnPrevPage.UseVisualStyleBackColor = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(309, 110);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 20);
-            this.label1.TabIndex = 35;
-            this.label1.Text = "Por página";
-            // 
-            // cmbNumByPag
-            // 
-            this.cmbNumByPag.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNumByPag.FormattingEnabled = true;
-            this.cmbNumByPag.Items.AddRange(new object[] {
-            "25",
-            "50",
-            "100",
-            "TODOS"});
-            this.cmbNumByPag.Location = new System.Drawing.Point(240, 109);
-            this.cmbNumByPag.Name = "cmbNumByPag";
-            this.cmbNumByPag.Size = new System.Drawing.Size(63, 21);
-            this.cmbNumByPag.TabIndex = 34;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -217,6 +191,20 @@
             this.dataGridView1.Size = new System.Drawing.Size(785, 384);
             this.dataGridView1.TabIndex = 33;
             // 
+            // btnActualizarTabla
+            // 
+            this.btnActualizarTabla.AutoSize = true;
+            this.btnActualizarTabla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActualizarTabla.BackColor = System.Drawing.Color.Transparent;
+            this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
+            this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
+            this.btnActualizarTabla.Location = new System.Drawing.Point(240, 100);
+            this.btnActualizarTabla.Name = "btnActualizarTabla";
+            this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
+            this.btnActualizarTabla.TabIndex = 47;
+            this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            // 
             // MainVentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,6 +212,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1100, 580);
             this.ControlBox = false;
+            this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtBuscar);
@@ -234,8 +223,6 @@
             this.Controls.Add(this.btnNextPage);
             this.Controls.Add(this.btnFirstPage);
             this.Controls.Add(this.btnPrevPage);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cmbNumByPag);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnMenus);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -268,8 +255,7 @@
         private System.Windows.Forms.Button btnNextPage;
         private System.Windows.Forms.Button btnFirstPage;
         private System.Windows.Forms.Button btnPrevPage;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox cmbNumByPag;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnActualizarTabla;
     }
 }

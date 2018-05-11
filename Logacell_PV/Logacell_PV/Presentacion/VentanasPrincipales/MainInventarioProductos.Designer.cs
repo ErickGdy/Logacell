@@ -68,6 +68,8 @@
             this.menuModificarProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEliminarProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarBusqueda = new System.Windows.Forms.LinkLabel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.stocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDetalles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAccesorio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCristal)).BeginInit();
@@ -462,7 +464,7 @@
             this.dataGridViewProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewProductos.Size = new System.Drawing.Size(785, 384);
             this.dataGridViewProductos.TabIndex = 31;
-            this.dataGridViewProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductos_CellClick);
+            this.dataGridViewProductos.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProductos_CellClick);
             // 
             // menuTablaProductos
             // 
@@ -470,9 +472,10 @@
             this.menuTablaProductos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuConsultarProducto,
             this.menuModificarProducto,
-            this.menuEliminarProducto});
+            this.menuEliminarProducto,
+            this.stocksToolStripMenuItem});
             this.menuTablaProductos.Name = "menuTabla";
-            this.menuTablaProductos.Size = new System.Drawing.Size(147, 76);
+            this.menuTablaProductos.Size = new System.Drawing.Size(153, 122);
             // 
             // menuConsultarProducto
             // 
@@ -518,6 +521,29 @@
             this.limpiarBusqueda.VisitedLinkColor = System.Drawing.Color.Black;
             this.limpiarBusqueda.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.limpiarBusqueda_LinkClicked);
             // 
+            // button1
+            // 
+            this.button1.AutoSize = true;
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(215, 47);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(30, 30);
+            this.button1.TabIndex = 39;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // stocksToolStripMenuItem
+            // 
+            this.stocksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stocksToolStripMenuItem.Image")));
+            this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
+            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.stocksToolStripMenuItem.Text = "Stocks";
+            this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
+            // 
             // MainInventarioProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,6 +551,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(998, 505);
             this.ControlBox = false;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panelDetalles);
             this.Controls.Add(this.limpiarBusqueda);
             this.Controls.Add(this.btnAgregarProducto);
@@ -602,5 +629,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox imgAccesorio;
         private System.Windows.Forms.PictureBox imgCristal;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem stocksToolStripMenuItem;
     }
 }

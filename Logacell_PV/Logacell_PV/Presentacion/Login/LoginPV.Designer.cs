@@ -41,13 +41,13 @@
             this.cmbSucursal.Location = new System.Drawing.Point(63, 68);
             this.cmbSucursal.Name = "cmbSucursal";
             this.cmbSucursal.Size = new System.Drawing.Size(225, 28);
-            this.cmbSucursal.TabIndex = 0;
+            this.cmbSucursal.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(59, 33);
+            this.label1.Location = new System.Drawing.Point(63, 33);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(229, 20);
             this.label1.TabIndex = 1;
@@ -56,10 +56,10 @@
             // btnAceptar
             // 
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAceptar.Location = new System.Drawing.Point(107, 131);
+            this.btnAceptar.Location = new System.Drawing.Point(101, 131);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(146, 30);
-            this.btnAceptar.TabIndex = 2;
+            this.btnAceptar.TabIndex = 1;
             this.btnAceptar.Text = "Abrir Sucursal";
             this.btnAceptar.UseVisualStyleBackColor = true;
             this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
