@@ -26,12 +26,7 @@ namespace Logacell.Presentacion
                 txtDireccion.Text = cliente.direcion;
                 txtTelefono.Text = cliente.telefono;
                 txtCorreo.Text = cliente.correo;
-                if (cliente.isFrecuente)
-                {
-                    checkFrecuente.Checked = true;
-                    txtObservaciones.Text = cliente.observaciones;
-                }
-                else checkFrecuente.Checked = false;
+                txtObservaciones.Text = cliente.observaciones;
             }
         }
 
@@ -44,8 +39,6 @@ namespace Logacell.Presentacion
                 c.direcion = txtDireccion.Text;
                 c.telefono = txtTelefono.Text;
                 c.correo = txtCorreo.Text;
-                if (checkFrecuente.Checked) c.isFrecuente = true;
-                else c.isFrecuente = false;
                 c.observaciones = txtObservaciones.Text;
                 try
                 {
@@ -122,18 +115,5 @@ namespace Logacell.Presentacion
             }
         }
 
-        private void checkFrecuente_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkFrecuente.Checked)
-            {
-                txtObservaciones.Enabled = true;
-                label1.Enabled = true;
-            }
-            else
-            {
-                txtObservaciones.Enabled = false;
-                label1.Enabled = false;
-            }
-        }
     }
 }

@@ -67,9 +67,9 @@
             this.menuConsultarProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.menuModificarProducto = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEliminarProducto = new System.Windows.Forms.ToolStripMenuItem();
+            this.stocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarBusqueda = new System.Windows.Forms.LinkLabel();
             this.button1 = new System.Windows.Forms.Button();
-            this.stocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelDetalles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAccesorio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgCristal)).BeginInit();
@@ -394,7 +394,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(746, 47);
+            this.pictureBox2.Location = new System.Drawing.Point(745, 47);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 25);
@@ -416,7 +416,7 @@
             // txtBuscarProducto
             // 
             this.txtBuscarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtBuscarProducto.Location = new System.Drawing.Point(776, 47);
+            this.txtBuscarProducto.Location = new System.Drawing.Point(775, 47);
             this.txtBuscarProducto.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtBuscarProducto.Name = "txtBuscarProducto";
             this.txtBuscarProducto.Size = new System.Drawing.Size(218, 26);
@@ -475,7 +475,7 @@
             this.menuEliminarProducto,
             this.stocksToolStripMenuItem});
             this.menuTablaProductos.Name = "menuTabla";
-            this.menuTablaProductos.Size = new System.Drawing.Size(153, 122);
+            this.menuTablaProductos.Size = new System.Drawing.Size(147, 100);
             // 
             // menuConsultarProducto
             // 
@@ -502,6 +502,14 @@
             this.menuEliminarProducto.Text = "Eliminar";
             this.menuEliminarProducto.Visible = false;
             this.menuEliminarProducto.Click += new System.EventHandler(this.menuEliminarProducto_Click);
+            // 
+            // stocksToolStripMenuItem
+            // 
+            this.stocksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stocksToolStripMenuItem.Image")));
+            this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
+            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.stocksToolStripMenuItem.Text = "Stocks";
+            this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
             // 
             // limpiarBusqueda
             // 
@@ -535,14 +543,6 @@
             this.button1.TabIndex = 39;
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // stocksToolStripMenuItem
-            // 
-            this.stocksToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("stocksToolStripMenuItem.Image")));
-            this.stocksToolStripMenuItem.Name = "stocksToolStripMenuItem";
-            this.stocksToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
-            this.stocksToolStripMenuItem.Text = "Stocks";
-            this.stocksToolStripMenuItem.Click += new System.EventHandler(this.stocksToolStripMenuItem_Click);
             // 
             // MainInventarioProductos
             // 

@@ -33,7 +33,6 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtObservaciones = new System.Windows.Forms.TextBox();
-            this.checkFrecuente = new System.Windows.Forms.CheckBox();
             this.txtCorreo = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.txtDireccion = new System.Windows.Forms.TextBox();
@@ -81,43 +80,27 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Enabled = false;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(182, 251);
+            this.label1.Location = new System.Drawing.Point(12, 252);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 20);
+            this.label1.Size = new System.Drawing.Size(132, 20);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Observaciones";
+            this.label1.Text = "Observaciones:";
             // 
             // txtObservaciones
             // 
-            this.txtObservaciones.Enabled = false;
             this.txtObservaciones.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtObservaciones.Location = new System.Drawing.Point(180, 276);
+            this.txtObservaciones.Location = new System.Drawing.Point(148, 249);
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.Size = new System.Drawing.Size(273, 45);
             this.txtObservaciones.TabIndex = 26;
             // 
-            // checkFrecuente
-            // 
-            this.checkFrecuente.AutoSize = true;
-            this.checkFrecuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkFrecuente.ForeColor = System.Drawing.Color.White;
-            this.checkFrecuente.Location = new System.Drawing.Point(49, 287);
-            this.checkFrecuente.Name = "checkFrecuente";
-            this.checkFrecuente.Size = new System.Drawing.Size(110, 24);
-            this.checkFrecuente.TabIndex = 25;
-            this.checkFrecuente.Text = "Frecuente";
-            this.checkFrecuente.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkFrecuente.UseVisualStyleBackColor = true;
-            this.checkFrecuente.CheckedChanged += new System.EventHandler(this.checkFrecuente_CheckedChanged);
-            // 
             // txtCorreo
             // 
             this.txtCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCorreo.Location = new System.Drawing.Point(125, 217);
+            this.txtCorreo.Location = new System.Drawing.Point(148, 217);
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(253, 26);
             this.txtCorreo.TabIndex = 23;
@@ -125,7 +108,7 @@
             // txtTelefono
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(125, 187);
+            this.txtTelefono.Location = new System.Drawing.Point(148, 187);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(160, 26);
             this.txtTelefono.TabIndex = 21;
@@ -133,15 +116,15 @@
             // txtDireccion
             // 
             this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.Location = new System.Drawing.Point(125, 158);
+            this.txtDireccion.Location = new System.Drawing.Point(148, 158);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(353, 26);
+            this.txtDireccion.Size = new System.Drawing.Size(339, 26);
             this.txtDireccion.TabIndex = 19;
             // 
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(125, 128);
+            this.txtNombre.Location = new System.Drawing.Point(148, 128);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(273, 26);
             this.txtNombre.TabIndex = 17;
@@ -151,7 +134,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(53, 220);
+            this.label5.Location = new System.Drawing.Point(76, 220);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 20);
             this.label5.TabIndex = 24;
@@ -162,7 +145,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(37, 190);
+            this.label4.Location = new System.Drawing.Point(60, 190);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 20);
             this.label4.TabIndex = 22;
@@ -173,7 +156,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(32, 161);
+            this.label3.Location = new System.Drawing.Point(55, 161);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 20);
             this.label3.TabIndex = 20;
@@ -184,7 +167,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(45, 131);
+            this.label2.Location = new System.Drawing.Point(68, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 20);
             this.label2.TabIndex = 18;
@@ -228,7 +211,6 @@
             this.ClientSize = new System.Drawing.Size(499, 419);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtObservaciones);
-            this.Controls.Add(this.checkFrecuente);
             this.Controls.Add(this.txtCorreo);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtDireccion);
@@ -258,7 +240,6 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtObservaciones;
-        private System.Windows.Forms.CheckBox checkFrecuente;
         private System.Windows.Forms.TextBox txtCorreo;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.TextBox txtDireccion;

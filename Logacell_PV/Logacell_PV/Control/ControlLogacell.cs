@@ -625,9 +625,9 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO cliente (Nombre,Direccion, Telefono, Correo, Observaciones, Frecuente) value ('"
+                cmd.CommandText = "INSERT INTO cliente (Nombre,Direccion, Telefono, Correo, Observaciones) value ('"
                     + cliente.nombre + "','" + cliente.direcion + "','" + cliente.telefono + "','" + cliente.correo + "','"
-                    + cliente.observaciones + "'," + cliente.isFrecuente + ")";
+                    + cliente.observaciones + "')";
                 //cmd.CommandText = "SELECT * FROM Clientes";
 
                 conn.Open();
@@ -659,29 +659,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Nombre,Direccion,Telefono,Correo,Frecuente,Observaciones FROM cliente where Estado=1", conn);
-                    conn.Close();
-                    return mdaDatos;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Error al obtener datos de Cliente de la Base de Datos");
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error al establecer conexión con el servidor");
-            }
-        }
-        public MySqlDataAdapter obtenerClientesFrecuentesTable()
-        {
-            try
-            {
-                conn = new MySqlConnection(builder.ToString());
-                conn.Open();
-                try
-                {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Nombre, Direccion, Telefono, Correo, Frecuente, Observaciones FROM cliente where Frecuente = true and Estado=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Nombre,Direccion,Telefono,Correo,Observaciones FROM cliente where Estado=1", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -703,40 +681,12 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT Nombre,Direccion,Telefono,Correo,Frecuente,Observaciones FROM cliente WHERE (" + 
+                    string sqlQuery = "SELECT Nombre,Direccion,Telefono,Correo,Observaciones FROM cliente WHERE (" + 
                         " Nombre LIKE '%" + parametro + "%' OR " +
                         " Direccion LIKE '%" + parametro + "%' OR " +
                         " Telefono LIKE '%" + parametro + "%' OR " +
                         " Correo LIKE '%" + parametro + "%'" +
                         ") AND Estado = 1";
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
-                    conn.Close();
-                    return mdaDatos;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Error al obtener datos de Cliente de la Base de Datos");
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error al establecer conexión con el servidor");
-            }
-        }
-        public MySqlDataAdapter obtenerClientesFrecuentesTable(string parametro)
-        {
-            try
-            {
-                conn = new MySqlConnection(builder.ToString());
-                conn.Open();
-                try
-                {
-                    string sqlQuery = "SELECT Nombre,Direccion,Telefono,Correo,Frecuente,Observaciones FROM cliente WHERE (" +
-                        " Nombre LIKE '%" + parametro + "%' OR " +
-                        " Direccion LIKE '%" + parametro + "%' OR " +
-                        " Telefono LIKE '%" + parametro + "%' OR " +
-                        " Correo LIKE '%" + parametro + "%'" +
-                        ") AND Estado = 1 AND Frecuente = true";
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
                     conn.Close();
                     return mdaDatos;
@@ -772,8 +722,7 @@ namespace Logacell.Control
                         s.direcion = reader.GetString(1);
                         s.telefono = reader.GetString(2);
                         s.correo = reader.GetString(3);
-                        s.observaciones = reader.GetString(5);
-                        s.isFrecuente = reader.GetBoolean(4);
+                        s.observaciones = reader.GetString(4);
                         conn.Close();
                         return s;
                     }
@@ -813,8 +762,7 @@ namespace Logacell.Control
                         s.direcion = reader.GetString(1);
                         s.telefono = reader.GetString(2);
                         s.correo = reader.GetString(3);
-                        s.observaciones = reader.GetString(5);
-                        s.isFrecuente = reader.GetBoolean(4);
+                        s.observaciones = reader.GetString(4);
                         aux.Add(s);
                     }
                     conn.Close();
@@ -868,8 +816,8 @@ namespace Logacell.Control
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "UPDATE cliente SET Nombre= '" + cliente.nombre +
-                "',Direccion='" + cliente.direcion + "',Frecuente= " + cliente.isFrecuente +
-                " ,Correo='" + cliente.correo + "',Observaciones='" + cliente.observaciones +
+                "',Direccion='" + cliente.direcion +
+                "' ,Correo='" + cliente.correo + "',Observaciones='" + cliente.observaciones +
                 "' ,Estado = 1 WHERE Telefono='" + cliente.telefono + "'";
                 try
                 {
