@@ -78,7 +78,7 @@ namespace Logacell
         private void form_Closed(object sender, FormClosedEventArgs e)
         {
             //aqui actualizas o recargas la info del Form1
-            actualizarTablaProductos(control.obtenerProductosTable());
+            actualizarTablaProductos(control.obtenerProductosTable(txtBuscarProducto.Text));
         }
 
         private void menuEliminarProducto_Click(object sender, EventArgs e)
@@ -122,11 +122,6 @@ namespace Logacell
         private void menuConsultarProducto_Click(object sender, EventArgs e)
         {
             consultarProducto();
-        }
-
-        private void btnAgregarProducto_Click_1(object sender, EventArgs e)
-        {
-
         }
 
         private void limpiarBusqueda_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -197,5 +192,21 @@ namespace Logacell
             panelDetalles.Height = this.Height;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            actualizarTablaProductos(control.obtenerProductosTable(txtBuscarProducto.Text));
+        }
+
+        private void stocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Producto p = new Producto();
+            p.id = Convert.ToInt32(dataGridViewProductos.CurrentRow.Cells[0].Value.ToString());
+            p.categoria = dataGridViewProductos.CurrentRow.Cells[1].Value.ToString();
+            p.nombre = dataGridViewProductos.CurrentRow.Cells[2].Value.ToString();
+            p.marca = dataGridViewProductos.CurrentRow.Cells[3].Value.ToString();
+            p.modelo = dataGridViewProductos.CurrentRow.Cells[4].Value.ToString();
+            StockEnPV spv = new StockEnPV(p);
+            spv.Show();
+        }
     }
 }

@@ -48,6 +48,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -70,13 +71,13 @@
             this.eliminarToolStripMenuItem,
             this.estadoToolStripMenuItem});
             this.menuTabla.Name = "menuTabla";
-            this.menuTabla.Size = new System.Drawing.Size(153, 122);
+            this.menuTabla.Size = new System.Drawing.Size(147, 100);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.consultarToolStripMenuItem.Text = "Consultar";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click_1);
             // 
@@ -104,7 +105,7 @@
             this.terminadoToolStripMenuItem,
             this.entregadoToolStripMenuItem});
             this.estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
-            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.estadoToolStripMenuItem.Text = "Estado";
             this.estadoToolStripMenuItem.Click += new System.EventHandler(this.estadoToolStripMenuItem_Click);
             // 
@@ -215,6 +216,21 @@
             this.dataGridView1.Size = new System.Drawing.Size(785, 384);
             this.dataGridView1.TabIndex = 33;
             // 
+            // btnActualizarTabla
+            // 
+            this.btnActualizarTabla.AutoSize = true;
+            this.btnActualizarTabla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActualizarTabla.BackColor = System.Drawing.Color.Transparent;
+            this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
+            this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
+            this.btnActualizarTabla.Location = new System.Drawing.Point(210, 46);
+            this.btnActualizarTabla.Name = "btnActualizarTabla";
+            this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
+            this.btnActualizarTabla.TabIndex = 46;
+            this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            this.btnActualizarTabla.Click += new System.EventHandler(this.btnActualizarTabla_Click);
+            // 
             // MainServiciosCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,6 +238,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1100, 580);
             this.ControlBox = false;
+            this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtBuscar);
@@ -265,5 +282,6 @@
         private System.Windows.Forms.ToolStripMenuItem enProgresoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
+        private System.Windows.Forms.Button btnActualizarTabla;
     }
 }

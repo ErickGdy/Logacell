@@ -145,6 +145,8 @@ namespace Logacell.Presentacion
             sc.tapa= checkTapa.Checked;
             sc.pila=checkPila.Checked;
             sc.memoria=checkMemoria.Checked;
+            sc.patron = patron;
+            sc.estado = "Espera";
             servicios.Add(sc);
             dataGridView1.Rows.Insert(dataGridView1.RowCount, sc.descripcion, sc.presupuesto);
             txtTotal.Text = (Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtPresupuesto.Text)).ToString();

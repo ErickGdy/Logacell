@@ -156,7 +156,6 @@ namespace Logacell
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
             this.toolStripMenuItem6.Size = new System.Drawing.Size(130, 36);
             this.toolStripMenuItem6.Text = "Servicios";
-            this.toolStripMenuItem6.Visible = false;
             // 
             // nuevoServicioToolStripMenuItem
             // 
@@ -203,7 +202,6 @@ namespace Logacell
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(112, 36);
             this.toolStripMenuItem5.Text = "Ventas";
-            this.toolStripMenuItem5.Visible = false;
             this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // nuevaVentaToolStripMenuItem
@@ -240,7 +238,6 @@ namespace Logacell
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 36);
             this.toolStripMenuItem1.Text = "Clientes";
-            this.toolStripMenuItem1.Visible = false;
             // 
             // listaDeClientesToolStripMenuItem
             // 
@@ -262,7 +259,6 @@ namespace Logacell
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(91, 36);
             this.toolStripMenuItem4.Text = "Caja";
-            this.toolStripMenuItem4.Visible = false;
             // 
             // corteDeCajaToolStripMenuItem
             // 

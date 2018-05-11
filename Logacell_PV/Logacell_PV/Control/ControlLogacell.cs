@@ -19,7 +19,7 @@ namespace Logacell.Control
         string userID = "logacell_logamel";
         string password = "Logamel82";
         string database = "logacell_logamysql";
-        string database = "logacell_logacell";
+        //string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
@@ -370,6 +370,28 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
+        }
+        public MySqlDataAdapter obtenerStockProductoPV(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT PV.Nombre AS 'Punto Venta', S.Cantidad AS Stock FROM producto P, stockPV S , puntoVenta PV WHERE P.Estado =1 and S.Producto = P.ID and PV.ID = S.PuntoVenta and P.ID =" + id , conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
         }
 
 
@@ -1653,7 +1675,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * from servicioCliente where Folio = '"+folio+"'", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Descripcion, Estado, Contrasena, Patron, Pila, Tapa, Memoria, Chip from servicioCliente where Folio = '"+folio+"'", conn);
                     conn.Close();
                     return mdaDatos;
                 }

@@ -83,6 +83,12 @@
     <Compile Include="DataObject\StockPuntoVenta.cs" />
     <Compile Include="DataObject\Usuario.cs" />
     <Compile Include="DataObject\Venta.cs" />
+    <Compile Include="Presentacion\Forms\StockEnPV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\StockEnPV.designer.cs">
+      <DependentUpon>StockEnPV.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\FormCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,6 +181,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\Forms\StockEnPV.resx">
+      <DependentUpon>StockEnPV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormCliente.resx">
       <DependentUpon>FormCliente.cs</DependentUpon>
     </EmbeddedResource>

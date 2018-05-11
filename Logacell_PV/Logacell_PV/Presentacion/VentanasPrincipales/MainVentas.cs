@@ -23,7 +23,6 @@ namespace Logacell
         public MainVentas()
         {
             InitializeComponent();
-            cmbNumByPag.SelectedIndex = 0;
             control = ControlLogacell.getInstance();
             try
             {

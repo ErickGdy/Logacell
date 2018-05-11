@@ -40,6 +40,7 @@ namespace Logacell
                 {
                     instance = new MainServiciosCliente();
                 }
+
                 return instance;
         }
 
@@ -90,8 +91,14 @@ namespace Logacell
 
         private void consultarToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            String id  = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            DetalleSolicitudServicios dt = new DetalleSolicitudServicios(id);
+            SolicitudServicio sc = new SolicitudServicio();
+            sc.Folio  = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            sc.nombreCliente = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            sc.telefonoCliente = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            sc.total = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            sc.anticipo = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            sc.pendiente = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            DetalleSolicitudServicios dt = new DetalleSolicitudServicios(sc);
             dt.Show();
         }
 
@@ -220,6 +227,11 @@ namespace Logacell
         private void estadoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnActualizarTabla_Click(object sender, EventArgs e)
+        {
+            actualizarTabla(control.obtenerServiciosClientesTable());
         }
     }
 }

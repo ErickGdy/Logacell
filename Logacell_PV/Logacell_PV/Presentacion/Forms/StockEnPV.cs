@@ -15,30 +15,28 @@ using System.Windows.Forms;
 
 namespace Logacell
 {
-    public partial class DetalleSolicitudServicios : Form
+    public partial class StockEnPV : Form
     {
-        private static DetalleSolicitudServicios instance;
+        private static StockEnPV instance;
         ControlLogacell control;
        
-        public DetalleSolicitudServicios(SolicitudServicio sc)
+        public StockEnPV(Producto p)
         {
             InitializeComponent();
-
             control = ControlLogacell.getInstance(); ;
-            actualizarTabla(control.obtenerDetalleServiciosClientesTable(sc.Folio));
-            lblFolio.Text = sc.Folio;
-            lblNombre.Text = sc.nombreCliente;
-            lblTelefono.Text = sc.telefonoCliente;
-            lblTotal.Text = sc.total;
-            lblPendiente.Text = sc.pendiente;
-            lblPego.Text = sc.anticipo;
+            actualizarTabla(control.obtenerStockProductoPV(p.id.ToString()));
+            lblID.Text = p.id.ToString();
+            lblCategoria.Text = p.categoria;
+            lblNombre.Text = p.nombre;
+            lblMarca.Text = p.marca;
+            lblModelo.Text = p.modelo;
         }
 
-        public static DetalleSolicitudServicios getInstance(SolicitudServicio sc)
+        public static StockEnPV getInstance(Producto p)
         {
                 if (instance == null)
                 {
-                    instance = new DetalleSolicitudServicios(sc);
+                    instance = new StockEnPV(p);
                 }
                 return instance;
         }
@@ -51,17 +49,10 @@ namespace Logacell
                 DataTable dtDatos = new DataTable();
                 // Con la información del adaptador se rellena el DataTable
                 data.Fill(dtDatos);
-
                 // Se asigna el DataTable como origen de datos del DataGridView
                 dataGridView1.DataSource = dtDatos;
-                dataGridView1.Columns[0].Width = 250;
-                dataGridView1.Columns[1].Width = 70;
-                dataGridView1.Columns[2].Width = 70;
-                dataGridView1.Columns[3].Width = 75;
-                dataGridView1.Columns[4].Width = 45;
-                dataGridView1.Columns[5].Width = 45;
-                dataGridView1.Columns[6].Width = 50;
-                dataGridView1.Columns[7].Width = 47;
+                dataGridView1.Columns[0].Width = 50;
+                dataGridView1.Columns[1].Width = 100;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
             }
             catch(Exception e)

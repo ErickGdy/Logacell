@@ -63,6 +63,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.limpiarBusqueda = new System.Windows.Forms.LinkLabel();
+            this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.panelDetalles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -427,6 +428,20 @@
             this.limpiarBusqueda.VisitedLinkColor = System.Drawing.Color.Black;
             this.limpiarBusqueda.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.limpiarBusqueda_LinkClicked);
             // 
+            // btnActualizarTabla
+            // 
+            this.btnActualizarTabla.AutoSize = true;
+            this.btnActualizarTabla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActualizarTabla.BackColor = System.Drawing.Color.Transparent;
+            this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
+            this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
+            this.btnActualizarTabla.Location = new System.Drawing.Point(209, 46);
+            this.btnActualizarTabla.Name = "btnActualizarTabla";
+            this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
+            this.btnActualizarTabla.TabIndex = 47;
+            this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            // 
             // MainServicios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -434,6 +449,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1002, 519);
             this.ControlBox = false;
+            this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.limpiarBusqueda);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtBuscarServicio);
@@ -501,5 +517,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox lblDescripcion;
         private System.Windows.Forms.LinkLabel limpiarBusqueda;
+        private System.Windows.Forms.Button btnActualizarTabla;
     }
 }

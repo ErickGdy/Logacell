@@ -161,8 +161,15 @@ namespace Logacell
 
         private void nuevoServicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormServicioCliente fsc = new FormServicioCliente();
-            fsc.Show();
+            FormServicioCliente fm = new FormServicioCliente();
+            fm.FormClosed += new FormClosedEventHandler(form_ClosedServiciosClientes);
+            fm.Show();
+        }
+        private void form_ClosedServiciosClientes(object sender, FormClosedEventArgs e)
+        {
+            //aqui actualizas o recargas la info del Form1
+            MainServiciosCliente.getInstance().Dispose();
+            btnProgresoServicios_Click(null, null);
         }
 
         private void nuevaVentaToolStripMenuItem_Click_1(object sender, EventArgs e)
