@@ -40,10 +40,6 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLastPage = new System.Windows.Forms.Button();
-            this.btnNextPage = new System.Windows.Forms.Button();
-            this.btnFirstPage = new System.Windows.Forms.Button();
-            this.btnPrevPage = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.menuTabla.SuspendLayout();
@@ -79,7 +75,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(777, 105);
+            this.pictureBox2.Location = new System.Drawing.Point(747, 47);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(24, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -91,7 +87,7 @@
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(856, 69);
+            this.btnAgregar.Location = new System.Drawing.Point(826, 11);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(160, 31);
             this.btnAgregar.TabIndex = 43;
@@ -103,7 +99,7 @@
             // txtBuscar
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtBuscar.Location = new System.Drawing.Point(807, 105);
+            this.txtBuscar.Location = new System.Drawing.Point(777, 47);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(218, 26);
             this.txtBuscar.TabIndex = 44;
@@ -113,7 +109,7 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(362, 530);
+            this.lblTotal.Location = new System.Drawing.Point(331, 473);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(18, 20);
             this.lblTotal.TabIndex = 42;
@@ -123,7 +119,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label3.Location = new System.Drawing.Point(242, 530);
+            this.label3.Location = new System.Drawing.Point(211, 473);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 20);
             this.label3.TabIndex = 41;
@@ -133,47 +129,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F);
-            this.label2.Location = new System.Drawing.Point(233, 41);
+            this.label2.Location = new System.Drawing.Point(273, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(123, 39);
             this.label2.TabIndex = 40;
             this.label2.Text = "Ventas";
-            // 
-            // btnLastPage
-            // 
-            this.btnLastPage.Location = new System.Drawing.Point(982, 527);
-            this.btnLastPage.Name = "btnLastPage";
-            this.btnLastPage.Size = new System.Drawing.Size(34, 23);
-            this.btnLastPage.TabIndex = 39;
-            this.btnLastPage.Text = ">>";
-            this.btnLastPage.UseVisualStyleBackColor = true;
-            // 
-            // btnNextPage
-            // 
-            this.btnNextPage.Location = new System.Drawing.Point(958, 527);
-            this.btnNextPage.Name = "btnNextPage";
-            this.btnNextPage.Size = new System.Drawing.Size(26, 23);
-            this.btnNextPage.TabIndex = 38;
-            this.btnNextPage.Text = ">";
-            this.btnNextPage.UseVisualStyleBackColor = true;
-            // 
-            // btnFirstPage
-            // 
-            this.btnFirstPage.Location = new System.Drawing.Point(902, 527);
-            this.btnFirstPage.Name = "btnFirstPage";
-            this.btnFirstPage.Size = new System.Drawing.Size(34, 23);
-            this.btnFirstPage.TabIndex = 37;
-            this.btnFirstPage.Text = "<<";
-            this.btnFirstPage.UseVisualStyleBackColor = true;
-            // 
-            // btnPrevPage
-            // 
-            this.btnPrevPage.Location = new System.Drawing.Point(934, 527);
-            this.btnPrevPage.Name = "btnPrevPage";
-            this.btnPrevPage.Size = new System.Drawing.Size(26, 23);
-            this.btnPrevPage.TabIndex = 36;
-            this.btnPrevPage.Text = "<";
-            this.btnPrevPage.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -183,7 +143,7 @@
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.ContextMenuStrip = this.menuTabla;
-            this.dataGridView1.Location = new System.Drawing.Point(240, 137);
+            this.dataGridView1.Location = new System.Drawing.Point(209, 79);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
@@ -199,7 +159,7 @@
             this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
             this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
-            this.btnActualizarTabla.Location = new System.Drawing.Point(240, 100);
+            this.btnActualizarTabla.Location = new System.Drawing.Point(209, 46);
             this.btnActualizarTabla.Name = "btnActualizarTabla";
             this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
             this.btnActualizarTabla.TabIndex = 47;
@@ -219,10 +179,6 @@
             this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnLastPage);
-            this.Controls.Add(this.btnNextPage);
-            this.Controls.Add(this.btnFirstPage);
-            this.Controls.Add(this.btnPrevPage);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnMenus);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -251,10 +207,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnLastPage;
-        private System.Windows.Forms.Button btnNextPage;
-        private System.Windows.Forms.Button btnFirstPage;
-        private System.Windows.Forms.Button btnPrevPage;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnActualizarTabla;
     }

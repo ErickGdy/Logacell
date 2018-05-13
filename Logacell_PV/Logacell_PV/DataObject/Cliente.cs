@@ -13,5 +13,6 @@ namespace Logacell.DataObject
         public string telefono { get; set; }
         public string correo { get; set; }
         public string observaciones { get; set; }
+        public bool is_credito { get; set; }
 }
 }

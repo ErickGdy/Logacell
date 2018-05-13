@@ -11,10 +11,6 @@ namespace Logacell.DataObject
         public string cliente { get; set; }
         public int limiteCredito { get; set; }
         public int deuda { get; set; }
-        public int abono { get; set; }
         public int pendiente { get; set; }
-        public int venta { get; set; }
-
-
 }
 }

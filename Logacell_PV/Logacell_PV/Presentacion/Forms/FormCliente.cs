@@ -27,6 +27,7 @@ namespace Logacell.Presentacion
                 txtTelefono.Text = cliente.telefono;
                 txtCorreo.Text = cliente.correo;
                 txtObservaciones.Text = cliente.observaciones;
+                checkCredito.Checked = cliente.is_credito;
             }
         }
 
@@ -40,6 +41,7 @@ namespace Logacell.Presentacion
                 c.telefono = txtTelefono.Text;
                 c.correo = txtCorreo.Text;
                 c.observaciones = txtObservaciones.Text;
+                c.is_credito = checkCredito.Checked;
                 try
                 {
                     if (modificacion)
