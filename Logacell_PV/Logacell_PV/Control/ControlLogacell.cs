@@ -1649,9 +1649,10 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO creditoClientes (Cliente,LimiteCredito,Deuda,Abono,Pendiente,Venta,Estado) values ('"
+                cmd.CommandText = "INSERT INTO creditoCliente (Cliente,LimiteCredito,Deuda,Pendiente,Estado) values ('"
                     + creditoCliente.cliente + "','" + creditoCliente.limiteCredito + "','"
-                    + creditoCliente.deuda + "','"   + creditoCliente.pendiente + "',1)";
+                    + creditoCliente.deuda + "','"   + creditoCliente.pendiente + "',1);"
+                    +" update cliente set is_Credito=1 where Telefono='"+creditoCliente.cliente+"'";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -1834,9 +1835,45 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE creditoCliente SET LimiteCredito= '" + creditoCliente.limiteCredito +
-                "',Deuda='" + creditoCliente.deuda + "',Pendiente='" + creditoCliente.pendiente +
-                "', Estado = 1 WHERE Cliente='" + creditoCliente.cliente + "'";
+                int lim = 0;
+                if (creditoCliente.limiteCredito == 0)
+                    lim = 0;
+                else
+                    lim = 1;
+                cmd.CommandText = "UPDATE cliente C INNER JOIN creditoCliente R ON R.Cliente = C.Telefono "+
+                    "SET C.is_Credito="+lim+", R.LimiteCredito= '" + creditoCliente.limiteCredito +
+                "',R.Deuda='" + creditoCliente.deuda + "',R.Pendiente='" + creditoCliente.pendiente +
+                "', R.Estado = 1 WHERE C.Telefono='" + creditoCliente.cliente + "'";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al actualizar Credito Cliente de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool cancelarCreditoCliente(CreditoCliente creditoCliente)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE cliente C INNER JOIN creditoCliente R ON R.Cliente = C.Telefono SET R.LimiteCredito=0 ,C.is_Credito=0" +
+                " WHERE C.Telefono='" + creditoCliente.cliente + "'";
                 try
                 {
                     //cmd.CommandText = "SELECT * FROM Servicios";

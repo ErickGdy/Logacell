@@ -28,6 +28,7 @@ namespace Logacell.Presentacion
                 txtPendiente.Text = credito.pendiente.ToString();
                 txtDeuda.Text = credito.deuda.ToString();
                 txtAbono.Maximum = credito.deuda;
+                txtAbono.Value = credito.deuda;
                 idCliente = credito.cliente;
             }
         }
@@ -133,5 +134,16 @@ namespace Logacell.Presentacion
             else
                 btnAceptar.Enabled = false;
         }
+
+        private void txtAbono_KeyUp(object sender, KeyEventArgs e)
+        {
+            calcularPendiente(null, null);
+        }
+
+        private void txtPago_KeyUp(object sender, KeyEventArgs e)
+        {
+            txtPago_ValueChanged(null,null);
+        }
+        
     }
 }

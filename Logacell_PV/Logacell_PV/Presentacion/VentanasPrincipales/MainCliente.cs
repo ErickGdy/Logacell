@@ -172,14 +172,54 @@ namespace Logacell
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            try
             {
-                if (dataGridView1.CurrentRow.Cells[5].Value.ToString() == "True")
+                if (e.Button == MouseButtons.Right)
                 {
-                    abonoACréditoToolStripMenuItem.Visible = true;
-                }else
-                    abonoACréditoToolStripMenuItem.Visible = false;
+                    CreditoCliente c = control.consultarCreditoCliente(dataGridView1.CurrentRow.Cells[2].Value.ToString());
+                    if (c != null)
+                    {
+                        if (c.deuda != 0)
+                        {
+                            abonoACréditoToolStripMenuItem1.Visible = true;
+                        }
+                        else
+                            abonoACréditoToolStripMenuItem1.Visible = false;
+                    }
+                    else
+                        abonoACréditoToolStripMenuItem1.Visible = false;
+                }
+            }catch(Exception ex)
+            {
+                abonoACréditoToolStripMenuItem1.Visible = false;
             }
         }
+
+        private void limiteDeCréditoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String telefono = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            try
+            {
+                CreditoCliente c;
+                c = control.consultarCreditoCliente(telefono);
+                if (c == null)
+                {
+                    c = new CreditoCliente();
+                    c.cliente = telefono;
+                    c.deuda = 0;
+                    c.limiteCredito = 0;
+                    c.pendiente = 0;
+                }
+                FormLimiteCredito flc = new FormLimiteCredito(c);
+                flc.FormClosed += new FormClosedEventHandler(form_ClosedClientes);
+                flc.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
     }
 }

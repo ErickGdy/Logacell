@@ -36,7 +36,9 @@
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abonoACréditoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.créditoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limiteDeCréditoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abonoACréditoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.txtBuscarCliente = new System.Windows.Forms.TextBox();
@@ -65,15 +67,15 @@
             this.consultarToolStripMenuItem,
             this.modificaToolStripMenuItem,
             this.eliminarToolStripMenuItem,
-            this.abonoACréditoToolStripMenuItem});
+            this.créditoToolStripMenuItem});
             this.menuTablaClietes.Name = "menuTabla";
-            this.menuTablaClietes.Size = new System.Drawing.Size(194, 100);
+            this.menuTablaClietes.Size = new System.Drawing.Size(147, 100);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.consultarToolStripMenuItem.Text = "Consultar";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click_1);
             // 
@@ -81,7 +83,7 @@
             // 
             this.modificaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificaToolStripMenuItem.Image")));
             this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.modificaToolStripMenuItem.Text = "Modificar";
             this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click_1);
             // 
@@ -89,18 +91,35 @@
             // 
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click_1);
             // 
-            // abonoACréditoToolStripMenuItem
+            // créditoToolStripMenuItem
             // 
-            this.abonoACréditoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abonoACréditoToolStripMenuItem.Image")));
-            this.abonoACréditoToolStripMenuItem.Name = "abonoACréditoToolStripMenuItem";
-            this.abonoACréditoToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
-            this.abonoACréditoToolStripMenuItem.Text = "Abono a Crédito";
-            this.abonoACréditoToolStripMenuItem.Visible = false;
-            this.abonoACréditoToolStripMenuItem.Click += new System.EventHandler(this.abonoACréditoToolStripMenuItem_Click);
+            this.créditoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.limiteDeCréditoToolStripMenuItem,
+            this.abonoACréditoToolStripMenuItem1});
+            this.créditoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("créditoToolStripMenuItem.Image")));
+            this.créditoToolStripMenuItem.Name = "créditoToolStripMenuItem";
+            this.créditoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.créditoToolStripMenuItem.Text = "Crédito";
+            // 
+            // limiteDeCréditoToolStripMenuItem
+            // 
+            this.limiteDeCréditoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("limiteDeCréditoToolStripMenuItem.Image")));
+            this.limiteDeCréditoToolStripMenuItem.Name = "limiteDeCréditoToolStripMenuItem";
+            this.limiteDeCréditoToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.limiteDeCréditoToolStripMenuItem.Text = "Limite de crédito";
+            this.limiteDeCréditoToolStripMenuItem.Click += new System.EventHandler(this.limiteDeCréditoToolStripMenuItem_Click);
+            // 
+            // abonoACréditoToolStripMenuItem1
+            // 
+            this.abonoACréditoToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("abonoACréditoToolStripMenuItem1.Image")));
+            this.abonoACréditoToolStripMenuItem1.Name = "abonoACréditoToolStripMenuItem1";
+            this.abonoACréditoToolStripMenuItem1.Size = new System.Drawing.Size(194, 24);
+            this.abonoACréditoToolStripMenuItem1.Text = "Abono a Crédito";
+            this.abonoACréditoToolStripMenuItem1.Click += new System.EventHandler(this.abonoACréditoToolStripMenuItem_Click);
             // 
             // pictureBox2
             // 
@@ -180,7 +199,7 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(785, 384);
             this.dataGridView1.TabIndex = 33;
-            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
             // 
             // btnActualizarTabla
             // 
@@ -243,7 +262,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.ToolStripMenuItem abonoACréditoToolStripMenuItem;
         private System.Windows.Forms.Button btnActualizarTabla;
+        private System.Windows.Forms.ToolStripMenuItem créditoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem limiteDeCréditoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abonoACréditoToolStripMenuItem1;
     }
 }
