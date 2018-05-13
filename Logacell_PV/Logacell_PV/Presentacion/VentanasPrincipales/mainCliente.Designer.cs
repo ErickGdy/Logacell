@@ -36,6 +36,7 @@
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abonoACréditoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnAgregarCliente = new System.Windows.Forms.Button();
             this.txtBuscarCliente = new System.Windows.Forms.TextBox();
@@ -43,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.btnActualizarTabla = new System.Windows.Forms.Button();
             this.menuTablaClietes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -62,15 +64,16 @@
             this.menuTablaClietes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultarToolStripMenuItem,
             this.modificaToolStripMenuItem,
-            this.eliminarToolStripMenuItem});
+            this.eliminarToolStripMenuItem,
+            this.abonoACréditoToolStripMenuItem});
             this.menuTablaClietes.Name = "menuTabla";
-            this.menuTablaClietes.Size = new System.Drawing.Size(147, 76);
+            this.menuTablaClietes.Size = new System.Drawing.Size(194, 100);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
             this.consultarToolStripMenuItem.Text = "Consultar";
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click_1);
             // 
@@ -78,7 +81,7 @@
             // 
             this.modificaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificaToolStripMenuItem.Image")));
             this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
             this.modificaToolStripMenuItem.Text = "Modificar";
             this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click_1);
             // 
@@ -86,9 +89,18 @@
             // 
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click_1);
+            // 
+            // abonoACréditoToolStripMenuItem
+            // 
+            this.abonoACréditoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("abonoACréditoToolStripMenuItem.Image")));
+            this.abonoACréditoToolStripMenuItem.Name = "abonoACréditoToolStripMenuItem";
+            this.abonoACréditoToolStripMenuItem.Size = new System.Drawing.Size(193, 24);
+            this.abonoACréditoToolStripMenuItem.Text = "Abono a Crédito";
+            this.abonoACréditoToolStripMenuItem.Visible = false;
+            this.abonoACréditoToolStripMenuItem.Click += new System.EventHandler(this.abonoACréditoToolStripMenuItem_Click);
             // 
             // pictureBox2
             // 
@@ -168,6 +180,22 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(785, 384);
             this.dataGridView1.TabIndex = 33;
+            this.dataGridView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseClick);
+            // 
+            // btnActualizarTabla
+            // 
+            this.btnActualizarTabla.AutoSize = true;
+            this.btnActualizarTabla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnActualizarTabla.BackColor = System.Drawing.Color.Transparent;
+            this.btnActualizarTabla.FlatAppearance.BorderSize = 0;
+            this.btnActualizarTabla.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActualizarTabla.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizarTabla.Image")));
+            this.btnActualizarTabla.Location = new System.Drawing.Point(213, 47);
+            this.btnActualizarTabla.Name = "btnActualizarTabla";
+            this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
+            this.btnActualizarTabla.TabIndex = 48;
+            this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            this.btnActualizarTabla.Click += new System.EventHandler(this.btnActualizarTabla_Click);
             // 
             // MainCliente
             // 
@@ -176,6 +204,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1100, 580);
             this.ControlBox = false;
+            this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAgregarCliente);
             this.Controls.Add(this.txtBuscarCliente);
@@ -214,5 +243,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ToolStripMenuItem abonoACréditoToolStripMenuItem;
+        private System.Windows.Forms.Button btnActualizarTabla;
     }
 }

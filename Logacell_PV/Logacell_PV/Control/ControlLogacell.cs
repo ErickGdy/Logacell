@@ -659,7 +659,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Nombre,Direccion,Telefono,Correo,Observaciones FROM cliente where Estado=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Nombre,Direccion,Telefono,Correo,Observaciones, is_Credito AS 'Crédito' FROM cliente where Estado=1", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -681,7 +681,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT Nombre,Direccion,Telefono,Correo,Observaciones FROM cliente WHERE (" + 
+                    string sqlQuery = "SELECT Nombre,Direccion,Telefono,Correo,Observaciones,is_Credito AS 'Crédito' FROM cliente WHERE (" + 
                         " Nombre LIKE '%" + parametro + "%' OR " +
                         " Direccion LIKE '%" + parametro + "%' OR " +
                         " Telefono LIKE '%" + parametro + "%' OR " +
@@ -723,6 +723,7 @@ namespace Logacell.Control
                         s.telefono = reader.GetString(2);
                         s.correo = reader.GetString(3);
                         s.observaciones = reader.GetString(4);
+                        s.is_credito= reader.GetBoolean(6);
                         conn.Close();
                         return s;
                     }
@@ -763,6 +764,7 @@ namespace Logacell.Control
                         s.telefono = reader.GetString(2);
                         s.correo = reader.GetString(3);
                         s.observaciones = reader.GetString(4);
+                        s.is_credito = reader.GetBoolean(6);
                         aux.Add(s);
                     }
                     conn.Close();
@@ -815,10 +817,11 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
+                
                 cmd.CommandText = "UPDATE cliente SET Nombre= '" + cliente.nombre +
                 "',Direccion='" + cliente.direcion +
                 "' ,Correo='" + cliente.correo + "',Observaciones='" + cliente.observaciones +
-                "' ,Estado = 1 WHERE Telefono='" + cliente.telefono + "'";
+                "',is_Credito= " + cliente.is_credito + " ,Estado = 1 WHERE Telefono='" + cliente.telefono+"'";
                 try
                 {
                     //cmd.CommandText = "SELECT * FROM Clientes";
@@ -1639,18 +1642,16 @@ namespace Logacell.Control
         }
 
 
-
         //-------------------CREDITO CLIENTE------------------//
-        public bool agregarCreaditoClientes(CreditoCliente creditoCliente)
+        public bool agregarCreditoClientes(CreditoCliente creditoCliente)
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO creditoClientes (Cliente,LimiteCredito,Deuda,Abono,Pendiente,Venta,Estado) value ('"
+                cmd.CommandText = "INSERT INTO creditoClientes (Cliente,LimiteCredito,Deuda,Abono,Pendiente,Venta,Estado) values ('"
                     + creditoCliente.cliente + "','" + creditoCliente.limiteCredito + "','"
-                    + creditoCliente.deuda + "','" + creditoCliente.abono + "','"
-                    + creditoCliente.pendiente + "','" + creditoCliente.venta + "',1)";
+                    + creditoCliente.deuda + "','"   + creditoCliente.pendiente + "',1)";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -1681,7 +1682,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Cliente, LimiteCredito, Deuda, Abono, Pendiente, Venta FROM creditoCliente WHERE Estado=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT Cliente, LimiteCredito, Deuda,  Pendiente, Venta FROM creditoCliente WHERE Estado=1", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -1703,11 +1704,10 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT Cliente, LimiteCredito, Deuda, Abono, Pendiente, Venta FROM creditoCliente WHERE (" +
+                    string sqlQuery = "SELECT Cliente, LimiteCredito, Deuda, Pendiente, Venta FROM creditoCliente WHERE (" +
                                         "Cliente LIKE '%" + parametro + "%' or" +
                                         "LimiteCredito LIKE '%" + parametro + "%' or" +
                                         "Deuda LIKE '%" + parametro + "%' or" +
-                                        "Abono LIKE '%" + parametro + "%' or" +
                                         "Pendiente LIKE '%" + parametro + "%' or" +
                                         "Venta LIKE '%" + parametro + "%') and Activo = 1";
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
@@ -1737,17 +1737,16 @@ namespace Logacell.Control
 
                     //int rowsAfected = cmd.ExecuteNonQuery();
                     MySqlDataReader reader = cmd.ExecuteReader();
-                    conn.Close();
-                    if (reader.HasRows)
+                    CreditoCliente c = new CreditoCliente();
+                    while (reader.Read())
                     {
-                        CreditoCliente aux = null;
-                        foreach (CreditoCliente p in reader)
-                        {
-                            aux = p;
-                        }
-                        return aux;
+                        c.cliente = reader.GetString(0);
+                        c.limiteCredito = reader.GetInt32(1);
+                        c.deuda = reader.GetInt32(2);
+                        c.pendiente = reader.GetInt32(3);
+                        conn.Close();
+                        return c;
                     }
-                    else
                         return null;
 
                 }
@@ -1782,9 +1781,7 @@ namespace Logacell.Control
                         cc.cliente = reader.GetString(0);
                         cc.limiteCredito = reader.GetInt32(1);
                         cc.deuda = reader.GetInt32(2);
-                        cc.abono = reader.GetInt32(3);
-                        cc.pendiente = reader.GetInt32(4);
-                        cc.venta = reader.GetInt32(4);
+                        cc.pendiente = reader.GetInt32(3);
                         aux.Add(cc);
                     }
                     conn.Close();
@@ -1838,8 +1835,7 @@ namespace Logacell.Control
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "UPDATE creditoCliente SET LimiteCredito= '" + creditoCliente.limiteCredito +
-                "',Deuda='" + creditoCliente.deuda + "',Abono='" + creditoCliente.abono +
-                "',Pendiente='" + creditoCliente.pendiente + ",Venta='" + creditoCliente.venta +
+                "',Deuda='" + creditoCliente.deuda + "',Pendiente='" + creditoCliente.pendiente +
                 "', Estado = 1 WHERE Cliente='" + creditoCliente.cliente + "'";
                 try
                 {
@@ -1862,6 +1858,107 @@ namespace Logacell.Control
             {
                 throw new Exception("Error al establecer conexión con el servidor");
             }
+        }
+
+        //---------------ABONO A CRÉDITO-----------------//
+        public bool agregarAbonoCredito(AbonoCredito abono)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                DateTime aux = DateTime.Now;
+                string day;
+                if (aux.Day.ToString().Length == 1)
+                    day = "0" + aux.Day.ToString();
+                else
+                    day = aux.Day.ToString();
+                string month;
+                if (aux.Month.ToString().Length == 1)
+                    month = "0" + aux.Month.ToString();
+                else
+                    month = aux.Month.ToString();
+                string hour;
+                if (aux.Hour.ToString().Length == 1)
+                    hour = "0" + aux.Hour.ToString();
+                else
+                    hour = aux.Hour.ToString();
+                string second;
+                if (aux.Second.ToString().Length == 1)
+                    second = "0" + aux.Second.ToString();
+                else
+                    second = aux.Second.ToString();
+                string minute;
+                if (aux.Minute.ToString().Length == 1)
+                    minute = "0" + aux.Minute.ToString();
+                else
+                    minute = aux.Minute.ToString();
+
+                string fecha = aux.Year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
+                cmd.CommandText = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) value ('"
+                    + abono.cliente + "','" + abono.abono + "','"
+                    + abono.empleado + "','" + fecha + "',"
+                    + idPV.id + ")";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public AbonoCredito consultarAbonoCredito(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM abono WHERE ID='" + id + "'";
+                conn.Open();
+                try
+                {
+
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    AbonoCredito c = new AbonoCredito();
+                    while (reader.Read())
+                    {
+                        c.id = reader.GetInt32(0);
+                        c.cliente = reader.GetString(1);
+                        c.abono = reader.GetInt32(2);
+                        c.empleado = reader.GetString(3);
+                        c.fecha = reader.GetDateTime(4);
+                        c.puntoVenta = reader.GetInt32(5);
+                        conn.Close();
+                        return c;
+                    }
+                    return null;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Credito Cliente de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
         }
 
         public string leerUserDoc()

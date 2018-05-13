@@ -68,11 +68,15 @@ namespace Logacell
                 dataGridView1.DataSource = dtDatos;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
                 lblTotalClientes.Text = dataGridView1.RowCount.ToString();
-                dataGridView1.Columns[0].Width = 180;
-                dataGridView1.Columns[1].Width = 180;
+                dataGridView1.Columns[0].Width = 160;
+                dataGridView1.Columns[1].Width = 170;
+                dataGridView1.Columns[1].HeaderText = "Dirección";
                 dataGridView1.Columns[2].Width = 80;
+                dataGridView1.Columns[2].HeaderText = "Teléfono";
                 dataGridView1.Columns[3].Width = 120;
-                dataGridView1.Columns[4].Width = 200;
+                dataGridView1.Columns[4].Width = 150;
+                dataGridView1.Columns[5].Width = 80;
+                dataGridView1.Columns[5].HeaderText = "Crédito";
 
             }
             catch(Exception e)
@@ -138,6 +142,44 @@ namespace Logacell
         private void MainCliente_SizeChanged(object sender, EventArgs e)
         {
             pnMenus.Height = this.Height;
+        }
+
+        private void abonoACréditoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String telefono = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            try
+            {
+                CreditoCliente c = control.consultarCreditoCliente(telefono);
+                if (c != null)
+                {
+                    FormAbonoCredito fc = new FormAbonoCredito(c);
+                    fc.Show();
+                }
+                else
+                    MessageBox.Show("Error al obtener datos de credito del cliente");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void btnActualizarTabla_Click(object sender, EventArgs e)
+        {
+            actualizarTablaClientes(control.obtenerClientesTable(txtBuscarCliente.Text));
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                if (dataGridView1.CurrentRow.Cells[5].Value.ToString() == "True")
+                {
+                    abonoACréditoToolStripMenuItem.Visible = true;
+                }else
+                    abonoACréditoToolStripMenuItem.Visible = false;
+            }
         }
     }
 }
