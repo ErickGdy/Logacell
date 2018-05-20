@@ -29,18 +29,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockEnPV));
             this.label2 = new System.Windows.Forms.Label();
-            this.menuTabla = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.estadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.esperaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enProgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.terminadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.entregadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -57,7 +47,6 @@
             this.lblID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblModelo = new System.Windows.Forms.Label();
-            this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -71,85 +60,11 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(44, 9);
+            this.label2.Location = new System.Drawing.Point(93, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(369, 38);
             this.label2.TabIndex = 40;
             this.label2.Text = "Stock Por Punto Venta";
-            // 
-            // menuTabla
-            // 
-            this.menuTabla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.menuTabla.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.consultarToolStripMenuItem,
-            this.modificaToolStripMenuItem,
-            this.eliminarToolStripMenuItem,
-            this.estadoToolStripMenuItem});
-            this.menuTabla.Name = "menuTabla";
-            this.menuTabla.Size = new System.Drawing.Size(147, 100);
-            // 
-            // consultarToolStripMenuItem
-            // 
-            this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
-            this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.consultarToolStripMenuItem.Text = "Consultar";
-            this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
-            // 
-            // modificaToolStripMenuItem
-            // 
-            this.modificaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificaToolStripMenuItem.Image")));
-            this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.modificaToolStripMenuItem.Text = "Modificar";
-            this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click);
-            // 
-            // eliminarToolStripMenuItem
-            // 
-            this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
-            this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.eliminarToolStripMenuItem.Text = "Cancelar";
-            this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
-            // 
-            // estadoToolStripMenuItem
-            // 
-            this.estadoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.esperaToolStripMenuItem,
-            this.enProgresoToolStripMenuItem,
-            this.terminadoToolStripMenuItem,
-            this.entregadoToolStripMenuItem});
-            this.estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
-            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.estadoToolStripMenuItem.Text = "Estado";
-            // 
-            // esperaToolStripMenuItem
-            // 
-            this.esperaToolStripMenuItem.Name = "esperaToolStripMenuItem";
-            this.esperaToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
-            this.esperaToolStripMenuItem.Text = "En Espera";
-            this.esperaToolStripMenuItem.Click += new System.EventHandler(this.esperaToolStripMenuItem_Click);
-            // 
-            // enProgresoToolStripMenuItem
-            // 
-            this.enProgresoToolStripMenuItem.Name = "enProgresoToolStripMenuItem";
-            this.enProgresoToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
-            this.enProgresoToolStripMenuItem.Text = "En progreso";
-            this.enProgresoToolStripMenuItem.Click += new System.EventHandler(this.enProgresoToolStripMenuItem_Click);
-            // 
-            // terminadoToolStripMenuItem
-            // 
-            this.terminadoToolStripMenuItem.Name = "terminadoToolStripMenuItem";
-            this.terminadoToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
-            this.terminadoToolStripMenuItem.Text = "Terminado";
-            this.terminadoToolStripMenuItem.Click += new System.EventHandler(this.terminadoToolStripMenuItem_Click);
-            // 
-            // entregadoToolStripMenuItem
-            // 
-            this.entregadoToolStripMenuItem.Name = "entregadoToolStripMenuItem";
-            this.entregadoToolStripMenuItem.Size = new System.Drawing.Size(165, 24);
-            this.entregadoToolStripMenuItem.Text = "Entregado";
-            this.entregadoToolStripMenuItem.Click += new System.EventHandler(this.entregadoToolStripMenuItem_Click);
             // 
             // dataGridView1
             // 
@@ -163,7 +78,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(157, 131);
+            this.dataGridView1.Size = new System.Drawing.Size(268, 131);
             this.dataGridView1.TabIndex = 55;
             // 
             // pictureBox9
@@ -339,7 +254,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(91)))), ((int)(((byte)(157)))));
-            this.ClientSize = new System.Drawing.Size(440, 193);
+            this.ClientSize = new System.Drawing.Size(555, 193);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblModelo);
             this.Controls.Add(this.pictureBox9);
@@ -364,7 +279,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form2";
-            this.menuTabla.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -378,15 +292,6 @@
 
         #endregion
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ContextMenuStrip menuTabla;
-        private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem estadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem esperaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem enProgresoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem terminadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox8;

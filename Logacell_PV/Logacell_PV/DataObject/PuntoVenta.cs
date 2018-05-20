@@ -14,5 +14,6 @@ namespace Logacell.DataObject
         public string telefono { get; set; }
         public string activo { get; set; }
         public string usuario { get; set; }
+        public string prefijo { get; set; }
     }
 }

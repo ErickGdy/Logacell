@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnActualizarTabla = new System.Windows.Forms.Button();
+            this.limpiarBusqueda = new System.Windows.Forms.LinkLabel();
             this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -164,6 +165,25 @@
             this.btnActualizarTabla.Size = new System.Drawing.Size(30, 30);
             this.btnActualizarTabla.TabIndex = 47;
             this.btnActualizarTabla.UseVisualStyleBackColor = false;
+            this.btnActualizarTabla.Click += new System.EventHandler(this.btnActualizarTabla_Click);
+            // 
+            // limpiarBusqueda
+            // 
+            this.limpiarBusqueda.AutoSize = true;
+            this.limpiarBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.limpiarBusqueda.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.limpiarBusqueda.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.limpiarBusqueda.LinkColor = System.Drawing.Color.Gray;
+            this.limpiarBusqueda.Location = new System.Drawing.Point(973, 50);
+            this.limpiarBusqueda.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.limpiarBusqueda.Name = "limpiarBusqueda";
+            this.limpiarBusqueda.Size = new System.Drawing.Size(21, 20);
+            this.limpiarBusqueda.TabIndex = 48;
+            this.limpiarBusqueda.TabStop = true;
+            this.limpiarBusqueda.Text = "X";
+            this.limpiarBusqueda.Visible = false;
+            this.limpiarBusqueda.VisitedLinkColor = System.Drawing.Color.Black;
+            this.limpiarBusqueda.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.limpiarBusqueda_LinkClicked);
             // 
             // MainVentas
             // 
@@ -172,6 +192,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1100, 580);
             this.ControlBox = false;
+            this.Controls.Add(this.limpiarBusqueda);
             this.Controls.Add(this.btnActualizarTabla);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.btnAgregar);
@@ -209,5 +230,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnActualizarTabla;
+        private System.Windows.Forms.LinkLabel limpiarBusqueda;
     }
 }

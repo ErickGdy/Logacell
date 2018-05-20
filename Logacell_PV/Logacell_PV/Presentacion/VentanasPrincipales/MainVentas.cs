@@ -67,11 +67,11 @@ namespace Logacell
                 dataGridView1.DataSource = dtDatos;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
                 lblTotal.Text = dataGridView1.RowCount.ToString();
-                dataGridView1.Columns[0].Width = 85;
+                dataGridView1.Columns[0].Width = 100;
                 dataGridView1.Columns[1].Width = 150;
-                dataGridView1.Columns[2].Width = 200;
-                dataGridView1.Columns[3].Width = 160;
-                dataGridView1.Columns[4].Width = 160;
+                dataGridView1.Columns[2].Width = 100;
+                dataGridView1.Columns[3].Width = 205;
+                dataGridView1.Columns[4].Width = 205;
             }
             catch(Exception e)
             {
@@ -81,6 +81,9 @@ namespace Logacell
 
         private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
         {
+            limpiarBusqueda.Visible = true;
+            if (txtBuscar.Text == "")
+                limpiarBusqueda.Visible = false;
             try
             {
                 actualizarTabla(control.obtenerVentasTable(txtBuscar.Text));
@@ -106,7 +109,35 @@ namespace Logacell
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            FormVenta fv = new FormVenta();
+            fv.FormClosed += new FormClosedEventHandler(form_ClosedClientes);
+            fv.Show();
+        }
 
+        private void btnActualizarTabla_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                actualizarTabla(control.obtenerVentasTable(txtBuscar.Text));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void limpiarBusqueda_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            txtBuscar.Text = "";
+            limpiarBusqueda.Visible = false;
+            try
+            {
+                actualizarTabla(control.obtenerVentasTable());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

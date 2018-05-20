@@ -8,11 +8,11 @@ namespace Logacell.DataObject
 {
     public class Venta
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public DateTime fecha { get; set; }
-        public string total { get; set; }
-        public string metodoPago { get; set; }
+        public double total { get; set; }
         public int puntoVenta { get; set; }
         public List<DetalleVenta> productos { get; set; }
+        public List<PagosVentas> pagos { get; set; }
     }
 }

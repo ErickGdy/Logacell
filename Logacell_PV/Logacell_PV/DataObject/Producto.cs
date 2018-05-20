@@ -14,6 +14,6 @@ namespace Logacell.DataObject
         public string modelo { get; set; }
         public string precio { get; set; }
         public string marca { get; set; }
-
+        public int cantidad { get; set; }
     }
 }
