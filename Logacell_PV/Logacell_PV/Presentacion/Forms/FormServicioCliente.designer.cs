@@ -152,10 +152,11 @@
             // txtFolio
             // 
             this.txtFolio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txtFolio.Location = new System.Drawing.Point(583, 78);
+            this.txtFolio.Location = new System.Drawing.Point(554, 78);
             this.txtFolio.Name = "txtFolio";
+            this.txtFolio.ReadOnly = true;
             this.txtFolio.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtFolio.Size = new System.Drawing.Size(112, 26);
+            this.txtFolio.Size = new System.Drawing.Size(141, 26);
             this.txtFolio.TabIndex = 36;
             this.txtFolio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.noSpaces_KeyPress);
             // 
@@ -203,7 +204,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(514, 80);
+            this.label1.Location = new System.Drawing.Point(496, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 24);
             this.label1.TabIndex = 35;

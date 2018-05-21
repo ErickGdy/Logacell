@@ -24,6 +24,13 @@ namespace Logacell.Presentacion
             control = new ControlLogacell();
             lblFecha.Text = DateTime.Now.ToShortDateString();
             servicios = new List<ServicioCliente>();
+            try
+            {
+                txtFolio.Text = control.folioServicio();
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)

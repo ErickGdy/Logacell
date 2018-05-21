@@ -1611,6 +1611,47 @@ namespace Logacell.Control
             }
 
         }
+        public string folioServicio()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Folio FROM solicitudServicio WHERE IDPuntoVenta=" + idPV.id + " ORDER BY ID DESC LIMIT 1";
+                conn.Open();
+                try
+                {
+                    string folio = "";
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        folio = reader.GetString(0);
+                    }
+                    conn.Close();
+                    if (folio != "")
+                    {
+                        string prefijo = folio.Substring(0, 3);
+                        folio = folio.Substring(5, 7);
+                        int num = Convert.ToInt32(folio);
+                        num++;
+                        return prefijo + "-S" + num.ToString("0000000");
+                    }
+                    else
+                        return idPV.prefijo + "-S0000001";
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Ventas de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
 
         //-------------------SERVICIO CLIENTE------------------//
         public bool agregarServiciosClientes(string folio, ServicioCliente servicio)
