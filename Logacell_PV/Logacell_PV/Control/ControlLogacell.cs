@@ -73,6 +73,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -96,6 +97,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -126,6 +128,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -166,6 +169,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -206,6 +210,49 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public List<Producto> obtenerProductosByPV()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT p.ID, p.Categoria, p.Nombre, p.Marca, p.Modelo,p.Precio, s.Cantidad FROM producto p INNER JOIN stockPV s on p.ID = s.Producto where s.PuntoVenta="+idPV.id+" and s.Cantidad > 0;";
+                conn.Open();
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<Producto> aux = new List<Producto>();
+                    while (reader.Read())
+                    {
+                        Producto p = new Producto();
+
+                        p.id = reader.GetInt32(0);
+                        p.categoria = reader.GetString(1);
+                        p.nombre = reader.GetString(2);
+                        p.modelo = reader.GetString(4);
+                        p.marca = reader.GetString(3);
+                        p.precio = reader.GetString(5);
+                        p.cantidad = reader.GetInt32(6);
+                        aux.Add(p);
+                    }
+                    conn.Close();
+                    if (aux.Count != 0) return aux;
+                    else return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -236,6 +283,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -267,6 +315,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -301,6 +350,46 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public string[] obtenerArregloProductos(string param)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT CONCAT( ID, ' - ', nombre, ' ' , Marca, ' ', Modelo) FROM producto where" +
+                    " Nombre Like '%"+param+"%' or "+
+                    " Marca Like '%" + param + "%' or "+
+                    " Modelo Like '%" + param + "%'";
+                conn.Open();
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<string> aux = new List<string>();
+                    while (reader.Read())
+                    {
+                        aux.Add(reader.GetString(0));
+                    }
+                    conn.Close();
+                    if (aux.Count != 0)
+                    {
+                        return aux.ToArray();
+                    }
+                    else return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -335,6 +424,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -367,6 +457,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -390,6 +481,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -424,6 +516,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -446,6 +539,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -474,6 +568,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -511,6 +606,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -550,6 +646,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -580,6 +677,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -612,6 +710,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -648,6 +747,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -670,6 +770,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -698,6 +799,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -738,6 +840,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -778,6 +881,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -808,6 +912,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -841,6 +946,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -884,6 +990,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -917,6 +1024,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -946,6 +1054,7 @@ namespace Logacell.Control
                         pv.telefono = reader.GetString(3);
                         pv.activo = reader.GetString(4);
                         pv.usuario = reader.GetString(5);
+                        pv.prefijo = reader.GetString(7);
                         conn.Close();
                         return pv;
                     }
@@ -960,6 +1069,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1004,6 +1114,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1048,6 +1159,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1080,6 +1192,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1094,16 +1207,42 @@ namespace Logacell.Control
         {
             try
             {
+                /**
+                 START TRANSACTION;
+                 SELECT @A:=SUM(salary) FROM table1 WHERE type=1;
+                 UPDATE table2 SET summary=@A WHERE type=1;
+                 COMMIT;
+                 * **/
+                string insertDetallesVenta = "";
+                string updateStocks = "";
+                foreach(DetalleVenta cv in venta.productos)
+                {
+                    insertDetallesVenta += " INSERT INTO detalleVenta (Producto, Venta, Cantidad,Total, Descuento) values (" +
+                        cv.idProducto + ", '" + cv.folio + "'," + cv.cantidadProducto + "," + cv.total + "," + cv.descuento + "); ";
+                    updateStocks += "UPDATE stockPV SET Cantidad = Cantidad - " + cv.cantidadProducto +
+                        " WHERE Producto= " + cv.idProducto + " and PuntoVenta = "+idPV.id+"; ";
+                }
+                string insertPagosVenta = "";
+                foreach (PagosVentas pv in venta.pagos)
+                {
+                    insertPagosVenta += " INSERT INTO pagosVentas (IDVenta, Pago, MetodoPago) values ('" +
+                        pv.idVenta+"',"+ pv.pago+",'"+pv.formaPago+"'); ";
+                }
+                string insertVenta = "INSERT INTO venta (ID, Fecha, Total,PuntoVenta, Estado, Vendedor) values ('" +
+                venta.id + "', '" + formatearFecha(DateTime.Now) + "','" + venta.total + "','" + idPV.id + "',1,'"+currentUser.empleado+"'); ";
+
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO venta (Fecha,Total,MetodoPago,PuntoVenta,Estado) value ('"
-                    + venta.fecha + "','" + venta.total + "','" + venta.metodoPago + "','" + venta.puntoVenta + "',1)";
-                //cmd.CommandText = "SELECT * FROM Servicios";
+                cmd.CommandText = "START TRANSACTION; " +
+                                    insertVenta + 
+                                    insertDetallesVenta + 
+                                    insertPagosVenta + 
+                                    updateStocks +
+                                    " COMMIT;";
                 conn.Open();
                 try
                 {
                     int rowsAfected = cmd.ExecuteNonQuery();
-                    //MySqlDataReader reader = cmd.ExecuteReader();
                     conn.Close();
                     if (rowsAfected > 0)
                         return true;
@@ -1117,6 +1256,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1128,7 +1268,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT ID, Fecha, Total, MetodoPago, PuntoVenta FROM venta WHERE Estado=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT V.ID, V.Fecha, V.Total, PV.Nombre AS 'Punto de Venta', E.Nombre AS 'Vendedor' FROM venta V INNER JOIN puntoVenta PV ON PV.ID=V.PuntoVenta INNER JOIN empleado E ON E.Correo=V.Vendedor WHERE V.Estado=1", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -1139,6 +1279,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1150,23 +1291,25 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT ID, Fecha, Total, MetodoPago, PuntoVenta FROM venta WHERE (" +
-                                        "ID LIKE '%" + parametro + "%' or" +
-                                        "Fecha LIKE '%" + parametro + "%' or" +
-                                        "Total LIKE '%" + parametro + "%' or" +
-                                        "MetodoPago LIKE '%" + parametro + "%' or" +
-                                        "PuntoVenta LIKE '%" + parametro + "%') and Estado = 1";
+                    string sqlQuery = "SELECT V.ID, V.Fecha, V.Total, PV.Nombre AS 'Punto de Venta', E.Nombre AS 'Vendedor' FROM venta V INNER JOIN puntoVenta PV ON PV.ID=V.PuntoVenta INNER JOIN empleado E ON E.Correo=V.Vendedor WHERE (" +
+                                        "V.ID LIKE '%" + parametro + "%' or " +
+                                        "V.Fecha LIKE '%" + parametro + "%' or " +
+                                        "V.Total LIKE '%" + parametro + "%' or " +
+                                        "E.Nombre LIKE '%" + parametro + "%' or " +
+                                        "PV.Nombre LIKE '%" + parametro + "%') and V.Estado = 1";
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
                     conn.Close();
                     return mdaDatos;
                 }
                 catch (Exception e)
                 {
+
                     throw new Exception("Error al obtener datos de Venta de la Base de Datos");
                 }
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1204,6 +1347,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1224,11 +1368,10 @@ namespace Logacell.Control
                     while (reader.Read())
                     {
                         Venta v = new Venta();
-                        v.id = reader.GetInt32(0);
+                        v.id = reader.GetInt32(0).ToString();
                         v.fecha = reader.GetDateTime(1);
-                        v.total = reader.GetString(2);
-                        v.metodoPago = reader.GetString(3);
-                        v.puntoVenta = reader.GetInt32(4);
+                        v.total = reader.GetInt32(2);
+                        v.puntoVenta = reader.GetInt32(3);
                         aux.Add(v);
                     }
                     conn.Close();
@@ -1242,73 +1385,53 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
         }
-        public bool eliminarVenta(string ID)
+        public string folioVenta()
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE venta WHERE SET Estado=0 WHERE ID = '" + ID + "'";
+                cmd.CommandText = "SELECT ID FROM venta WHERE PuntoVenta="+idPV.id+" ORDER BY ID DESC LIMIT 1";
                 conn.Open();
                 try
                 {
-
-                    int rowsAfected = cmd.ExecuteNonQuery();
+                    string folio="";
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        folio = reader.GetString(0);
+                    }
                     conn.Close();
-                    if (rowsAfected > 0)
-                        return true;
+                    if (folio != "")
+                    {
+                        string prefijo = folio.Substring(0, 3);
+                        folio = folio.Substring(5, 7);
+                        int num = Convert.ToInt32(folio);
+                        num++;
+                        return prefijo + "-V" + num.ToString("0000000");
+                    }
                     else
-                        return false;
-
+                        return idPV.prefijo + "-V0000001";
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error..! Error al eliminar Venta de la Base de Datos");
+                    throw new Exception("Error al obtener datos de Ventas de la Base de Datos");
                 }
             }
             catch (Exception e)
             {
-                throw new Exception("Error al establecer conexión con el servidor");
-            }
-        }
-        public bool actualizarVenta(Venta venta)
-        {
-            try
-            {
-                conn = new MySqlConnection(builder.ToString());
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE venta SET Fecha= '" + venta.fecha +
-                "',Total='" + venta.total +
-                "',MetodoPago='" + venta.metodoPago +
-                "',PuntoVenta='" + venta.puntoVenta +
-                "',Estado = 1 WHERE ID='" + venta.id + "'";
-                try
-                {
-                    //cmd.CommandText = "SELECT * FROM Servicios";
-                    conn.Open();
-                    int rowsAfected = cmd.ExecuteNonQuery();
-                    //MySqlDataReader reader = cmd.ExecuteReader();
-                    conn.Close();
-                    if (rowsAfected > 0)
-                        return true;
-                    else
-                        return false;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Error..! Error al actualizar venta de la Base de Datos");
-                }
-            }
-            catch (Exception e)
-            {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
         }
+
 
         //-------------------SOLICITUD SERVICIO------------------//
         public bool agregarSolicitudServicios(SolicitudServicio servicio)
@@ -1344,6 +1467,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1386,6 +1510,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1409,6 +1534,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1435,6 +1561,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1479,6 +1606,48 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public string folioServicio()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT Folio FROM solicitudServicio WHERE IDPuntoVenta=" + idPV.id + " ORDER BY ID DESC LIMIT 1";
+                conn.Open();
+                try
+                {
+                    string folio = "";
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        folio = reader.GetString(0);
+                    }
+                    conn.Close();
+                    if (folio != "")
+                    {
+                        string prefijo = folio.Substring(0, 3);
+                        folio = folio.Substring(5, 7);
+                        int num = Convert.ToInt32(folio);
+                        num++;
+                        return prefijo + "-S" + num.ToString("0000000");
+                    }
+                    else
+                        return idPV.prefijo + "-S0000001";
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Ventas de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1514,6 +1683,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1551,6 +1721,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1581,6 +1752,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1614,6 +1786,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1637,6 +1810,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1672,6 +1846,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1694,6 +1869,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1722,6 +1898,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1758,6 +1935,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1796,6 +1974,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
@@ -1826,6 +2005,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1863,6 +2043,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1893,6 +2074,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1904,37 +2086,9 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                DateTime aux = DateTime.Now;
-                string day;
-                if (aux.Day.ToString().Length == 1)
-                    day = "0" + aux.Day.ToString();
-                else
-                    day = aux.Day.ToString();
-                string month;
-                if (aux.Month.ToString().Length == 1)
-                    month = "0" + aux.Month.ToString();
-                else
-                    month = aux.Month.ToString();
-                string hour;
-                if (aux.Hour.ToString().Length == 1)
-                    hour = "0" + aux.Hour.ToString();
-                else
-                    hour = aux.Hour.ToString();
-                string second;
-                if (aux.Second.ToString().Length == 1)
-                    second = "0" + aux.Second.ToString();
-                else
-                    second = aux.Second.ToString();
-                string minute;
-                if (aux.Minute.ToString().Length == 1)
-                    minute = "0" + aux.Minute.ToString();
-                else
-                    minute = aux.Minute.ToString();
-
-                string fecha = aux.Year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second;
                 cmd.CommandText = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) value ('"
                     + abono.cliente + "','" + abono.abono + "','"
-                    + abono.empleado + "','" + fecha + "',"
+                    + abono.empleado + "','" + formatearFecha(DateTime.Now) + "',"
                     + idPV.id + ")";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
@@ -1955,6 +2109,7 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
@@ -1993,11 +2148,14 @@ namespace Logacell.Control
             }
             catch (Exception e)
             {
+                conn.Close();
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
         }
 
+
+        //----------------------Control--------------///
         public string leerUserDoc()
         {
             String line;
@@ -2051,7 +2209,6 @@ namespace Logacell.Control
                 return "";
             }
         }
-
         public bool escribirDoc()
         {
             try
@@ -2078,6 +2235,42 @@ namespace Logacell.Control
             {
                 return false;
             }
+        }
+        public string formatearFecha(DateTime fecha)
+        {
+            DateTime aux;
+            if (fecha != null)
+                aux = DateTime.Now;
+            else
+                aux = fecha;
+
+            string day;
+            if (aux.Day.ToString().Length == 1)
+                day = "0" + aux.Day.ToString();
+            else
+                day = aux.Day.ToString();
+            string month;
+            if (aux.Month.ToString().Length == 1)
+                month = "0" + aux.Month.ToString();
+            else
+                month = aux.Month.ToString();
+            string hour;
+            if (aux.Hour.ToString().Length == 1)
+                hour = "0" + aux.Hour.ToString();
+            else
+                hour = aux.Hour.ToString();
+            string second;
+            if (aux.Second.ToString().Length == 1)
+                second = "0" + aux.Second.ToString();
+            else
+                second = aux.Second.ToString();
+            string minute;
+            if (aux.Minute.ToString().Length == 1)
+                minute = "0" + aux.Minute.ToString();
+            else
+                minute = aux.Minute.ToString();
+
+            return aux.Year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
         }
 
     }

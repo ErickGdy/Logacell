@@ -55,6 +55,9 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="DataGridViewNumericUpDownElements">
+      <HintPath>..\..\..\DataGridViewNumericUpDownElements\bin\Debug\DataGridViewNumericUpDownElements.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,6 +86,7 @@
     <Compile Include="DataObject\ServicioCliente.cs" />
     <Compile Include="DataObject\StockPuntoVenta.cs" />
     <Compile Include="DataObject\Usuario.cs" />
+    <Compile Include="DataObject\PagosVentas.cs" />
     <Compile Include="DataObject\Venta.cs" />
     <Compile Include="Presentacion\Forms\FormLimiteCredito.cs">
       <SubType>Form</SubType>
@@ -95,6 +99,24 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormAbonoCredito.designer.cs">
       <DependentUpon>FormAbonoCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVenta.designer.cs">
+      <DependentUpon>FormVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVentaDescuentoDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVentaDescuentoDialog.Designer.cs">
+      <DependentUpon>FormVentaDescuentoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVentasPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormVentasPagos.Designer.cs">
+      <DependentUpon>FormVentasPagos.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\StockEnPV.cs">
       <SubType>Form</SubType>
@@ -199,6 +221,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormAbonoCredito.resx">
       <DependentUpon>FormAbonoCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormVenta.resx">
+      <DependentUpon>FormVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormVentaDescuentoDialog.resx">
+      <DependentUpon>FormVentaDescuentoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormVentasPagos.resx">
+      <DependentUpon>FormVentasPagos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\StockEnPV.resx">
       <DependentUpon>StockEnPV.cs</DependentUpon>

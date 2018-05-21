@@ -51,8 +51,8 @@ namespace Logacell
                 data.Fill(dtDatos);
                 // Se asigna el DataTable como origen de datos del DataGridView
                 dataGridView1.DataSource = dtDatos;
-                dataGridView1.Columns[0].Width = 50;
-                dataGridView1.Columns[1].Width = 100;
+                dataGridView1.Columns[0].Width = 195;
+                dataGridView1.Columns[1].Width = 50;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
             }
             catch(Exception e)
