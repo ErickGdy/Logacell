@@ -33,8 +33,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DetalleSolicitudServicios));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuTabla = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.estadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.esperaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,35 +88,16 @@
             // 
             this.menuTabla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTabla.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.consultarToolStripMenuItem,
-            this.modificaToolStripMenuItem,
             this.eliminarToolStripMenuItem,
             this.estadoToolStripMenuItem});
             this.menuTabla.Name = "menuTabla";
-            this.menuTabla.Size = new System.Drawing.Size(147, 100);
-            // 
-            // consultarToolStripMenuItem
-            // 
-            this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
-            this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.consultarToolStripMenuItem.Text = "Consultar";
-            this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click);
-            // 
-            // modificaToolStripMenuItem
-            // 
-            this.modificaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificaToolStripMenuItem.Image")));
-            this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
-            this.modificaToolStripMenuItem.Text = "Modificar";
-            this.modificaToolStripMenuItem.Visible = false;
-            this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click);
+            this.menuTabla.Size = new System.Drawing.Size(153, 74);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.eliminarToolStripMenuItem.Text = "Cancelar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -129,8 +108,9 @@
             this.enProgresoToolStripMenuItem,
             this.terminadoToolStripMenuItem,
             this.entregadoToolStripMenuItem});
+            this.estadoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("estadoToolStripMenuItem.Image")));
             this.estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
-            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.estadoToolStripMenuItem.Text = "Estado";
             // 
             // esperaToolStripMenuItem
@@ -185,7 +165,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(486, 59);
+            this.pictureBox8.Location = new System.Drawing.Point(486, 62);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(20, 23);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -205,7 +185,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(485, 126);
+            this.pictureBox6.Location = new System.Drawing.Point(485, 129);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(20, 23);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -242,7 +222,7 @@
             this.lblPendiente.AutoSize = true;
             this.lblPendiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPendiente.ForeColor = System.Drawing.Color.White;
-            this.lblPendiente.Location = new System.Drawing.Point(593, 128);
+            this.lblPendiente.Location = new System.Drawing.Point(593, 131);
             this.lblPendiente.Name = "lblPendiente";
             this.lblPendiente.Size = new System.Drawing.Size(54, 16);
             this.lblPendiente.TabIndex = 65;
@@ -254,7 +234,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(509, 126);
+            this.label10.Location = new System.Drawing.Point(509, 129);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 18);
             this.label10.TabIndex = 64;
@@ -288,7 +268,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(557, 62);
+            this.lblTotal.Location = new System.Drawing.Point(557, 65);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(47, 16);
             this.lblTotal.TabIndex = 61;
@@ -300,7 +280,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(508, 60);
+            this.label6.Location = new System.Drawing.Point(508, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 18);
             this.label6.TabIndex = 60;
@@ -345,7 +325,7 @@
             this.lblPego.AutoSize = true;
             this.lblPego.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPego.ForeColor = System.Drawing.Color.White;
-            this.lblPego.Location = new System.Drawing.Point(557, 95);
+            this.lblPego.Location = new System.Drawing.Point(557, 98);
             this.lblPego.Name = "lblPego";
             this.lblPego.Size = new System.Drawing.Size(54, 16);
             this.lblPego.TabIndex = 76;
@@ -354,7 +334,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(486, 90);
+            this.pictureBox1.Location = new System.Drawing.Point(486, 93);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 23);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -369,7 +349,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(508, 93);
+            this.label4.Location = new System.Drawing.Point(508, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 18);
             this.label4.TabIndex = 74;
@@ -381,7 +361,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(91)))), ((int)(((byte)(157)))));
-            this.ClientSize = new System.Drawing.Size(698, 291);
+            this.ClientSize = new System.Drawing.Size(698, 288);
             this.Controls.Add(this.lblPego);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
@@ -425,14 +405,11 @@
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ContextMenuStrip menuTabla;
-        private System.Windows.Forms.ToolStripMenuItem consultarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem estadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem esperaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enProgresoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminadoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
         private System.Windows.Forms.Label lblTelefono;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox8;
@@ -452,5 +429,6 @@
         private System.Windows.Forms.Label lblPego;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
     }
 }

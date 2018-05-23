@@ -174,8 +174,15 @@ namespace Logacell
 
         private void nuevaVentaToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            //FormVenta fv = new FormVenta();
-            //fv.Show();
+            FormVenta fv = new FormVenta();
+            fv.FormClosed += new FormClosedEventHandler(form_CloseVentas);
+            fv.Show();
+        }
+        private void form_CloseVentas(object sender, FormClosedEventArgs e)
+        {
+            //aqui actualizas o recargas la info del Form1
+            MainVentas.getInstance().Dispose();
+            btnVenta_Click(null, null);
         }
     }
 }

@@ -15,9 +15,7 @@ namespace Logacell.DataObject
         public string anticipo { get; set; }
         public string pendiente { get; set; }
         public List<ServicioCliente> servicios { get; set; }
-
-
-
+        public List<Pagos> pagos { get; set; }
 
     }
 }

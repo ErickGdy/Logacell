@@ -43,11 +43,6 @@ namespace Logacell
                 return instance;
         }
 
-        private void form_ClosedFrecuente(object sender, FormClosedEventArgs e)
-        {
-            //aqui actualizas o recargas la info del Form1
-            actualizarTabla(control.obtenerVentasTable());
-        }
 
         private void form_ClosedClientes(object sender, FormClosedEventArgs e)
         {
@@ -98,8 +93,9 @@ namespace Logacell
         {
             try
             {
-                String idVenta = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                MessageBox.Show("aqui se mostraran los datos relevantes de la venta: " + idVenta);
+                String idVenta = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                DetalleDeVenta dv = new DetalleDeVenta(control.consultarVenta(idVenta));
+                dv.ShowDialog();
             }
             catch (Exception ex)
             {

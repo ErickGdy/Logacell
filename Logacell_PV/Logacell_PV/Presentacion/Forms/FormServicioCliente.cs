@@ -1,5 +1,6 @@
 ﻿using Logacell.Control;
 using Logacell.DataObject;
+using Logacell_PV.Presentacion.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,9 +16,11 @@ namespace Logacell.Presentacion
     public partial class FormServicioCliente : Form
     {
         ControlLogacell control;
+        SolicitudServicio s;
         List<ServicioCliente> servicios;
         string patron = "";
         int contadorPatron = 1;
+        FormPagos fp;
         public FormServicioCliente()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace Logacell.Presentacion
             try {
                 if (validarCampos())
                 {
-                    SolicitudServicio s = new SolicitudServicio();
+                    s = new SolicitudServicio();
                     s.Folio=txtFolio.Text;
                     s.nombreCliente = txtNombre.Text;
                     s.telefonoCliente = txtTelefono.Text;
@@ -46,21 +49,42 @@ namespace Logacell.Presentacion
                     s.anticipo = txtAnticipo.Text;
                     s.pendiente = txtPendiente.Text;
                     s.servicios = servicios;
-                    if (control.agregarSolicitudServicios(s))
+                    if (txtAnticipo.Text != "0" && txtAnticipo.Text != "0.00")
                     {
-                        MessageBox.Show("Datos guardados exitosamente");
-                        Close();
-                        this.Dispose();
+                        fp = new FormPagos(txtAnticipo.Text);
+                        fp.FormClosed += new FormClosedEventHandler(form_ClosedClientes);
+                        fp.Show();
+                    }else
+                    {
+                        if (control.agregarSolicitudServicios(s))
+                        {
+                            MessageBox.Show("Datos guardados exitosamente");
+                            Close();
+                            Dispose();
+                        }
+                        else
+                            MessageBox.Show("Error: verifique los campos y vuelva a intentarlo");
                     }
-                    else
-                        MessageBox.Show("Error: verifique los campos y vuelva a intentarlo");
                 }
                 else
                     MessageBox.Show("No dejar campos vacios");
             }catch(Exception ex){
                 MessageBox.Show(ex.Message);
             }
-}
+        }
+        private void form_ClosedClientes(object sender, FormClosedEventArgs e)
+        {
+            //aqui actualizas o recargas la info del Form1
+            if (control.agregarSolicitudServicios(s, fp.obtenerPagos()))
+            {
+                MessageBox.Show("Datos guardados exitosamente");
+                fp.Dispose();
+                Close();
+                this.Dispose();
+            }
+            else
+                MessageBox.Show("Error: verifique los campos y vuelva a intentarlo");
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -144,22 +168,25 @@ namespace Logacell.Presentacion
 
         private void btnAgregarServicio_Click(object sender, EventArgs e)
         {
-            ServicioCliente sc = new ServicioCliente();
-            sc.descripcion = txtMarca.Text + " " + txtModelo.Text + ": " + txtMotivo.Text;
-            sc.presupuesto = txtPresupuesto.Text;
-            sc.contrasena = txtContra.Text;
-            sc.chip = checkChip.Checked;
-            sc.tapa= checkTapa.Checked;
-            sc.pila=checkPila.Checked;
-            sc.memoria=checkMemoria.Checked;
-            sc.patron = patron;
-            sc.estado = "Espera";
-            servicios.Add(sc);
-            dataGridView1.Rows.Insert(dataGridView1.RowCount, sc.descripcion, sc.presupuesto);
-            txtTotal.Text = (Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtPresupuesto.Text)).ToString();
+            if (txtMarca.Text!="" && txtModelo.Text!="" && txtMotivo.Text!="" && txtPresupuesto.Text!="") {
+                ServicioCliente sc = new ServicioCliente();
+                sc.descripcion = txtMarca.Text + " " + txtModelo.Text + ": " + txtMotivo.Text;
+                sc.presupuesto = txtPresupuesto.Text;
+                sc.contrasena = txtContra.Text;
+                sc.chip = checkChip.Checked;
+                sc.tapa = checkTapa.Checked;
+                sc.pila = checkPila.Checked;
+                sc.memoria = checkMemoria.Checked;
+                sc.patron = patron;
+                sc.estado = "Espera";
+                servicios.Add(sc);
+                dataGridView1.Rows.Insert(dataGridView1.RowCount, sc.descripcion, sc.presupuesto);
+                txtTotal.Text = (Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtPresupuesto.Text)).ToString();
 
-            limpiarForm();
-            btnBorrarPatron_Click(null, null);
+                limpiarForm();
+                btnBorrarPatron_Click(null, null);
+            } else
+                MessageBox.Show("No dejar vacios los campos requeridos");
         }
 
         private void limpiarForm()
