@@ -49,7 +49,7 @@ namespace Logacell.Presentacion
                         detalle.folio = txtFolio.Text;
                         detalle.total=Convert.ToDouble(row.Cells[5].Value.ToString());
                         if(row.Cells[4].Value.ToString()!="Agregar")
-                            detalle.descuento = Convert.ToDouble(row.Cells[5].Value.ToString()) * Convert.ToInt32(row.Cells[4].Value.ToString());
+                            detalle.descuento =Convert.ToDouble(Decimal.Round(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)));
                         else
                             detalle.descuento = 0;
                         detalle.idProducto = Convert.ToInt32(row.Cells[0].Value.ToString());

@@ -2,6 +2,7 @@
 using Logacell.Control;
 using Logacell.DataObject;
 using Logacell.Presentacion;
+using Logacell_PV.Presentacion.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -99,45 +100,7 @@ namespace Logacell
             sc.anticipo = dataGridView1.CurrentRow.Cells[4].Value.ToString();
             sc.pendiente = dataGridView1.CurrentRow.Cells[5].Value.ToString();
             DetalleSolicitudServicios dt = new DetalleSolicitudServicios(sc);
-            dt.Show();
-        }
-
-        private void modificaToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            try
-            {
-                ServicioCliente serCli = control.consultarServicioCliente(id);
-                //FormServicio fc = new FormCliente(serCli);
-                //fc.FormClosed += new FormClosedEventHandler(form_Closed);
-                //fc.Show();
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void eliminarToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                DialogResult dialogResult = MessageBox.Show("¿Desea cancelar el servicio?", "Cancelar servicio", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.OK)
-                {
-                    if (control.actualizarEstadoServicioCliente(id, "Cancelado"))
-                    {
-                        MessageBox.Show("Servicio Cancelado");
-                        actualizarTabla(control.obtenerServiciosClientesTable());
-                    }
-                    else MessageBox.Show("Error al cancelar servicio");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            dt.ShowDialog();
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -147,91 +110,21 @@ namespace Logacell
             fm.Show();
         }
 
-        private void esperaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                if (control.actualizarEstadoServicioCliente(id, "Espera"))
-                {
-                    MessageBox.Show("Servicio actualizado");
-                    actualizarTabla(control.obtenerServiciosClientesTable());
-                }
-                else MessageBox.Show("Error al actualizar estado de servicio");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void enProgresoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                if (control.actualizarEstadoServicioCliente(id, "En Progreso"))
-                {
-                    MessageBox.Show("Servicio actualizado");
-                    actualizarTabla(control.obtenerServiciosClientesTable());
-                }
-                else MessageBox.Show("Error al actualizar estado de servicio");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void terminadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                if (control.actualizarEstadoServicioCliente(id, "Terminado"))
-                {
-                    MessageBox.Show("Servicio actualizado");
-                    actualizarTabla(control.obtenerServiciosClientesTable());
-                }
-                else MessageBox.Show("Error al actualizar estado de servicio");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void entregadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                if (control.actualizarEstadoServicioCliente(id, "Entregado"))
-                {
-                    MessageBox.Show("Servicio actualizado");
-                    actualizarTabla(control.obtenerServiciosClientesTable());
-                }
-                else MessageBox.Show("Error al actualizar estado de servicio");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void MainServiciosCliente_SizeChanged(object sender, EventArgs e)
         {
             pnMenus.Height = this.Height;
         }
 
-        private void estadoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnActualizarTabla_Click(object sender, EventArgs e)
         {
             actualizarTabla(control.obtenerServiciosClientesTable());
+        }
+
+        private void registrarPagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSevicioClientePagos fm = new FormSevicioClientePagos(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+            fm.FormClosed += new FormClosedEventHandler(form_Closed);
+            fm.Show();
         }
     }
 }

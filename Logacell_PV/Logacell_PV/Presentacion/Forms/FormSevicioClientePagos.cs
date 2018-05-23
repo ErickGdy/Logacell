@@ -12,21 +12,33 @@ using System.Windows.Forms;
 
 namespace Logacell_PV.Presentacion.Forms
 {
-    public partial class FormVentasPagos : Form
+    public partial class FormSevicioClientePagos : Form
     {
-        Venta venta;
-        public FormVentasPagos(Venta sale)
+        SolicitudServicio solicitud;
+        ServicioCliente servicio;
+        ControlLogacell control;
+        public FormSevicioClientePagos(string folio)
         {
             InitializeComponent();
-            this.venta = sale;
-            lblFecha.Text = DateTime.Now.ToShortDateString();
-            txtFolio.Text = venta.id.ToString();
-            lblTotal.Text = venta.total.ToString("F2");
-            lblRestante.Text= venta.total.ToString("F2");
-            lblCambio.Text = "0";
-            txtCantidad.Value = Convert.ToDecimal(venta.total);
-            cmbFormaPago.SelectedIndex = 0;
-            txtCantidad.Maximum = Convert.ToDecimal(lblRestante.Text);
+            control = ControlLogacell.getInstance();
+            try
+            {
+                btnAgregar.Enabled = false;
+                btnAceptar.Enabled = false;
+                this.solicitud = control.consultarSolicitudServicio(folio);
+                lblFecha.Text = DateTime.Now.ToShortDateString();
+                txtFolio.Text = solicitud.Folio;
+                lblTotal.Text = Convert.ToDecimal(solicitud.pendiente).ToString("F2");
+                lblRestante.Text = Convert.ToDecimal(solicitud.pendiente).ToString("F2");
+                txtCantidad.Value = Convert.ToDecimal(solicitud.pendiente);
+                lblCambio.Text = "0";
+                cmbFormaPago.SelectedIndex = 0;
+                txtCantidad.Maximum = Convert.ToDecimal(lblRestante.Text);
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -36,18 +48,15 @@ namespace Logacell_PV.Presentacion.Forms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            int found = -1; 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                if(dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
+                if (dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
                 {
-                    found = i;
+                    dataGridView1.Rows[i].Cells[1].Value = Convert.ToDecimal(dataGridView1.Rows[i].Cells[1].Value.ToString()) + txtCantidad.Value;
+                    return;
                 }
             }
-            if(found>=0)
-                dataGridView1.Rows[found].Cells[0].Value = Convert.ToDecimal(dataGridView1.Rows[found].Cells[0].Value.ToString()) + txtCantidad.Value;
-            else
-                dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
+            dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
             lblRestante.Text = (Convert.ToDecimal(lblRestante.Text) - (txtCantidad.Value)).ToString("F2");
             cmbFormaPago.SelectedIndex = 0;
             double totalEnPagos = 0;
@@ -102,14 +111,13 @@ namespace Logacell_PV.Presentacion.Forms
                     pago.formaPago = dataGridView1.Rows[i].Cells[1].Value.ToString();
                     pagos.Add(pago);
                 }
-                venta.pagos = pagos;
-                if (ControlLogacell.getInstance().agregarVenta(venta))
+                if (control.agregarPagoServicio(solicitud,pagos))
                 {
-                    MessageBox.Show("Venta agregada exitosamente");
+                    MessageBox.Show("Pago registrado exitosamente");
                     Dispose();
                 }else
                 {
-                    MessageBox.Show("Error al agregar venta");
+                    MessageBox.Show("Error al registrar");
                 }
             }
             catch (Exception ex)

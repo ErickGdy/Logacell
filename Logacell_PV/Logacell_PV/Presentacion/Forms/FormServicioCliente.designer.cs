@@ -81,6 +81,12 @@
             this.txtAnticipo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -163,7 +169,7 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.txtNombre.Location = new System.Drawing.Point(100, 78);
+            this.txtNombre.Location = new System.Drawing.Point(101, 78);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(318, 26);
             this.txtNombre.TabIndex = 1;
@@ -193,7 +199,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(18, 81);
+            this.label2.Location = new System.Drawing.Point(17, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 20);
             this.label2.TabIndex = 37;
@@ -499,6 +505,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.btnBorrarPatron);
             this.groupBox1.Controls.Add(this.checkMemoria);
             this.groupBox1.Controls.Add(this.checkTapa);
@@ -552,6 +562,8 @@
             // checkMemoria
             // 
             this.checkMemoria.AutoSize = true;
+            this.checkMemoria.Checked = true;
+            this.checkMemoria.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkMemoria.Location = new System.Drawing.Point(513, 201);
             this.checkMemoria.Name = "checkMemoria";
             this.checkMemoria.Size = new System.Drawing.Size(80, 20);
@@ -562,6 +574,8 @@
             // checkTapa
             // 
             this.checkTapa.AutoSize = true;
+            this.checkTapa.Checked = true;
+            this.checkTapa.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkTapa.Location = new System.Drawing.Point(424, 200);
             this.checkTapa.Name = "checkTapa";
             this.checkTapa.Size = new System.Drawing.Size(67, 20);
@@ -572,6 +586,8 @@
             // checkChip
             // 
             this.checkChip.AutoSize = true;
+            this.checkChip.Checked = true;
+            this.checkChip.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkChip.Location = new System.Drawing.Point(611, 201);
             this.checkChip.Name = "checkChip";
             this.checkChip.Size = new System.Drawing.Size(54, 20);
@@ -582,6 +598,8 @@
             // checkPila
             // 
             this.checkPila.AutoSize = true;
+            this.checkPila.Checked = true;
+            this.checkPila.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkPila.Location = new System.Drawing.Point(348, 201);
             this.checkPila.Name = "checkPila";
             this.checkPila.Size = new System.Drawing.Size(50, 20);
@@ -681,12 +699,74 @@
             this.lblFecha.Text = "10/10/2013";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(70, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(13, 16);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "*";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(198, 26);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(13, 16);
+            this.label14.TabIndex = 76;
+            this.label14.Text = "*";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(128, 78);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(13, 16);
+            this.label15.TabIndex = 77;
+            this.label15.Text = "*";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(115, 131);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(13, 16);
+            this.label16.TabIndex = 78;
+            this.label16.Text = "*";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(89, 116);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(15, 20);
+            this.label17.TabIndex = 79;
+            this.label17.Text = "*";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(88, 84);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(15, 20);
+            this.label18.TabIndex = 80;
+            this.label18.Text = "*";
+            // 
             // FormServicioCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(715, 478);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.label18);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label10);
@@ -697,15 +777,13 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
             this.Controls.Add(this.txtFolio);
-            this.Controls.Add(this.txtNombre);
-            this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "FormServicioCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nota de Servicio";
@@ -773,5 +851,11 @@
         private System.Windows.Forms.CheckBox checkPila;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnBorrarPatron;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }

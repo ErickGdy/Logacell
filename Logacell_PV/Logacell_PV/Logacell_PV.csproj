@@ -88,6 +88,12 @@
     <Compile Include="DataObject\Usuario.cs" />
     <Compile Include="DataObject\PagosVentas.cs" />
     <Compile Include="DataObject\Venta.cs" />
+    <Compile Include="Presentacion\Forms\DetalleDeVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\DetalleDeVenta.designer.cs">
+      <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\FormLimiteCredito.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,12 @@
     <Compile Include="Presentacion\Forms\FormAbonoCredito.designer.cs">
       <DependentUpon>FormAbonoCredito.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\Forms\FormPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormPagos.Designer.cs">
+      <DependentUpon>FormPagos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\FormVenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +123,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormVentaDescuentoDialog.Designer.cs">
       <DependentUpon>FormVentaDescuentoDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormSevicioClientePagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormSevicioClientePagos.Designer.cs">
+      <DependentUpon>FormSevicioClientePagos.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormVentasPagos.cs">
       <SubType>Form</SubType>
@@ -216,17 +234,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\Forms\DetalleDeVenta.resx">
+      <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormLimiteCredito.resx">
       <DependentUpon>FormLimiteCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormAbonoCredito.resx">
       <DependentUpon>FormAbonoCredito.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormPagos.resx">
+      <DependentUpon>FormPagos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVenta.resx">
       <DependentUpon>FormVenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVentaDescuentoDialog.resx">
       <DependentUpon>FormVentaDescuentoDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormSevicioClientePagos.resx">
+      <DependentUpon>FormSevicioClientePagos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVentasPagos.resx">
       <DependentUpon>FormVentasPagos.cs</DependentUpon>

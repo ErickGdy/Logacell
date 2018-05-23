@@ -12,21 +12,31 @@ using System.Windows.Forms;
 
 namespace Logacell_PV.Presentacion.Forms
 {
-    public partial class FormVentasPagos : Form
+    public partial class FormPagos : Form
     {
-        Venta venta;
-        public FormVentasPagos(Venta sale)
+        ControlLogacell control;
+        List<Pagos> pagos;
+        public FormPagos(string cantidad)
         {
             InitializeComponent();
-            this.venta = sale;
-            lblFecha.Text = DateTime.Now.ToShortDateString();
-            txtFolio.Text = venta.id.ToString();
-            lblTotal.Text = venta.total.ToString("F2");
-            lblRestante.Text= venta.total.ToString("F2");
-            lblCambio.Text = "0";
-            txtCantidad.Value = Convert.ToDecimal(venta.total);
-            cmbFormaPago.SelectedIndex = 0;
-            txtCantidad.Maximum = Convert.ToDecimal(lblRestante.Text);
+            control = ControlLogacell.getInstance();
+            try
+            {
+                lblFecha.Text = DateTime.Now.ToShortDateString();
+                pagos = new List<Pagos>();
+                lblTotal.Text = Convert.ToDecimal(cantidad).ToString("F2");
+                lblRestante.Text = Convert.ToDecimal(cantidad).ToString("F2");
+                txtCantidad.Value = Convert.ToDecimal(cantidad);
+                lblCambio.Text = "0";
+                cmbFormaPago.SelectedIndex = 0;
+                txtCantidad.Maximum = Convert.ToDecimal(lblRestante.Text);
+                btnAgregar.Enabled = false;
+                btnAceptar.Enabled = false;
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -36,20 +46,17 @@ namespace Logacell_PV.Presentacion.Forms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            int found = -1; 
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
-                if(dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
+                if (dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
                 {
-                    found = i;
+                    dataGridView1.Rows[i].Cells[1].Value = Convert.ToDecimal(dataGridView1.Rows[i].Cells[1].Value.ToString()) + txtCantidad.Value;
+                    return;
                 }
             }
-            if(found>=0)
-                dataGridView1.Rows[found].Cells[0].Value = Convert.ToDecimal(dataGridView1.Rows[found].Cells[0].Value.ToString()) + txtCantidad.Value;
-            else
-                dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
+            dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
             lblRestante.Text = (Convert.ToDecimal(lblRestante.Text) - (txtCantidad.Value)).ToString("F2");
-            cmbFormaPago.SelectedIndex = 0;
+            cmbFormaPago.SelectedIndex = 1;
             double totalEnPagos = 0;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
@@ -90,11 +97,10 @@ namespace Logacell_PV.Presentacion.Forms
         {
             try
             {
-                List<Pagos> pagos = new List<Pagos>();
+                pagos.Clear();
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
                     Pagos pago = new Pagos();
-                    pago.folio = txtFolio.Text;
                     if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "Efectivo")
                         pago.pago = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString()) - Convert.ToDouble(lblCambio.Text);
                     else
@@ -102,21 +108,17 @@ namespace Logacell_PV.Presentacion.Forms
                     pago.formaPago = dataGridView1.Rows[i].Cells[1].Value.ToString();
                     pagos.Add(pago);
                 }
-                venta.pagos = pagos;
-                if (ControlLogacell.getInstance().agregarVenta(venta))
-                {
-                    MessageBox.Show("Venta agregada exitosamente");
-                    Dispose();
-                }else
-                {
-                    MessageBox.Show("Error al agregar venta");
-                }
+                Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        public List<Pagos> obtenerPagos()
+        {
+            return pagos;
         }
     }
 }

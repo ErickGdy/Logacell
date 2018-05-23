@@ -12,7 +12,8 @@ namespace Logacell.DataObject
         public DateTime fecha { get; set; }
         public double total { get; set; }
         public int puntoVenta { get; set; }
+        public string vendedor { get; set; }
         public List<DetalleVenta> productos { get; set; }
-        public List<PagosVentas> pagos { get; set; }
+        public List<Pagos> pagos { get; set; }
     }
 }

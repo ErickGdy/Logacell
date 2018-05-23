@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Logacell.DataObject
 {
-    public class PagosVentas
+    public class Pagos
     {
         public string id { get; set; }
-        public string idVenta { get; set; }
+        public string folio { get; set; }
         public string formaPago { get; set; }
         public double pago { get; set; }
 
