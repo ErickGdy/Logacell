@@ -36,9 +36,20 @@ namespace Logacell_PV.Presentacion.Forms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
-            lblRestante.Text = (Convert.ToDecimal(venta.total) - (txtCantidad.Value)).ToString();
-            cmbFormaPago.SelectedIndex = 1;
+            int found = -1; 
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                if(dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
+                {
+                    found = i;
+                }
+            }
+            if(found>=0)
+                dataGridView1.Rows[found].Cells[0].Value = Convert.ToDecimal(dataGridView1.Rows[found].Cells[0].Value.ToString()) + txtCantidad.Value;
+            else
+                dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
+            lblRestante.Text = (Convert.ToDecimal(lblRestante.Text) - (txtCantidad.Value)).ToString("F2");
+            cmbFormaPago.SelectedIndex = 0;
             double totalEnPagos = 0;
             for (int i = 0; i < dataGridView1.RowCount; i++)
             {
@@ -79,12 +90,15 @@ namespace Logacell_PV.Presentacion.Forms
         {
             try
             {
-                List<PagosVentas> pagos = new List<PagosVentas>();
+                List<Pagos> pagos = new List<Pagos>();
                 for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
-                    PagosVentas pago = new PagosVentas();
-                    pago.idVenta = txtFolio.Text;
-                    pago.pago = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                    Pagos pago = new Pagos();
+                    pago.folio = txtFolio.Text;
+                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "Efectivo")
+                        pago.pago = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString()) - Convert.ToDouble(lblCambio.Text);
+                    else
+                        pago.pago = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString());
                     pago.formaPago = dataGridView1.Rows[i].Cells[1].Value.ToString();
                     pagos.Add(pago);
                 }
