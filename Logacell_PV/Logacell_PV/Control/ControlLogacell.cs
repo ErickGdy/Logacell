@@ -30,6 +30,7 @@ namespace Logacell.Control
             builder.UserID = userID;
             builder.Password = password;
             builder.Database = database;
+            builder.AllowUserVariables = true;
         }
 
         public static ControlLogacell getInstance()
@@ -1029,8 +1030,74 @@ namespace Logacell.Control
             }
 
         }
+        public bool entradaEmpleado()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO bitacoraEmpleados (Empleado, Fecha, CheckOut, IDPuntoVenta) values ('"+
+                    currentUser.empleado+ "', now(), null,"+idPV.id+" );";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al ingresar entrada de empleado");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
 
-       
+        }
+        public bool salidaEmpleado()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SET @id = 0; " +
+                "SELECT @id := ID FROM bitacoraEmpleados WHERE Empleado = '"+currentUser.empleado+"' ORDER BY ID DESC LIMIT 1; " +
+                "UPDATE bitacoraEmpleados SET CheckOut = CURRENT_TIME() WHERE ID = @id;";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al registrar salida de empleado");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+
+
+
         //------------------PUNTOVENTA------------------//
         public PuntoVenta consultarPuntoVenta(string ID)
         {

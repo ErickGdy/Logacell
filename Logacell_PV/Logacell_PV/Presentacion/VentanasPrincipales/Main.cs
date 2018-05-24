@@ -184,5 +184,10 @@ namespace Logacell
             MainVentas.getInstance().Dispose();
             btnVenta_Click(null, null);
         }
+
+        private void nuevaCompraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

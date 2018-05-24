@@ -95,7 +95,12 @@ namespace Logacell.Presentacion
             ControlLogacell control = ControlLogacell.getInstance();
             LoginPV lpv = new LoginPV();
             lpv.ShowDialog();
-            control.setCurrentUser(txtUsuario.Text);
+            try
+            {
+                control.setCurrentUser(txtUsuario.Text);
+                control.entradaEmpleado();
+            }
+            catch (Exception ex) { }
             Main principal = new Main();
             principal.Show();
             this.Hide();
