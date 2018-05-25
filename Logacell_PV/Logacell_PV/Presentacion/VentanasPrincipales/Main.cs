@@ -86,10 +86,6 @@ namespace Logacell
             form.Show();
         }
 
-        private void nuevaVentaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void corteDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -188,6 +184,42 @@ namespace Logacell
         private void nuevaCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            //FormVenta fv = new FormVenta();
+            //fv.FormClosed += new FormClosedEventHandler(form_FormCompra);
+           //fv.Show();
+        }
+        private void form_FormCompra(object sender, FormClosedEventArgs e)
+        {
+            //aqui actualizas o recargas la info del Form1
+            //MainVentas.getInstance().Dispose();
+            //btnVenta_Click(null, null);
+        }
+
+        private void egresoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            minimizeForms();
+            inhabilitarBoton("MovimientoCaja");
+            MainMovimientosCaja mv = MainMovimientosCaja.getInstance();
+            configurarForm(mv);
+            mv.Show();
+        }
+
+        private void listaDeComprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nuevoIngresoEgresoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEgreso fv = new FormEgreso(null);
+            fv.FormClosed += new FormClosedEventHandler(form_CloseIngreso);
+            fv.Show();
+        }
+        private void form_CloseIngreso(object sender, FormClosedEventArgs e)
+        {
+            //aqui actualizas o recargas la info del Form1
+            MainMovimientosCaja.getInstance().Dispose();
+            egresoToolStripMenuItem_Click(null, null);
         }
     }
 }

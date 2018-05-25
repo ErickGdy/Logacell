@@ -1,5 +1,6 @@
 ﻿using Logacell.Control;
 using Logacell.DataObject;
+using Logacell_PV.Presentacion;
 using Logacell_PV.Presentacion.Forms;
 using System;
 using System.Collections.Generic;

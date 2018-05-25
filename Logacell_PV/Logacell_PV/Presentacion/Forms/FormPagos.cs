@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Logacell_PV.Presentacion.Forms
+namespace Logacell_PV.Presentacion
 {
     public partial class FormPagos : Form
     {

@@ -79,6 +79,7 @@
     <Compile Include="DataObject\CreditoCliente.cs" />
     <Compile Include="DataObject\DetalleVenta.cs" />
     <Compile Include="DataObject\Empleado.cs" />
+    <Compile Include="DataObject\IngresoEgreso.cs" />
     <Compile Include="DataObject\Producto.cs" />
     <Compile Include="DataObject\PuntoVenta.cs" />
     <Compile Include="DataObject\Servicio.cs" />
@@ -111,6 +112,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormPagos.Designer.cs">
       <DependentUpon>FormPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormEgreso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormEgreso.designer.cs">
+      <DependentUpon>FormEgreso.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormVenta.cs">
       <SubType>Form</SubType>
@@ -196,6 +203,12 @@
     <Compile Include="Presentacion\Login\LoginPV.Designer.cs">
       <DependentUpon>LoginPV.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainMovimientosCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainMovimientosCaja.Designer.cs">
+      <DependentUpon>MainMovimientosCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\VentanasPrincipales\MainServicios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +259,9 @@
     <EmbeddedResource Include="Presentacion\Forms\FormPagos.resx">
       <DependentUpon>FormPagos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormEgreso.resx">
+      <DependentUpon>FormEgreso.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVenta.resx">
       <DependentUpon>FormVenta.cs</DependentUpon>
     </EmbeddedResource>
@@ -287,6 +303,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login\LoginPV.resx">
       <DependentUpon>LoginPV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainMovimientosCaja.resx">
+      <DependentUpon>MainMovimientosCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainServicios.resx">
       <DependentUpon>MainServicios.cs</DependentUpon>
