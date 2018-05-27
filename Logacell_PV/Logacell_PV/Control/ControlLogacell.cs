@@ -20,7 +20,7 @@ namespace Logacell.Control
         string userID = "logacell_logamel";
         string password = "Logamel82";
         //string database = "logacell_logamysql";
-        string database = "logacell_logacell";
+         string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
