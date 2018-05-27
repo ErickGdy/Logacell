@@ -184,15 +184,15 @@ namespace Logacell
         private void nuevaCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            //FormVenta fv = new FormVenta();
-            //fv.FormClosed += new FormClosedEventHandler(form_FormCompra);
-           //fv.Show();
+           FormCompra fv = new FormCompra();
+           fv.FormClosed += new FormClosedEventHandler(form_FormCompra);
+           fv.Show();
         }
         private void form_FormCompra(object sender, FormClosedEventArgs e)
         {
             //aqui actualizas o recargas la info del Form1
-            //MainVentas.getInstance().Dispose();
-            //btnVenta_Click(null, null);
+            MainCompras.getInstance().Dispose();
+            listaDeComprasToolStripMenuItem_Click(null, null);
         }
 
         private void egresoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -206,7 +206,11 @@ namespace Logacell
 
         private void listaDeComprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            minimizeForms();
+            inhabilitarBoton("MovimientoCaja");
+            MainCompras mc = MainCompras.getInstance();
+            configurarForm(mc);
+            mc.Show();
         }
 
         private void nuevoIngresoEgresoToolStripMenuItem_Click(object sender, EventArgs e)

@@ -55,7 +55,8 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="DataGridViewNumericUpDownElements">
+    <Reference Include="DataGridViewNumericUpDownElements, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\DataGridViewNumericUpDownElements\bin\Debug\DataGridViewNumericUpDownElements.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
@@ -79,6 +80,7 @@
     <Compile Include="DataObject\CreditoCliente.cs" />
     <Compile Include="DataObject\DetalleVenta.cs" />
     <Compile Include="DataObject\Empleado.cs" />
+    <Compile Include="DataObject\Compra.cs" />
     <Compile Include="DataObject\IngresoEgreso.cs" />
     <Compile Include="DataObject\Producto.cs" />
     <Compile Include="DataObject\PuntoVenta.cs" />
@@ -118,6 +120,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormEgreso.designer.cs">
       <DependentUpon>FormEgreso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormCompra.designer.cs">
+      <DependentUpon>FormCompra.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormVenta.cs">
       <SubType>Form</SubType>
@@ -221,6 +229,12 @@
     <Compile Include="Presentacion\VentanasPrincipales\MainServiciosCliente.designer.cs">
       <DependentUpon>MainServiciosCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainCompras.designer.cs">
+      <DependentUpon>MainCompras.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\VentanasPrincipales\MainVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormEgreso.resx">
       <DependentUpon>FormEgreso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormCompra.resx">
+      <DependentUpon>FormCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVenta.resx">
       <DependentUpon>FormVenta.cs</DependentUpon>
@@ -312,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainServiciosCliente.resx">
       <DependentUpon>MainServiciosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainCompras.resx">
+      <DependentUpon>MainCompras.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainVentas.resx">
       <DependentUpon>MainVentas.cs</DependentUpon>
