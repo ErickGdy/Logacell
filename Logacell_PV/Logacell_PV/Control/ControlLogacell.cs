@@ -2742,10 +2742,12 @@ namespace Logacell.Control
         public string leerUserDoc()
         {
             String line;
+            StreamReader sr = null;
+            string user = "";
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("thumbs.txt");
+                sr = new StreamReader("thumbs.txt");
                 //read de first line
                 line = sr.ReadLine();
                 //Continue to read until you reach end of file
@@ -2753,25 +2755,30 @@ namespace Logacell.Control
                 {
                     if (line == "us")
                     {
-                        return sr.ReadLine();
+                        user  = sr.ReadLine();
+                        break;
                     }
                 }
                 //close the file
                 sr.Close();
-                return "";
+                sr.Dispose();
+                return user;
             }
             catch (Exception e)
             {
+                sr.Dispose();
                 return "";
             }
         }
         public string leerPVDoc()
         {
             String line;
+            StreamReader sr = null;
+            string pv = "";
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("thumbs.txt");
+                sr = new StreamReader("thumbs.txt");
                 //read de first line
                 line = sr.ReadLine();
                 //Continue to read until you reach end of file
@@ -2779,26 +2786,30 @@ namespace Logacell.Control
                 {
                     if (line == "pv")
                     {
-                        return sr.ReadLine();
+                        pv= sr.ReadLine();
+                        break;
                     }
                     line = sr.ReadLine();
                 }
                 //close the file
                 sr.Close();
-                return "";
+                sr.Dispose();
+                return pv;
             }
             catch (Exception e)
             {
+                sr.Dispose();
                 return "";
             }
         }
         public bool escribirDoc()
         {
+            StreamWriter sw = null;
             try
             {
 
                 //Pass the filepath and filename to the StreamWriter Constructor
-                StreamWriter sw = new StreamWriter("thumbs.txt");
+                sw = new StreamWriter("thumbs.txt");
                 //Write a line of text
                 if (currentUser.usuario != null)
                 {
@@ -2812,10 +2823,12 @@ namespace Logacell.Control
                 }
                 //Close the file
                 sw.Close();
+                sw.Dispose();
                 return true;
             }
             catch (Exception e)
             {
+                sw.Dispose();
                 return false;
             }
         }
