@@ -27,6 +27,7 @@ namespace Logacell
             try
             {
                 ControlLogacell.getInstance().salidaEmpleado();
+                ControlLogacell.getInstance().actualizarEstadoPuntoVenta("Inactivo");
             }
             catch (System.Exception ex) { }
         }
