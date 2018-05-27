@@ -19,8 +19,8 @@ namespace Logacell.Control
         string server = "logacell.com";
         string userID = "logacell_logamel";
         string password = "Logamel82";
-        //string database = "logacell_logamysql";
-         string database = "logacell_logacell";
+        string database = "logacell_logamysql";
+        //string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
@@ -1034,7 +1034,7 @@ namespace Logacell.Control
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "INSERT INTO bitacoraEmpleados (Empleado, Fecha, CheckOut, IDPuntoVenta) values ('"+
-                    currentUser.empleado+ "', now(), null,"+idPV.id+ " ); INSERT INTO usuariosPV (PuntoVenta, Usuario) values (" + idPV.id + ",'" + currentUser.empleado + "');";
+                    currentUser.empleado+ "', now(), null,"+idPV.id+" );";
                 try
                 {
                     //cmd.CommandText = "SELECT * FROM Servicios";
@@ -1042,7 +1042,7 @@ namespace Logacell.Control
                     int rowsAfected = cmd.ExecuteNonQuery();
                     //MySqlDataReader reader = cmd.ExecuteReader();
                     conn.Close();
-                    if (rowsAfected >= 2)
+                    if (rowsAfected > 0)
                         return true;
                     else
                         return false;
@@ -1067,7 +1067,7 @@ namespace Logacell.Control
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "SET @id = 0; " +
                 "SELECT @id := ID FROM bitacoraEmpleados WHERE Empleado = '"+currentUser.empleado+"' ORDER BY ID DESC LIMIT 1; " +
-                "UPDATE bitacoraEmpleados SET CheckOut = CURRENT_TIME() WHERE ID = @id; DELETE FROM usuariosPV WHERE PuntoVenta=" + idPV.id + " AND Usuario = '" + currentUser.empleado + "'; ";
+                "UPDATE bitacoraEmpleados SET CheckOut = CURRENT_TIME() WHERE ID = @id;";
                 try
                 {
                     //cmd.CommandText = "SELECT * FROM Servicios";
@@ -1185,40 +1185,8 @@ namespace Logacell.Control
         {
             idPV = consultarPuntoVenta(id);
         }
-        public bool actualizarEstadoPuntoVenta(string estado)
-        {
-            try
-            {
-                conn = new MySqlConnection(builder.ToString());
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE puntoVenta SET Usuario= '" + currentUser.empleado +
-                "',Activo = '"+estado+"' WHERE id = " + idPV.id;
-                try
-                {
-                    //cmd.CommandText = "SELECT * FROM Servicios";
-                    conn.Open();
-                    int rowsAfected = cmd.ExecuteNonQuery();
-                    //MySqlDataReader reader = cmd.ExecuteReader();
-                    conn.Close();
-                    if (rowsAfected > 0)
-                        return true;
-                    else
-                        return false;
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Error..! Error al actualizar usuario de la Base de Datos");
-                }
-            }
-            catch (Exception e)
-            {
-                conn.Close();
-                throw new Exception("Error al establecer conexión con el servidor");
-            }
 
-        }
-
-
+        
         //------------------USUARIO------------------//
         public Usuario consultarUsuario(string id)
         {

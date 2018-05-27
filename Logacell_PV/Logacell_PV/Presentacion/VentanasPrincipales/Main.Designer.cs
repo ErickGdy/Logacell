@@ -27,7 +27,6 @@ namespace Logacell
             try
             {
                 ControlLogacell.getInstance().salidaEmpleado();
-                ControlLogacell.getInstance().actualizarEstadoPuntoVenta("Inactivo");
             }
             catch (System.Exception ex) { }
         }
@@ -66,11 +65,11 @@ namespace Logacell
             this.listaDeComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.corteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.egresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -307,7 +306,6 @@ namespace Logacell
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(91, 36);
             this.toolStripMenuItem4.Text = "Caja";
-            this.toolStripMenuItem4.Visible = false;
             // 
             // corteDeCajaToolStripMenuItem
             // 
@@ -318,11 +316,6 @@ namespace Logacell
             this.corteDeCajaToolStripMenuItem.Text = "Corte de caja";
             this.corteDeCajaToolStripMenuItem.Click += new System.EventHandler(this.corteDeCajaToolStripMenuItem_Click);
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(275, 6);
-            // 
             // egresoToolStripMenuItem
             // 
             this.egresoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
@@ -331,15 +324,6 @@ namespace Logacell
             this.egresoToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
             this.egresoToolStripMenuItem.Text = "Lista de Egreso/Ingreso";
             this.egresoToolStripMenuItem.Click += new System.EventHandler(this.egresoToolStripMenuItem_Click);
-            // 
-            // nuevoIngresoEgresoToolStripMenuItem
-            // 
-            this.nuevoIngresoEgresoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
-            this.nuevoIngresoEgresoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.nuevoIngresoEgresoToolStripMenuItem.Name = "nuevoIngresoEgresoToolStripMenuItem";
-            this.nuevoIngresoEgresoToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
-            this.nuevoIngresoEgresoToolStripMenuItem.Text = "Nuevo Ingreso/Egreso";
-            this.nuevoIngresoEgresoToolStripMenuItem.Click += new System.EventHandler(this.nuevoIngresoEgresoToolStripMenuItem_Click);
             // 
             // footer
             // 
@@ -359,6 +343,20 @@ namespace Logacell
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
+            // 
+            // nuevoIngresoEgresoToolStripMenuItem
+            // 
+            this.nuevoIngresoEgresoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.nuevoIngresoEgresoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.nuevoIngresoEgresoToolStripMenuItem.Name = "nuevoIngresoEgresoToolStripMenuItem";
+            this.nuevoIngresoEgresoToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
+            this.nuevoIngresoEgresoToolStripMenuItem.Text = "Nuevo Ingreso/Egreso";
+            this.nuevoIngresoEgresoToolStripMenuItem.Click += new System.EventHandler(this.nuevoIngresoEgresoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(275, 6);
             // 
             // Main
             // 
