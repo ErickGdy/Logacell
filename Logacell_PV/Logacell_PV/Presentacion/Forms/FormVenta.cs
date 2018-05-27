@@ -146,18 +146,25 @@ namespace Logacell.Presentacion
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            string id;
-            id = txtProducto.Text.Substring(0, txtProducto.Text.IndexOf(" -"));
-            Producto prod = null;
-            foreach (Producto p in productos)
+            try
             {
-                if (p.id.ToString() == id)
+                string id;
+                id = txtProducto.Text.Substring(0, txtProducto.Text.IndexOf(" -"));
+                Producto prod = null;
+                foreach (Producto p in productos)
                 {
-                    prod = p;
-                    break;
+                    if (p.id.ToString() == id)
+                    {
+                        prod = p;
+                        break;
+                    }
                 }
+                dataGridView1.Rows.Insert(dataGridView1.RowCount, prod.id, prod.nombre, prod.cantidad, 1, "Agregar", prod.precio);
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error al seleccionar producto, seleccione un producto válido");
             }
-            dataGridView1.Rows.Insert(dataGridView1.RowCount, prod.id, prod.nombre, prod.cantidad, 1 ,"Agregar", prod.precio);
+
             limpiarForm();
             actualizarTotal();
         }
@@ -169,12 +176,13 @@ namespace Logacell.Presentacion
         {
             try
             {
-                if (txtProducto.Text.Length > 2)
+                int i;
+                if (txtProducto.Text.Length > 2 || int.TryParse(Convert.ToString(txtProducto.Text), out i))
                 {
                     comboBox1.Items.Clear();
                     string[] aux = obtenerArregloProductos(txtProducto.Text);
                     comboBox1.Items.AddRange(aux);
-                    comboBox1.DroppedDown = true;
+                    //comboBox1.DroppedDown = true;
                 }
                 else
                 {
@@ -199,7 +207,7 @@ namespace Logacell.Presentacion
             List<string> aux = new List<string>();
             foreach (Producto p in productos)
             {
-                if(p.id.ToString().Contains(text) || p.nombre.Contains(text) || p.modelo.Contains(text) || p.marca.Contains(text))
+                if (p.id.ToString().IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 || p.nombre.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 || p.modelo.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0 || p.marca.IndexOf(text, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     aux.Add(p.id.ToString()+" - "+p.nombre+ " "+p.marca+" "+p.modelo);
                 }
