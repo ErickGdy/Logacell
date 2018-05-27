@@ -13,24 +13,23 @@ using System.Windows.Forms;
 
 namespace Logacell.Presentacion
 {
-    public partial class FormVenta : Form
+    public partial class FormCompra : Form
     {
         ControlLogacell control;
         List<Producto> productos;
-        List<Producto> productosVendidos;
-        FormVentaDescuentoDialog fd;
-        public FormVenta()
+        List<Producto> productosComprados;
+        public FormCompra()
         {
             InitializeComponent();
             control = new ControlLogacell();
             lblFecha.Text = DateTime.Now.ToShortDateString();
-            productos = new List<Producto>();              
+            productos = new List<Producto>();
+            productosComprados = new List<Producto>();
             try
             {
-                txtFolio.Text = control.folioVenta();
-                productos = control.obtenerProductosByPV();
                 this.dataGridView1.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridView1_CellValidating);
-                this.dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellContentClick);
+                this.dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
+                productos = control.obtenerProductos();
             }
             catch (Exception ex)
             {
@@ -43,30 +42,23 @@ namespace Logacell.Presentacion
             {
                 if (validarCampos())
                 {
-                    List<DetalleVenta> detalles = new List<DetalleVenta>();
-                    DetalleVenta detalle;
+                    Producto prod = new Producto();
+                    productosComprados.Clear();
                     foreach (DataGridViewRow row in dataGridView1.Rows)
                     {
-                        detalle = new DetalleVenta();
-                        detalle.folio = txtFolio.Text;
-                        detalle.total=Convert.ToDouble(row.Cells[5].Value.ToString());
-                        if(row.Cells[4].Value.ToString()!="Agregar")
-                            detalle.descuento =Convert.ToDouble(Decimal.Round(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)));
-                        else
-                            detalle.descuento = 0;
-                        detalle.idProducto = Convert.ToInt32(row.Cells[0].Value.ToString());
-                        detalle.cantidadProducto = Convert.ToInt32(row.Cells[3].Value.ToString());
-                        detalles.Add(detalle);
+                        prod.id = Convert.ToInt32(row.Cells[0].Value.ToString());
+                        prod.cantidad = Convert.ToInt32(row.Cells[3].Value.ToString());
+                        prod.precio = row.Cells[4].Value.ToString();
+                        productosComprados.Add(prod);
                     }
-                    Venta venta = new Venta();
-                    venta.id = txtFolio.Text;
-                    venta.productos = detalles;
-                    venta.total = Convert.ToDouble(txtTotal.Text);
-                    FormVentasPagos fv = new FormVentasPagos(venta);
-                    fv.FormClosed += new FormClosedEventHandler(form_ClosedThis);
-                    fv.ShowDialog();
-        
-            }
+                    if (control.agregarCompra(productosComprados, txtTotal.Text))
+                    {
+                        MessageBox.Show("Compra guardada exitosamente");
+                        Close();
+                        Dispose();
+                    }
+                    else MessageBox.Show("Error al guardar compra");
+                }
                 else
                     MessageBox.Show("No dejar campos vacios");
             }
@@ -74,11 +66,6 @@ namespace Logacell.Presentacion
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-        private void form_ClosedThis(object sender, FormClosedEventArgs e)
-        {
-            Close();
-            Dispose();
         }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -112,32 +99,24 @@ namespace Logacell.Presentacion
         }
         private bool validarCampos()
         {
-            if (txtSubTotal.Text != "" && txtSubTotal.Text != "0")
+            if (txtTotal.Text != "" && txtTotal.Text != "0")
                 return true;
             return false;
         }
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            productos.RemoveAt(dataGridView1.CurrentRow.Index);
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
         }
         private void actualizarTotal()
         {
             try
             {
-                decimal descuentos = 0;
-                decimal cont = 0;
                 decimal total = 0;
                 foreach(DataGridViewRow row in dataGridView1.Rows)
                 {
-                    cont += Convert.ToDecimal(row.Cells[5].Value.ToString())* Convert.ToDecimal(row.Cells[3].Value.ToString());
-                    if(row.Cells[4].Value.ToString()!="Agregar")
-                        descuentos += Decimal.Round(Convert.ToDecimal(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)) * Convert.ToDecimal(row.Cells[3].Value.ToString()));
-                    total += cont - descuentos;
+                    total += Convert.ToDecimal(row.Cells[3].Value.ToString()) * Convert.ToDecimal(row.Cells[4].Value.ToString());
                 }
-                txtSubTotal.Text = cont.ToString("F2");
                 txtTotal.Text = total.ToString("F2");
-                txtDescuento.Text = descuentos.ToString("F2");
             }
             catch (Exception ex)
             {
@@ -148,7 +127,7 @@ namespace Logacell.Presentacion
         {
             string id;
             id = txtProducto.Text.Substring(0, txtProducto.Text.IndexOf(" -"));
-            Producto prod = null;
+            Producto prod = new Producto();
             foreach (Producto p in productos)
             {
                 if (p.id.ToString() == id)
@@ -157,7 +136,7 @@ namespace Logacell.Presentacion
                     break;
                 }
             }
-            dataGridView1.Rows.Insert(dataGridView1.RowCount, prod.id, prod.nombre, prod.cantidad, 1 ,"Agregar", prod.precio);
+            dataGridView1.Rows.Insert(dataGridView1.RowCount, prod.id, prod.nombre, control.obtenerStockProducto(prod.id.ToString()), 1 , prod.precio, prod.precio);
             limpiarForm();
             actualizarTotal();
         }
@@ -220,46 +199,40 @@ namespace Logacell.Presentacion
                 e.Handled = true;
             }
         }
+        private void FormVenta_Load(object sender, EventArgs e)
+        {
+            
+        }
         private void dataGridView1_CellValidating(object sender,DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 3) // 1 should be your column index
+            if (e.ColumnIndex == 3 || e.ColumnIndex == 4) // 1 should be your column index
             {
                 decimal i;
                 if (!decimal.TryParse(Convert.ToString(e.FormattedValue), out i))
                 {
                     e.Cancel = true;
                 }
-                if (Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[2].Value) < Convert.ToDecimal(e.FormattedValue))
+                else
                 {
-                    e.Cancel = true;
-                    MessageBox.Show("La cantidad no puede exceder el stock");
+                    if(e.ColumnIndex == 4) dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value).ToString("F2");
                 }
             }
-            if (e.ColumnIndex != 3 && e.ColumnIndex != 4)
-                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() != e.FormattedValue.ToString())
-                    e.Cancel = true;
+            else if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() != e.FormattedValue.ToString())
+                e.Cancel = true;
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            // Clear the row error in case the user presses ESC.   
+            if (dataGridView1.CurrentCell.ColumnIndex == 3 || dataGridView1.CurrentCell.ColumnIndex == 4)
             {
-                fd = new FormVentaDescuentoDialog();
-                fd.FormClosed += new FormClosedEventHandler(form_ClosedClientes);
-                fd.ShowDialog();
-            }
-            if (e.ColumnIndex == 3)
-            {
+                if (e.ColumnIndex == 4) dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value).ToString("F2");
+                decimal cantidad = Convert.ToDecimal(dataGridView1.CurrentRow.Cells[3].Value.ToString());
+                decimal precio = Convert.ToDecimal(dataGridView1.CurrentRow.Cells[4].Value.ToString());
+                decimal total = cantidad * precio;
+                dataGridView1.CurrentRow.Cells[5].Value = total.ToString("F2");
                 actualizarTotal();
             }
         }
-        private void form_ClosedClientes(object sender, FormClosedEventArgs e)
-        {
-            //aqui actualizas o recargas la info del Form1
-            if(fd.discount()>0)
-                dataGridView1.CurrentRow.Cells[4].Value= fd.discount();
-            if (fd.discount() == 0)
-                dataGridView1.CurrentRow.Cells[4].Value = "Agregar";
-            actualizarTotal();
-        }
+
     }
 }

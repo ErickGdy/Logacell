@@ -12,6 +12,7 @@ namespace Logacell.DataObject
         public string folio { get; set; }
         public string formaPago { get; set; }
         public double pago { get; set; }
+        public string concepto { get; set; }
 
     }
 }

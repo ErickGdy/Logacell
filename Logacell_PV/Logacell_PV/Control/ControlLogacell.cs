@@ -1,4 +1,5 @@
-﻿    using Logacell.DataObject;
+﻿using Logacell.DataObject;
+using Logacell_PV.DataObject;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace Logacell.Control
             builder.UserID = userID;
             builder.Password = password;
             builder.Database = database;
+            builder.AllowUserVariables = true;
         }
 
         public static ControlLogacell getInstance()
@@ -42,7 +44,6 @@ namespace Logacell.Control
             else
                 return instance;
         }
-
 
         //-------------------PRODUCTOS------------------//
         public bool agregarProducto(Producto producto)
@@ -195,8 +196,8 @@ namespace Logacell.Control
                             p.categoria = reader.GetString(1);
                             p.nombre= reader.GetString(2);
                             p.modelo= reader.GetString(3);
-                            p.marca= reader.GetString(5);
-                            p.precio= reader.GetString(4);
+                            p.marca= reader.GetString(4);
+                            p.precio= reader.GetString(5);
                             aux.Add(p);
                         }
                     conn.Close();
@@ -486,7 +487,6 @@ namespace Logacell.Control
             }
         }
 
-
         //-------------------SERVICIOS------------------//
         public bool agregarServicios(Servicio servicio)
         {
@@ -715,7 +715,6 @@ namespace Logacell.Control
             }
 
         }
-
 
         //-------------------CLIENTE------------------//
         public bool agregarCliente(Cliente cliente)
@@ -952,7 +951,6 @@ namespace Logacell.Control
 
         }
 
-        
         //------------------EMPLEADO------------------//
         public Empleado consultarEmpleado(string correo)
         {
@@ -1029,8 +1027,72 @@ namespace Logacell.Control
             }
 
         }
+        public bool entradaEmpleado()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO bitacoraEmpleados (Empleado, Fecha, CheckOut, IDPuntoVenta) values ('"+
+                    currentUser.empleado+ "', now(), null,"+idPV.id+" );";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al ingresar entrada de empleado");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
 
-       
+        }
+        public bool salidaEmpleado()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SET @id = 0; " +
+                "SELECT @id := ID FROM bitacoraEmpleados WHERE Empleado = '"+currentUser.empleado+"' ORDER BY ID DESC LIMIT 1; " +
+                "UPDATE bitacoraEmpleados SET CheckOut = CURRENT_TIME() WHERE ID = @id;";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al registrar salida de empleado");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+
         //------------------PUNTOVENTA------------------//
         public PuntoVenta consultarPuntoVenta(string ID)
         {
@@ -1972,8 +2034,6 @@ namespace Logacell.Control
             }
         }
         
-
-
         //-------------------CREDITO CLIENTE------------------//
         public bool agregarCreditoClientes(CreditoCliente creditoCliente)
         {
@@ -2244,7 +2304,7 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) value ('"
+                cmd.CommandText = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) values ('"
                     + abono.cliente + "','" + abono.abono + "','"
                     + abono.empleado + "','" + formatearFecha(DateTime.Now) + "',"
                     + idPV.id + ")";
@@ -2312,6 +2372,371 @@ namespace Logacell.Control
 
         }
 
+        //---------------INGRESOS EGRESOS-----------------//
+        public bool agregarIngresoEgreso(IngresoEgreso pago, string tipo)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO movimientosCaja (Pago,Concepto,Tipo,IDPuntoVenta,Empleado) values ("
+                    + pago.pago + ",'" + pago.concepto + "','"+tipo+"'," + 
+                    + idPV.id + ",'" + currentUser.empleado +"');";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool actualizarIngresoEgreso(IngresoEgreso pago, string tipo)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE movimientosCaja SET Pago="+ pago.pago + ", Concepto='" + pago.concepto + 
+                    "', Tipo='" + tipo + "' WHERE ID="+idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public IngresoEgreso consultarIngresosEgreso(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM movimientosCaja WHERE ID='" + id + "'";
+                conn.Open();
+                try
+                {
+
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    IngresoEgreso c = new IngresoEgreso();
+                    while (reader.Read())
+                    {
+                        c.id = reader.GetInt32(0);
+                        c.pago = reader.GetDouble(1);
+                        c.fecha = reader.GetDateTime(2);
+                        c.tipo = reader.GetString(3);
+                        c.concepto = reader.GetString(4);
+                        c.idPV = reader.GetInt32(5);
+                        c.Empleado = reader.GetString(6);
+                        conn.Close();
+                        return c;
+                    }
+                    return null;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimiento de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public MySqlDataAdapter obtenerMovimientosTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM movimientosCaja WHERE IDPuntoVenta="+idPV.id+";", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimientos de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerMovimientosTable(string param)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM movimientosCaja WHERE "+
+                        "( Fecha LIKE '%"+param+"%' OR "+
+                        "Tipo LIKE '%" + param + "%' OR " +
+                        "Concepto LIKE '%" + param + "%' OR " +
+                        "Empleado LIKE '%" + param + "%' OR " +
+                        "Pago LIKE '%" + param +
+                        "%') AND IDPuntoVenta=" + idPV.id + ";", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimientos de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+
+        //---------------COMPRAS-----------------//
+        public bool agregarCompra(List<Producto> lista, string total)
+        {
+            try
+            {
+                string insertDetallesCompra = "";
+                string updateStocks = "";
+                string folioCompra = this.folioCompra();
+                foreach (Producto p in lista)
+                {
+                    insertDetallesCompra += " INSERT INTO detalleCompra (Producto, Compra, Cantidad, Total) values (" +
+                        p.id + ",'"+ folioCompra + "'," + p.cantidad + "," + Convert.ToDecimal(p.precio)*Convert.ToDecimal(p.cantidad) + "); ";
+                    updateStocks += "UPDATE stockPV SET Cantidad = Cantidad + " + p.cantidad +
+                        " WHERE Producto= " + p.id + " and PuntoVenta = " + idPV.id + "; ";
+                }
+                string insertCompra = "INSERT INTO compra (ID,Fecha, Total,PuntoVenta, Estado, Empleado) values ('" +
+                folioCompra+"',"+"'"+formatearFecha(DateTime.Now) + "'," + total + ",'" + idPV.id + "',1,'" + currentUser.empleado + "'); ";
+
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION; " +
+                                    insertCompra +
+                                    insertDetallesCompra +
+                                    updateStocks +
+                                    " COMMIT;";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool cancelarCompra(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE compra SET Estado= 0 WHERE ID=" + id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public Compra consultarCompra(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM compra WHERE ID='" + id + "'";
+                conn.Open();
+                try
+                {
+
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    Compra c = new Compra();
+                    while (reader.Read())
+                    {
+                        c.id = reader.GetInt32(0);
+                        c.fecha = reader.GetDateTime(1);
+                        c.total = reader.GetDouble(2);
+                        c.idPV = reader.GetInt32(3);
+                        c.Empleado = reader.GetString(5);
+                        conn.Close();
+                        return c;
+                    }
+                    return null;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimiento de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public MySqlDataAdapter obtenerComprasTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM compra WHERE PuntoVenta=" + idPV.id + ";", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimientos de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerComprasTable(string param)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM compra WHERE " +
+                        "( Fecha LIKE '%" + param + "%' OR " +
+                        "Empleado LIKE '%" + param + "%' OR " +
+                        "Total LIKE '%" + param +
+                        "%') AND PuntoVenta=" + idPV.id + ";", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimientos de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public string folioCompra()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT ID FROM compra WHERE PuntoVenta=" + idPV.id + " ORDER BY ID DESC LIMIT 1";
+                conn.Open();
+                try
+                {
+                    string folio = "";
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        folio = reader.GetString(0);
+                    }
+                    conn.Close();
+                    if (folio != "")
+                    {
+                        string prefijo = folio.Substring(0, 3);
+                        folio = folio.Substring(5, 7);
+                        int num = Convert.ToInt32(folio);
+                        num++;
+                        return prefijo + "-C" + num.ToString("0000000");
+                    }
+                    else
+                        return idPV.prefijo + "-C0000001";
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Ventas de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
 
         //----------------------Control--------------///
         public string leerUserDoc()

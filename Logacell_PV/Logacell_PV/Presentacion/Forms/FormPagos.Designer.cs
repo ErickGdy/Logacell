@@ -1,4 +1,4 @@
-﻿namespace Logacell_PV.Presentacion.Forms
+﻿namespace Logacell_PV.Presentacion
 {
     partial class FormPagos
     {

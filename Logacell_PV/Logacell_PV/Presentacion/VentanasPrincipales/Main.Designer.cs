@@ -1,4 +1,5 @@
-﻿using Logacell.Presentacion;
+﻿using Logacell.Control;
+using Logacell.Presentacion;
 
 namespace Logacell
 {
@@ -23,6 +24,11 @@ namespace Logacell
             instance = null;
             Login lg = new Login();
             lg.Show();
+            try
+            {
+                ControlLogacell.getInstance().salidaEmpleado();
+            }
+            catch (System.Exception ex) { }
         }
 
         #region Código generado por el Diseñador de Windows Forms
@@ -43,8 +49,6 @@ namespace Logacell
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.listaDeProductosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.listaDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuProgresoServicios = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,10 +58,18 @@ namespace Logacell
             this.nuevaVentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.listaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeClientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevaCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listaDeComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.corteDeCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.egresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -70,9 +82,10 @@ namespace Logacell
             this.usuarioToolStripMenuItem,
             this.inicioToolStripMenuItem,
             this.toolStripMenuItem7,
-            this.toolStripMenuItem1,
             this.toolStripMenuItem6,
             this.toolStripMenuItem5,
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
             this.toolStripMenuItem4});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -141,27 +154,6 @@ namespace Logacell
             this.listaDeProductosToolStripMenuItem.Size = new System.Drawing.Size(271, 28);
             this.listaDeProductosToolStripMenuItem.Text = "Catálogo de Productos";
             this.listaDeProductosToolStripMenuItem.Click += new System.EventHandler(this.listaDeProductosToolStripMenuItem_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listaDeClientesToolStripMenuItem});
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 36);
-            this.toolStripMenuItem1.Text = "Clientes";
-            // 
-            // listaDeClientesToolStripMenuItem
-            // 
-            this.listaDeClientesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
-            this.listaDeClientesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
-            this.listaDeClientesToolStripMenuItem.Name = "listaDeClientesToolStripMenuItem";
-            this.listaDeClientesToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
-            this.listaDeClientesToolStripMenuItem.Text = "Listado de Clientes";
-            this.listaDeClientesToolStripMenuItem.Click += new System.EventHandler(this.btnClientes_Click);
             // 
             // toolStripMenuItem6
             // 
@@ -248,10 +240,65 @@ namespace Logacell
             this.listaToolStripMenuItem.Text = "Lista de Ventas";
             this.listaToolStripMenuItem.Click += new System.EventHandler(this.btnVenta_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.listaDeClientesToolStripMenuItem});
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 36);
+            this.toolStripMenuItem1.Text = "Clientes";
+            // 
+            // listaDeClientesToolStripMenuItem
+            // 
+            this.listaDeClientesToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.listaDeClientesToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.listaDeClientesToolStripMenuItem.Name = "listaDeClientesToolStripMenuItem";
+            this.listaDeClientesToolStripMenuItem.Size = new System.Drawing.Size(238, 28);
+            this.listaDeClientesToolStripMenuItem.Text = "Listado de Clientes";
+            this.listaDeClientesToolStripMenuItem.Click += new System.EventHandler(this.btnClientes_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevaCompraToolStripMenuItem,
+            this.listaDeComprasToolStripMenuItem});
+            this.toolStripMenuItem2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem2.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem2.Image")));
+            this.toolStripMenuItem2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(130, 36);
+            this.toolStripMenuItem2.Text = "Compras";
+            // 
+            // nuevaCompraToolStripMenuItem
+            // 
+            this.nuevaCompraToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.nuevaCompraToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.nuevaCompraToolStripMenuItem.Name = "nuevaCompraToolStripMenuItem";
+            this.nuevaCompraToolStripMenuItem.Size = new System.Drawing.Size(225, 28);
+            this.nuevaCompraToolStripMenuItem.Text = "Nueva Compra";
+            this.nuevaCompraToolStripMenuItem.Click += new System.EventHandler(this.nuevaCompraToolStripMenuItem_Click);
+            // 
+            // listaDeComprasToolStripMenuItem
+            // 
+            this.listaDeComprasToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.listaDeComprasToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.listaDeComprasToolStripMenuItem.Name = "listaDeComprasToolStripMenuItem";
+            this.listaDeComprasToolStripMenuItem.Size = new System.Drawing.Size(225, 28);
+            this.listaDeComprasToolStripMenuItem.Text = "Lista de Compras";
+            this.listaDeComprasToolStripMenuItem.Click += new System.EventHandler(this.listaDeComprasToolStripMenuItem_Click);
+            // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.corteDeCajaToolStripMenuItem});
+            this.corteDeCajaToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.egresoToolStripMenuItem,
+            this.nuevoIngresoEgresoToolStripMenuItem});
             this.toolStripMenuItem4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem4.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem4.Image")));
@@ -265,9 +312,18 @@ namespace Logacell
             this.corteDeCajaToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
             this.corteDeCajaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.corteDeCajaToolStripMenuItem.Name = "corteDeCajaToolStripMenuItem";
-            this.corteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(191, 28);
+            this.corteDeCajaToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
             this.corteDeCajaToolStripMenuItem.Text = "Corte de caja";
             this.corteDeCajaToolStripMenuItem.Click += new System.EventHandler(this.corteDeCajaToolStripMenuItem_Click);
+            // 
+            // egresoToolStripMenuItem
+            // 
+            this.egresoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.egresoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.egresoToolStripMenuItem.Name = "egresoToolStripMenuItem";
+            this.egresoToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
+            this.egresoToolStripMenuItem.Text = "Lista de Egreso/Ingreso";
+            this.egresoToolStripMenuItem.Click += new System.EventHandler(this.egresoToolStripMenuItem_Click);
             // 
             // footer
             // 
@@ -287,6 +343,20 @@ namespace Logacell
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
+            // 
+            // nuevoIngresoEgresoToolStripMenuItem
+            // 
+            this.nuevoIngresoEgresoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.nuevoIngresoEgresoToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.nuevoIngresoEgresoToolStripMenuItem.Name = "nuevoIngresoEgresoToolStripMenuItem";
+            this.nuevoIngresoEgresoToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
+            this.nuevoIngresoEgresoToolStripMenuItem.Text = "Nuevo Ingreso/Egreso";
+            this.nuevoIngresoEgresoToolStripMenuItem.Click += new System.EventHandler(this.nuevoIngresoEgresoToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(275, 6);
             // 
             // Main
             // 
@@ -335,6 +405,12 @@ namespace Logacell
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuProgresoServicios;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem nuevaCompraToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem egresoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem listaDeComprasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem nuevoIngresoEgresoToolStripMenuItem;
     }
 }
 
