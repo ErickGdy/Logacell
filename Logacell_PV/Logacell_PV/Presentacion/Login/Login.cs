@@ -99,7 +99,6 @@ namespace Logacell.Presentacion
             {
                 control.setCurrentUser(txtUsuario.Text);
                 control.entradaEmpleado();
-                control.actualizarEstadoPuntoVenta("Activo");
             }
             catch (Exception ex) { }
             Main principal = new Main();
