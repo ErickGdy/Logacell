@@ -44,12 +44,6 @@
             this.menuTablaProductos = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CantidadColumn = new DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn();
-            this.DescuentoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAgregarServicio = new System.Windows.Forms.Button();
             this.btn1 = new System.Windows.Forms.Button();
             this.btn2 = new System.Windows.Forms.Button();
@@ -71,6 +65,12 @@
             this.txtDescuento = new System.Windows.Forms.TextBox();
             this.asd = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
+            this.IDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescuentoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -205,8 +205,8 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -230,65 +230,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(668, 150);
             this.dataGridView1.TabIndex = 51;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // IDColumn
-            // 
-            this.IDColumn.FillWeight = 250F;
-            this.IDColumn.HeaderText = "ID";
-            this.IDColumn.Name = "IDColumn";
-            this.IDColumn.ReadOnly = true;
-            this.IDColumn.Width = 50;
-            // 
-            // NombreColumn
-            // 
-            this.NombreColumn.FillWeight = 200F;
-            this.NombreColumn.HeaderText = "Nombre";
-            this.NombreColumn.Name = "NombreColumn";
-            this.NombreColumn.ReadOnly = true;
-            this.NombreColumn.Width = 250;
-            // 
-            // StockColumn
-            // 
-            this.StockColumn.FillWeight = 50F;
-            this.StockColumn.HeaderText = "Stock";
-            this.StockColumn.Name = "StockColumn";
-            this.StockColumn.ReadOnly = true;
-            this.StockColumn.Width = 50;
-            // 
-            // CantidadColumn
-            // 
-            this.CantidadColumn.FillWeight = 95F;
-            this.CantidadColumn.HeaderText = "Cantidad";
-            this.CantidadColumn.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.CantidadColumn.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.CantidadColumn.Name = "CantidadColumn";
-            this.CantidadColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.CantidadColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.CantidadColumn.ThousandsSeparator = true;
-            this.CantidadColumn.Width = 95;
-            // 
-            // DescuentoColumn
-            // 
-            this.DescuentoColumn.HeaderText = "Descuento";
-            this.DescuentoColumn.Name = "DescuentoColumn";
-            this.DescuentoColumn.ReadOnly = true;
-            this.DescuentoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.DescuentoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DescuentoColumn.ToolTipText = "Click para agregar descuento";
-            // 
-            // TotalColumn
-            // 
-            this.TotalColumn.HeaderText = "Total";
-            this.TotalColumn.Name = "TotalColumn";
-            this.TotalColumn.ReadOnly = true;
             // 
             // btnAgregarServicio
             // 
@@ -503,6 +444,53 @@
             this.lblFecha.Text = "10/10/2013";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // IDColumn
+            // 
+            this.IDColumn.FillWeight = 250F;
+            this.IDColumn.HeaderText = "ID";
+            this.IDColumn.Name = "IDColumn";
+            this.IDColumn.ReadOnly = true;
+            this.IDColumn.Width = 50;
+            // 
+            // NombreColumn
+            // 
+            this.NombreColumn.FillWeight = 200F;
+            this.NombreColumn.HeaderText = "Nombre";
+            this.NombreColumn.Name = "NombreColumn";
+            this.NombreColumn.ReadOnly = true;
+            this.NombreColumn.Width = 250;
+            // 
+            // StockColumn
+            // 
+            this.StockColumn.FillWeight = 50F;
+            this.StockColumn.HeaderText = "Stock";
+            this.StockColumn.Name = "StockColumn";
+            this.StockColumn.ReadOnly = true;
+            this.StockColumn.Width = 50;
+            // 
+            // CantidadColumn
+            // 
+            this.CantidadColumn.FillWeight = 95F;
+            this.CantidadColumn.HeaderText = "Cantidad";
+            this.CantidadColumn.Name = "CantidadColumn";
+            this.CantidadColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.CantidadColumn.Width = 95;
+            // 
+            // DescuentoColumn
+            // 
+            this.DescuentoColumn.HeaderText = "Descuento";
+            this.DescuentoColumn.Name = "DescuentoColumn";
+            this.DescuentoColumn.ReadOnly = true;
+            this.DescuentoColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.DescuentoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.DescuentoColumn.ToolTipText = "Click para agregar descuento";
+            // 
+            // TotalColumn
+            // 
+            this.TotalColumn.HeaderText = "Precio";
+            this.TotalColumn.Name = "TotalColumn";
+            this.TotalColumn.ReadOnly = true;
+            // 
             // FormVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -527,7 +515,6 @@
             this.Name = "FormVenta";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Nota de Venta";
-            this.Load += new System.EventHandler(this.FormVenta_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -578,7 +565,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn NombreColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn StockColumn;
-        private DataGridViewNumericUpDownElements.DataGridViewNumericUpDownColumn CantidadColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DescuentoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalColumn;
     }

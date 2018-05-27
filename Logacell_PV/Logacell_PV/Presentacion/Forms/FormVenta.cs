@@ -27,8 +27,10 @@ namespace Logacell.Presentacion
             productos = new List<Producto>();              
             try
             {
-                    txtFolio.Text = control.folioVenta();
-                    productos = control.obtenerProductosByPV();
+                txtFolio.Text = control.folioVenta();
+                productos = control.obtenerProductosByPV();
+                this.dataGridView1.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridView1_CellValidating);
+                this.dataGridView1.CellEndEdit += new DataGridViewCellEventHandler(dataGridView1_CellContentClick);
             }
             catch (Exception ex)
             {
@@ -128,9 +130,9 @@ namespace Logacell.Presentacion
                 decimal total = 0;
                 foreach(DataGridViewRow row in dataGridView1.Rows)
                 {
-                    cont += Convert.ToDecimal(row.Cells[5].Value.ToString());
+                    cont += Convert.ToDecimal(row.Cells[5].Value.ToString())* Convert.ToDecimal(row.Cells[3].Value.ToString());
                     if(row.Cells[4].Value.ToString()!="Agregar")
-                        descuentos += Decimal.Round(Convert.ToDecimal(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)));
+                        descuentos += Decimal.Round(Convert.ToDecimal(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)) * Convert.ToDecimal(row.Cells[3].Value.ToString()));
                     total += cont - descuentos;
                 }
                 txtSubTotal.Text = cont.ToString("F2");
@@ -218,39 +220,24 @@ namespace Logacell.Presentacion
                 e.Handled = true;
             }
         }
-        private void FormVenta_Load(object sender, EventArgs e)
-        {
-            this.dataGridView1.CellValidating += new
-            DataGridViewCellValidatingEventHandler(dataGridView1_CellValidating);
-            this.dataGridView1.CellEndEdit += new
-                DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
-        }
         private void dataGridView1_CellValidating(object sender,DataGridViewCellValidatingEventArgs e)
         {
-            string headerText =
-                dataGridView1.Columns[e.ColumnIndex].HeaderText;
-
-            // Abort validation if cell is not in the CompanyName column.
-            if (!headerText.Equals("Cantidad")) return;
-
-            // Confirm that the cell is not empty.
-            //if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-            if(e.FormattedValue.ToString()=="0")
+            if (e.ColumnIndex == 3) // 1 should be your column index
             {
-                dataGridView1.Rows[e.RowIndex].ErrorText =
-                    "Cantidad no puede ser menor a 1";
-                e.Cancel = true;
+                decimal i;
+                if (!decimal.TryParse(Convert.ToString(e.FormattedValue), out i))
+                {
+                    e.Cancel = true;
+                }
+                if (Convert.ToDecimal(dataGridView1.Rows[e.RowIndex].Cells[2].Value) < Convert.ToDecimal(e.FormattedValue))
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("La cantidad no puede exceder el stock");
+                }
             }
-            if (Convert.ToInt32(e.FormattedValue.ToString()) > Convert.ToInt32(dataGridView1.CurrentRow.Cells[2].Value.ToString()))
-            {
-                MessageBox.Show("Cantidad no puede exceder el stock");
-                e.Cancel = true;
-            }
-        }
-        void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            // Clear the row error in case the user presses ESC.   
-            dataGridView1.Rows[e.RowIndex].ErrorText = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            if (e.ColumnIndex != 3 && e.ColumnIndex != 4)
+                if (dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() != e.FormattedValue.ToString())
+                    e.Cancel = true;
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -259,6 +246,10 @@ namespace Logacell.Presentacion
                 fd = new FormVentaDescuentoDialog();
                 fd.FormClosed += new FormClosedEventHandler(form_ClosedClientes);
                 fd.ShowDialog();
+            }
+            if (e.ColumnIndex == 3)
+            {
+                actualizarTotal();
             }
         }
         private void form_ClosedClientes(object sender, FormClosedEventArgs e)
