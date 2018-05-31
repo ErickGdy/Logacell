@@ -69,6 +69,7 @@ namespace Logacell
             this.egresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
@@ -295,6 +296,13 @@ namespace Logacell
             // 
             // toolStripMenuItem4
             // 
+            this.abrirCajaToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.abrirCajaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
+            this.abrirCajaToolStripMenuItem.Text = "Abrir Caja";
+            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
+
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.abrirCajaToolStripMenuItem,
             this.corteDeCajaToolStripMenuItem,
