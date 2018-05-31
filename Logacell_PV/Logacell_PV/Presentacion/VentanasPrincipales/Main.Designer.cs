@@ -24,6 +24,7 @@ namespace Logacell
             instance = null;
             Login lg = new Login();
             lg.Show();
+            this.closeForms();
             try
             {
                 ControlLogacell.getInstance().salidaEmpleado();
@@ -295,6 +296,7 @@ namespace Logacell
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirCajaToolStripMenuItem,
             this.corteDeCajaToolStripMenuItem,
             this.toolStripSeparator3,
             this.egresoToolStripMenuItem,
@@ -411,6 +413,7 @@ namespace Logacell
         private System.Windows.Forms.ToolStripMenuItem listaDeComprasToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem nuevoIngresoEgresoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirCajaToolStripMenuItem;
     }
 }
 

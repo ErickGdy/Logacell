@@ -140,9 +140,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(52, 138);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 24);
+            this.label2.Size = new System.Drawing.Size(115, 24);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Cantidad:";
+            this.label2.Text = "Cantidad: $";
             // 
             // label1
             // 
@@ -210,7 +210,7 @@
             // txtCantidad
             // 
             this.txtCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtCantidad.Location = new System.Drawing.Point(150, 139);
+            this.txtCantidad.Location = new System.Drawing.Point(164, 139);
             this.txtCantidad.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -222,7 +222,7 @@
             0,
             0});
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(143, 26);
+            this.txtCantidad.Size = new System.Drawing.Size(129, 26);
             this.txtCantidad.TabIndex = 34;
             this.txtCantidad.Value = new decimal(new int[] {
             1,

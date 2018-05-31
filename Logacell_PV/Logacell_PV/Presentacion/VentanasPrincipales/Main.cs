@@ -22,7 +22,7 @@ namespace Logacell
             usuarioToolStripMenuItem.Text = ControlLogacell.currentUser.usuario;
             this.Text = ControlLogacell.idPV.nombre;
             ControlLogacell.getInstance().escribirDoc();
-            
+            ControlLogacell.getInstance().setCaja();
         }
         public static Main getInstance(string usuario)
         {
@@ -89,7 +89,14 @@ namespace Logacell
 
         private void corteDeCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ControlLogacell.getInstance().consultarCaja().estado == "Abierta")
+            {
+                CerrarCaja fc = new CerrarCaja();
+            }
+            else
+                MessageBox.Show("Error!: Debe abrir la caja primero");
 
+            
         }
 
         //---------METODOS DE CONTROL------------------//
@@ -224,6 +231,17 @@ namespace Logacell
             //aqui actualizas o recargas la info del Form1
             MainMovimientosCaja.getInstance().Dispose();
             egresoToolStripMenuItem_Click(null, null);
+        }
+
+        private void abrirCajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ControlLogacell.caja.estado != "Abierta")
+            {
+                AbrirCaja ac = new AbrirCaja();
+            }
+            else
+                MessageBox.Show("La caja se encuentra abierta");
+
         }
     }
 }

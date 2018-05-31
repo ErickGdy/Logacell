@@ -83,6 +83,7 @@
     <Compile Include="DataObject\Compra.cs" />
     <Compile Include="DataObject\IngresoEgreso.cs" />
     <Compile Include="DataObject\Producto.cs" />
+    <Compile Include="DataObject\Caja.cs" />
     <Compile Include="DataObject\PuntoVenta.cs" />
     <Compile Include="DataObject\Servicio.cs" />
     <Compile Include="DataObject\SolicitudServicio.cs" />
@@ -91,11 +92,23 @@
     <Compile Include="DataObject\Usuario.cs" />
     <Compile Include="DataObject\PagosVentas.cs" />
     <Compile Include="DataObject\Venta.cs" />
+    <Compile Include="Presentacion\Forms\AbrirCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\AbrirCaja.designer.cs">
+      <DependentUpon>AbrirCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\DetalleDeVenta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Presentacion\Forms\DetalleDeVenta.designer.cs">
       <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormCorteCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormCorteCaja.designer.cs">
+      <DependentUpon>FormCorteCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormLimiteCredito.cs">
       <SubType>Form</SubType>
@@ -150,6 +163,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormVentasPagos.Designer.cs">
       <DependentUpon>FormVentasPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\CerrarCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\CerrarCaja.designer.cs">
+      <DependentUpon>CerrarCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\StockEnPV.cs">
       <SubType>Form</SubType>
@@ -261,8 +280,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentacion\Forms\AbrirCaja.resx">
+      <DependentUpon>AbrirCaja.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\DetalleDeVenta.resx">
       <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormCorteCaja.resx">
+      <DependentUpon>FormCorteCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormLimiteCredito.resx">
       <DependentUpon>FormLimiteCredito.cs</DependentUpon>
@@ -290,6 +315,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVentasPagos.resx">
       <DependentUpon>FormVentasPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\CerrarCaja.resx">
+      <DependentUpon>CerrarCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\StockEnPV.resx">
       <DependentUpon>StockEnPV.cs</DependentUpon>

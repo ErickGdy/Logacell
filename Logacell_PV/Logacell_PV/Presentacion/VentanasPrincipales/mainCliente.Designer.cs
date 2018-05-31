@@ -69,21 +69,22 @@
             this.eliminarToolStripMenuItem,
             this.créditoToolStripMenuItem});
             this.menuTablaClietes.Name = "menuTabla";
-            this.menuTablaClietes.Size = new System.Drawing.Size(147, 100);
+            this.menuTablaClietes.Size = new System.Drawing.Size(153, 122);
             // 
             // consultarToolStripMenuItem
             // 
             this.consultarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("consultarToolStripMenuItem.Image")));
             this.consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.consultarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.consultarToolStripMenuItem.Text = "Consultar";
+            this.consultarToolStripMenuItem.Visible = false;
             this.consultarToolStripMenuItem.Click += new System.EventHandler(this.consultarToolStripMenuItem_Click_1);
             // 
             // modificaToolStripMenuItem
             // 
             this.modificaToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificaToolStripMenuItem.Image")));
             this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.modificaToolStripMenuItem.Text = "Modificar";
             this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click_1);
             // 
@@ -91,7 +92,7 @@
             // 
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click_1);
             // 
@@ -102,7 +103,7 @@
             this.abonoACréditoToolStripMenuItem1});
             this.créditoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("créditoToolStripMenuItem.Image")));
             this.créditoToolStripMenuItem.Name = "créditoToolStripMenuItem";
-            this.créditoToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
+            this.créditoToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.créditoToolStripMenuItem.Text = "Crédito";
             // 
             // limiteDeCréditoToolStripMenuItem
