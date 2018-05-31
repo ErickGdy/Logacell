@@ -50,8 +50,13 @@ namespace Logacell.Presentacion
                 {
                     if (control.actualizarCreditoCliente(c))
                     {
-                        control.agregarAbonoCredito(a);
-                        MessageBox.Show("Datos guardados exitosamente!");
+                        if (control.agregarAbonoCredito(a))
+                        {
+                            MessageBox.Show("Datos guardados exitosamente!");
+                        }else
+                        {
+                            MessageBox.Show("Ocurio un error al registrar pago");
+                        }
                         Close();
                         Dispose();
                     }

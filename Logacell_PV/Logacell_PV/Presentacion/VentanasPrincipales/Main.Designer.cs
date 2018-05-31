@@ -24,6 +24,7 @@ namespace Logacell
             instance = null;
             Login lg = new Login();
             lg.Show();
+            this.closeForms();
             try
             {
                 ControlLogacell.getInstance().salidaEmpleado();
@@ -71,6 +72,7 @@ namespace Logacell
             this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.abrirCajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -296,6 +298,7 @@ namespace Logacell
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirCajaToolStripMenuItem,
             this.corteDeCajaToolStripMenuItem,
             this.toolStripSeparator3,
             this.egresoToolStripMenuItem,
@@ -307,7 +310,6 @@ namespace Logacell
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(91, 36);
             this.toolStripMenuItem4.Text = "Caja";
-            this.toolStripMenuItem4.Visible = false;
             // 
             // corteDeCajaToolStripMenuItem
             // 
@@ -359,6 +361,15 @@ namespace Logacell
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
+            // 
+            // abrirCajaToolStripMenuItem
+            // 
+            this.abrirCajaToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.abrirCajaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.abrirCajaToolStripMenuItem.Name = "abrirCajaToolStripMenuItem";
+            this.abrirCajaToolStripMenuItem.Size = new System.Drawing.Size(278, 28);
+            this.abrirCajaToolStripMenuItem.Text = "Abrir Caja";
+            this.abrirCajaToolStripMenuItem.Click += new System.EventHandler(this.abrirCajaToolStripMenuItem_Click);
             // 
             // Main
             // 
@@ -413,6 +424,7 @@ namespace Logacell
         private System.Windows.Forms.ToolStripMenuItem listaDeComprasToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem nuevoIngresoEgresoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirCajaToolStripMenuItem;
     }
 }
 

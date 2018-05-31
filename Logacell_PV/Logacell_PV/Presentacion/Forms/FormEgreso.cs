@@ -27,6 +27,7 @@ namespace Logacell.Presentacion
                 modificacion = true;
                 txtID.Text = pago.id.ToString();
                 txtCantidad.Value = Convert.ToDecimal(pago.pago);
+                txtCantidad.ReadOnly = true;
                 dateTimePicker1.Value = pago.fecha;
                 cmbTipo.SelectedItem = pago.tipo;
                 txtConcepto.Text = pago.concepto;

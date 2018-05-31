@@ -19,11 +19,12 @@ namespace Logacell.Control
         string server = "logacell.com";
         string userID = "logacell_logamel";
         string password = "Logamel82";
-        //string database = "logacell_logamysql";
-         string database = "logacell_logacell";
+        string database = "logacell_logamysql";
+        //string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
+        public static Caja caja;
         public ControlLogacell()
         {
             builder = new MySqlConnectionStringBuilder();
@@ -1307,31 +1308,36 @@ namespace Logacell.Control
                  UPDATE table2 SET summary=@A WHERE type=1;
                  COMMIT;
                  * **/
+                double pagoEfectivo = 0;
                 string insertDetallesVenta = "";
                 string updateStocks = "";
-                foreach(DetalleVenta cv in venta.productos)
+                string actualizarCaja = "";
+                foreach (DetalleVenta cv in venta.productos)
                 {
                     insertDetallesVenta += " INSERT INTO detalleVenta (Producto, Venta, Cantidad,Total, Descuento) values (" +
                         cv.idProducto + ", '" + cv.folio + "'," + cv.cantidadProducto + "," + cv.total + "," + cv.descuento + "); ";
                     updateStocks += "UPDATE stockPV SET Cantidad = Cantidad - " + cv.cantidadProducto +
-                        " WHERE Producto= " + cv.idProducto + " and PuntoVenta = "+idPV.id+"; ";
+                        " WHERE Producto= " + cv.idProducto + " and PuntoVenta = " + idPV.id + "; ";
                 }
                 string insertPagosVenta = "";
                 foreach (Pagos pv in venta.pagos)
                 {
-                    insertPagosVenta += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto) values ('" +
-                        pv.folio+"',"+ pv.pago+",'"+pv.formaPago+"', 'Pago de venta'); ";
+                    insertPagosVenta += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto, PuntoVenta) values ('" +
+                        pv.folio + "'," + pv.pago + ",'" + pv.formaPago + "', 'Pago de venta'," + idPV.id +"); ";
+                    if (pv.formaPago == "Efectivo")
+                        pagoEfectivo += pv.pago;
                 }
                 string insertVenta = "INSERT INTO venta (ID, Fecha, Total,PuntoVenta, Estado, Vendedor) values ('" +
-                venta.id + "', '" + formatearFecha(DateTime.Now) + "','" + venta.total + "','" + idPV.id + "',1,'"+currentUser.empleado+"'); ";
-
+                venta.id + "', '" + formatearFecha(DateTime.Now) + "','" + venta.total + "','" + idPV.id + "',1,'" + currentUser.empleado + "'); ";
+                actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + pagoEfectivo + " WHERE PuntoVenta=" + idPV.id + ";";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
-                                    insertVenta + 
-                                    insertDetallesVenta + 
-                                    insertPagosVenta + 
+                                    insertVenta +
+                                    insertDetallesVenta +
+                                    insertPagosVenta +
                                     updateStocks +
+                                    actualizarCaja +
                                     " COMMIT;";
                 conn.Open();
                 try
@@ -1362,7 +1368,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT V.ID, V.Fecha, V.Total, PV.Nombre AS 'Punto de Venta', E.Nombre AS 'Vendedor' FROM venta V INNER JOIN puntoVenta PV ON PV.ID=V.PuntoVenta INNER JOIN empleado E ON E.Correo=V.Vendedor WHERE V.Estado=1", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT V.ID, V.Fecha, V.Total, PV.Nombre AS 'Punto de Venta', E.Nombre AS 'Vendedor' FROM venta V INNER JOIN puntoVenta PV ON PV.ID=V.PuntoVenta INNER JOIN empleado E ON E.Correo=V.Vendedor WHERE V.Estado=1 and V.PuntoVenta="+idPV.id, conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -1390,7 +1396,7 @@ namespace Logacell.Control
                                         "V.Fecha LIKE '%" + parametro + "%' or " +
                                         "V.Total LIKE '%" + parametro + "%' or " +
                                         "E.Nombre LIKE '%" + parametro + "%' or " +
-                                        "PV.Nombre LIKE '%" + parametro + "%') and V.Estado = 1";
+                                        "PV.Nombre LIKE '%" + parametro + "%') and V.Estado = 1 and V.PuntoVenta=" + idPV.id;
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
                     conn.Close();
                     return mdaDatos;
@@ -1596,21 +1602,27 @@ namespace Logacell.Control
         {
             try
             {
+                double pagoEfectivo = 0;
                 string insertarSolicitud = "INSERT INTO solicitudServicio (Folio, NombreCliente, TelefonoCliente, Total, Anticipo, Pendiente, IDPuntoVenta) values ('"
                         + servicio.Folio + "','" + servicio.nombreCliente + "','" + servicio.telefonoCliente + "',"
                         + Convert.ToInt32(servicio.total) + "," + Convert.ToInt32(servicio.anticipo) + "," + Convert.ToInt32(servicio.pendiente) + ", '" + idPV.id + "' ); ";
                 string insertPagosVenta = "";
                 foreach (Pagos pv in pagos)
                 {
-                    insertPagosVenta += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto) values ('" +
-                        servicio.Folio + "'," + pv.pago + ",'" + pv.formaPago + "','Anticipo Servicio'); ";
+                    insertPagosVenta += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto,PuntoVenta) values ('" +
+                        servicio.Folio + "'," + pv.pago + ",'" + pv.formaPago + "','Anticipo Servicio',"+idPV.id+"); ";
+                    if (pv.formaPago == "Efectivo")
+                        pagoEfectivo += pv.pago;
                 }
+                string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + pagoEfectivo + " WHERE PuntoVenta=" + idPV.id + ";";
+
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
 
                 cmd.CommandText = "START TRANSACTION; " +
                                     insertarSolicitud +
                                     insertPagosVenta +
+                                    actualizarCaja +
                                     " COMMIT;";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
@@ -1646,19 +1658,25 @@ namespace Logacell.Control
             {
                 string insertPagos = "";
                 double total = 0;
+                double pagoEfectivo = 0;
                 foreach (Pagos pv in pagos)
                 {
-                    insertPagos += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto) values ('" +
-                        pv.folio + "'," + pv.pago + ",'" + pv.formaPago + "', 'Pago servicio'); ";
+                    insertPagos += " INSERT INTO pagos (Folio, Pago, MetodoPago, Concepto, PuntoVenta) values ('" +
+                        pv.folio + "'," + pv.pago + ",'" + pv.formaPago + "', 'Pago servicio'," + idPV.id + "); ";
                     total += pv.pago;
+                    if (pv.formaPago == "Efectivo")
+                        pagoEfectivo += pv.pago;
                 }
                 string updateServicio = "UPDATE solicitudServicio SET Anticipo= Anticipo +" + total.ToString() + ", Pendiente= Pendiente - " + total.ToString() +
                     " WHERE Folio = '" + sc.Folio + "'; ";
+                string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + pagoEfectivo + " WHERE PuntoVenta=" + idPV.id + ";";
+
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
                                     updateServicio +
                                     insertPagos +
+                                    actualizarCaja+
                                     " COMMIT;";
                 conn.Open();
                 try
@@ -2334,12 +2352,17 @@ namespace Logacell.Control
         {
             try
             {
-                conn = new MySqlConnection(builder.ToString());
-                cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) values ('"
+                string insertarAbono = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) values ('"
                     + abono.cliente + "','" + abono.abono + "','"
                     + abono.empleado + "','" + formatearFecha(DateTime.Now) + "',"
-                    + idPV.id + ")";
+                    + idPV.id + "); ";
+                string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + abono.abono + " WHERE PuntoVenta=" + idPV.id + ";";
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION; " +
+                                    insertarAbono +
+                                    actualizarCaja +
+                                    " COMMIT;";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -2409,11 +2432,20 @@ namespace Logacell.Control
         {
             try
             {
+                string actualizarCaja="";
+                string movimientoCaja = "INSERT INTO movimientosCaja (Pago,Concepto,Tipo,IDPuntoVenta,Empleado) values ("
+                    + pago.pago + ",'" + pago.concepto + "','" + tipo + "'," +
+                    +idPV.id + ",'" + currentUser.empleado + "');";
+                if(tipo=="Ingreso")
+                    actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + pago.pago + " WHERE PuntoVenta=" + idPV.id + ";";
+                if (tipo == "Egreso")
+                    actualizarCaja = "UPDATE caja SET FondoActual= FondoActual -" + pago.pago + " WHERE PuntoVenta=" + idPV.id + ";";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO movimientosCaja (Pago,Concepto,Tipo,IDPuntoVenta,Empleado) values ("
-                    + pago.pago + ",'" + pago.concepto + "','"+tipo+"'," + 
-                    + idPV.id + ",'" + currentUser.empleado +"');";
+                cmd.CommandText = "START TRANSACTION; " +
+                                    movimientoCaja +
+                                    actualizarCaja +
+                                    " COMMIT;";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -2577,15 +2609,17 @@ namespace Logacell.Control
                     updateStocks += "UPDATE stockPV SET Cantidad = Cantidad + " + p.cantidad +
                         " WHERE Producto= " + p.id + " and PuntoVenta = " + idPV.id + "; ";
                 }
+                string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual -" + total + " WHERE PuntoVenta=" + idPV.id + ";";
                 string insertCompra = "INSERT INTO compra (ID,Fecha, Total,PuntoVenta, Estado, Empleado) values ('" +
                 folioCompra+"',"+"'"+formatearFecha(DateTime.Now) + "'," + total + ",'" + idPV.id + "',1,'" + currentUser.empleado + "'); ";
-
+                
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
                                     insertCompra +
                                     insertDetallesCompra +
                                     updateStocks +
+                                    actualizarCaja +
                                     " COMMIT;";
                 conn.Open();
                 try
@@ -2768,6 +2802,210 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
 
+        }
+
+        //--------------CAJAS---------------//
+        public bool agregarCaja()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "INSERT INTO caja (PuntoVenta) VALUES (" + idPV.id + ");";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public Caja consultarCaja()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT * FROM  caja WHERE PuntoVenta=" + idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    Caja c = new Caja();
+                    while (reader.Read())
+                    {
+                        c.id = reader.GetInt32(0);
+                        c.puntoVenta = reader.GetInt32(1);
+                        c.fondoInicial = reader.GetDecimal(2);
+                        c.estado = reader.GetString(3);
+                        c.fondoActual = reader.GetDecimal(4);
+                        conn.Close();
+                        return c;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al obtener datos de Caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool actualizarCaja(Caja c)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE caja SET FondoInicial=" + c.fondoInicial + ", FondoActual=" + c.fondoActual + ", Estado = '" + c.estado+"' WHERE PuntoVenta=" + idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool cerrarCaja(string salida)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada' WHERE PuntoVenta=" + idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar caja a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool abrirCaja(string entrada)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE caja SET FondoActual= " + entrada + ", FondoInicial= " + entrada + ", Estado = 'Abierta' WHERE PuntoVenta=" + idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar caja a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public void setCaja()
+        {
+            try
+            {
+                caja = consultarCaja();
+                if (caja == null)
+                {
+                    agregarCaja();
+                    caja = consultarCaja();
+                }
+            }
+            catch (Exception ex) {
+                
+            }
+        }
+        public bool agregarEntradaCaja(string entrada)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "UPDATE caja SET FondoActual= FondoActual +" + entrada + " WHERE PuntoVenta=" + idPV.id + ";";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar caja a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
         }
 
         //----------------------Control--------------///

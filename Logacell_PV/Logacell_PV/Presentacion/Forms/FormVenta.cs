@@ -120,6 +120,7 @@ namespace Logacell.Presentacion
         {
             productos.RemoveAt(dataGridView1.CurrentRow.Index);
             dataGridView1.Rows.RemoveAt(dataGridView1.CurrentRow.Index);
+            actualizarTotal();
         }
         private void actualizarTotal()
         {
@@ -133,8 +134,8 @@ namespace Logacell.Presentacion
                     cont += Convert.ToDecimal(row.Cells[5].Value.ToString())* Convert.ToDecimal(row.Cells[3].Value.ToString());
                     if(row.Cells[4].Value.ToString()!="Agregar")
                         descuentos += Decimal.Round(Convert.ToDecimal(Convert.ToDecimal(row.Cells[5].Value.ToString()) * (Convert.ToDecimal(row.Cells[4].Value.ToString())/100)) * Convert.ToDecimal(row.Cells[3].Value.ToString()));
-                    total += cont - descuentos;
                 }
+                total = cont - descuentos;
                 txtSubTotal.Text = cont.ToString("F2");
                 txtTotal.Text = total.ToString("F2");
                 txtDescuento.Text = descuentos.ToString("F2");
