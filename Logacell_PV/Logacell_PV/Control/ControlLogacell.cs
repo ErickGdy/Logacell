@@ -1718,7 +1718,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono de Cliente', S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S  WHERE IDPuntoVenta = '" + idPV.id + "'", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono', C.Estado, S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S, servicioCliente C  WHERE C.Folio=S.Folio AND IDPuntoVenta = '" + idPV.id + "'", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -1741,10 +1741,13 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    string sqlQuery = "SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono de Cliente', S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S WHERE " +
+                    string sqlQuery = "SELECT S.Folio, S.NombreCliente AS 'Nombre de Cliente', S.TelefonoCliente AS 'Telefono', C.Estado, S.Total, S.Anticipo, S.Pendiente FROM solicitudServicio S, servicioCliente C WHERE " +
                                         "( S.Folio LIKE '%" + parametro + "%' or " +
                                         "S.NombreCliente LIKE '%" + parametro + "%' or " +
-                                        "S.TelefonoCliente LIKE '%" + parametro + "%') and S.IDPuntoVenta = '" + idPV.id + "'";
+                                        "C.Estado LIKE '%" + parametro + "%' or " +
+                                        "C.Descripcion LIKE '%" + parametro + "%' or " + 
+                                        "S.Fecha LIKE '%" + parametro + "%' or " +
+                                        "S.TelefonoCliente LIKE '%" + parametro + "%') and C.Folio=S.Folio and S.IDPuntoVenta = '" + idPV.id + "'";
                     MySqlDataAdapter mdaDatos = new MySqlDataAdapter(sqlQuery, conn);
                     conn.Close();
                     return mdaDatos;
@@ -3079,7 +3082,7 @@ namespace Logacell.Control
             }
         }
 
-        //----------------------Control--------------///
+        //----------------------CONFG--------------///
         public string leerUserDoc()
         {
             String line;
