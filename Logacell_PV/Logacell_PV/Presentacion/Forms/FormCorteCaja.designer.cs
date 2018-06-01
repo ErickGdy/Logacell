@@ -49,10 +49,6 @@
             this.lblFecha = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.IDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StockColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.lblPuntoVenta = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -261,16 +257,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.IDColumn,
-            this.NombreColumn,
-            this.StockColumn,
-            this.Total});
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(18, 21);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
@@ -279,36 +269,6 @@
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(586, 199);
             this.dataGridView1.TabIndex = 51;
-            // 
-            // IDColumn
-            // 
-            this.IDColumn.FillWeight = 250F;
-            this.IDColumn.HeaderText = "Tipo";
-            this.IDColumn.Name = "IDColumn";
-            this.IDColumn.ReadOnly = true;
-            this.IDColumn.Width = 130;
-            // 
-            // NombreColumn
-            // 
-            this.NombreColumn.FillWeight = 200F;
-            this.NombreColumn.HeaderText = "Operación";
-            this.NombreColumn.Name = "NombreColumn";
-            this.NombreColumn.ReadOnly = true;
-            this.NombreColumn.Width = 180;
-            // 
-            // StockColumn
-            // 
-            this.StockColumn.FillWeight = 50F;
-            this.StockColumn.HeaderText = "Folio";
-            this.StockColumn.Name = "StockColumn";
-            this.StockColumn.ReadOnly = true;
-            this.StockColumn.Width = 150;
-            // 
-            // Total
-            // 
-            this.Total.HeaderText = "Total";
-            this.Total.Name = "Total";
-            this.Total.ReadOnly = true;
             // 
             // label1
             // 
@@ -750,7 +710,7 @@
             this.Controls.Add(this.groupBox4);
             this.Name = "FormCorteCaja";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nota de Venta";
+            this.Text = "Corte de caja";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -806,10 +766,6 @@
         private System.Windows.Forms.Label lblVentasEfectivo2;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label lblTotalVentas2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IDColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StockColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total;
         private System.Windows.Forms.Label lblEgresos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;

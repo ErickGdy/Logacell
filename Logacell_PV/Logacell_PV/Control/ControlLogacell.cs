@@ -3051,7 +3051,7 @@ namespace Logacell.Control
                 Caja caja = consultarCaja();
                 string cerraCaja = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
                 string insertCorteCaja = "INSERT INTO corteCaja ( Total, PuntoVenta, Vendedor, FechaInicio) VALUES (" +
-                    salida + "," + idPV.id + "," + currentUser.empleado + "," + caja.fecha + ");";
+                    salida + "," + idPV.id + ",'" + currentUser.empleado + "','" + formatearFecha(caja.fecha) + "');";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
@@ -3081,6 +3081,30 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
+        public MySqlDataAdapter corteCajaTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT 'Ingreso', CONCAT(Concepto, '-', MetodoPago), Folio, Pago FROM pagos WHERE PuntoVenta = " + idPV.id + " and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP UNION SELECT 'Egreso', 'Compra', ID, Total FROM compra WHERE PuntoVenta = " + idPV.id + " and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de movimientos de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+
 
         //----------------------CONFG--------------///
         public string leerUserDoc()

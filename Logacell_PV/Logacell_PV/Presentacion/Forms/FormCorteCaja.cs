@@ -1,6 +1,7 @@
 ﻿using Logacell.Control;
 using Logacell.DataObject;
 using Logacell_PV.Presentacion.Forms;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,6 +49,8 @@ namespace Logacell.Presentacion
                 lblTotalEnCaja.Text = caja.fondoActual.ToString("C2");
                 lblTotalVentas2.Text = datos.ElementAt(9).ToString("C2");
                 lblTotalServicios.Text = datos.ElementAt(8).ToString("C2");
+                actualizarTabla(control.corteCajaTable());
+
                 this.ShowDialog();
             }catch(Exception ex)
             {
@@ -79,6 +82,33 @@ namespace Logacell.Presentacion
             Dispose();
         }
 
+        public void actualizarTabla(MySqlDataAdapter data)
+        {
+            try
+            {
+                DataTable dtDatos = new DataTable();
+                // Con la información del adaptador se rellena el DataTable
+                data.Fill(dtDatos);
+
+                // Se asigna el DataTable como origen de datos del DataGridView
+                dataGridView1.DataSource = dtDatos;
+                // actualiza el valor de la etiqueta donde se muestra el total de productos
+                dataGridView1.Columns[0].Width = 100;
+                dataGridView1.Columns[0].HeaderText = "Tipo";
+                dataGridView1.Columns[1].Width = 240;
+                dataGridView1.Columns[1].HeaderText = "Operación";
+                dataGridView1.Columns[2].Width = 125;
+                dataGridView1.Columns[2].HeaderText = "Folio";
+                dataGridView1.Columns[3].Width = 100;
+                dataGridView1.Columns[3].HeaderText = "Total";
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
 
     }
+
 }
