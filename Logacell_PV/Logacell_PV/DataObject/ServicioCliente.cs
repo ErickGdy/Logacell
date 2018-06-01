@@ -19,6 +19,7 @@ namespace Logacell.DataObject
         public bool tapa { get; set; }
         public bool memoria { get; set; }
         public bool chip { get; set; }
+        public string IMEI { get; set; }
 
     }
 }

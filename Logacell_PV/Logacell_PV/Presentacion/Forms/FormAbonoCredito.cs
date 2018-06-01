@@ -31,6 +31,7 @@ namespace Logacell.Presentacion
                 txtAbono.Value = credito.deuda;
                 idCliente = credito.cliente;
             }
+            cmbFormaPago.SelectedIndex = 0;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -50,7 +51,7 @@ namespace Logacell.Presentacion
                 {
                     if (control.actualizarCreditoCliente(c))
                     {
-                        if (control.agregarAbonoCredito(a))
+                        if (control.agregarAbonoCredito(a,cmbFormaPago.SelectedItem.ToString()))
                         {
                             MessageBox.Show("Datos guardados exitosamente!");
                         }else

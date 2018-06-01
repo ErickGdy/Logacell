@@ -122,7 +122,7 @@ namespace Logacell.Presentacion
         }
         private bool validarCampos()
         {
-            if (txtTelefono.Text != "" && txtNombre.Text != "" && txtTotal.Text!="" && txtTotal.Text != "0")
+            if (txtTelefono.Text != "" && txtNombre.Text != "" && servicios.Count!=0)
                 return true;
             return false;
         }
@@ -180,6 +180,7 @@ namespace Logacell.Presentacion
                 sc.memoria = checkMemoria.Checked;
                 sc.patron = patron;
                 sc.estado = "Espera";
+                sc.IMEI = txtIMEI.Text;
                 servicios.Add(sc);
                 dataGridView1.Rows.Insert(dataGridView1.RowCount, sc.descripcion, sc.presupuesto);
                 txtTotal.Text = (Convert.ToInt32(txtTotal.Text) + Convert.ToInt32(txtPresupuesto.Text)).ToString();
@@ -315,6 +316,12 @@ namespace Logacell.Presentacion
             btn9.BackColor = Color.FromArgb(215, 60, 39);
             btn9.Enabled = true;
             btn9.Text = "";
+        }
+
+        private void txtPresupuesto_Leave(object sender, EventArgs e)
+        {
+            if (txtPresupuesto.Text == "")
+                txtPresupuesto.Text = "0";
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Logacell
                 Dispose();
             }
             txtFondoInicial.Text = "0.00";
-            ShowDialog();
         }
 
         private void txtFondoInicial_KeyPress(object sender, KeyPressEventArgs e)
@@ -70,7 +69,7 @@ namespace Logacell
         {
             try
             {
-                if (control.cerrarCaja(txtFondoInicial.Text))
+                if (control.corteDeCaja(txtFondoInicial.Text))
                 {
                     MessageBox.Show("Corte de caja exitoso: La caja ha sido cerrada");
                     Dispose();
