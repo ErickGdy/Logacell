@@ -68,6 +68,9 @@
             this.btn8 = new System.Windows.Forms.Button();
             this.btn9 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.btnBorrarPatron = new System.Windows.Forms.Button();
             this.checkMemoria = new System.Windows.Forms.CheckBox();
             this.checkTapa = new System.Windows.Forms.CheckBox();
@@ -81,12 +84,10 @@
             this.txtAnticipo = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
+            this.txtIMEI = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -260,7 +261,9 @@
             this.txtPresupuesto.Name = "txtPresupuesto";
             this.txtPresupuesto.Size = new System.Drawing.Size(148, 22);
             this.txtPresupuesto.TabIndex = 6;
+            this.txtPresupuesto.Text = "0";
             this.txtPresupuesto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.onlyNumber_KeyPress);
+            this.txtPresupuesto.Leave += new System.EventHandler(this.txtPresupuesto_Leave);
             // 
             // txtMotivo
             // 
@@ -280,7 +283,7 @@
             this.Presupuesto});
             this.dataGridView1.ContextMenuStrip = this.menuTablaServiciosDados;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.Location = new System.Drawing.Point(332, 35);
+            this.dataGridView1.Location = new System.Drawing.Point(332, 18);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -347,7 +350,7 @@
             this.btnAgregarServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAgregarServicio.ForeColor = System.Drawing.Color.White;
             this.btnAgregarServicio.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregarServicio.Image")));
-            this.btnAgregarServicio.Location = new System.Drawing.Point(293, 42);
+            this.btnAgregarServicio.Location = new System.Drawing.Point(293, 25);
             this.btnAgregarServicio.Margin = new System.Windows.Forms.Padding(0);
             this.btnAgregarServicio.Name = "btnAgregarServicio";
             this.btnAgregarServicio.Size = new System.Drawing.Size(36, 32);
@@ -505,6 +508,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtIMEI);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
@@ -545,6 +549,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Servicio";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(128, 78);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(13, 16);
+            this.label15.TabIndex = 77;
+            this.label15.Text = "*";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(198, 26);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(13, 16);
+            this.label14.TabIndex = 76;
+            this.label14.Text = "*";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(70, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(13, 16);
+            this.label13.TabIndex = 75;
+            this.label13.Text = "*";
+            // 
             // btnBorrarPatron
             // 
             this.btnBorrarPatron.BackColor = System.Drawing.Color.White;
@@ -576,7 +607,7 @@
             this.checkTapa.AutoSize = true;
             this.checkTapa.Checked = true;
             this.checkTapa.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkTapa.Location = new System.Drawing.Point(424, 200);
+            this.checkTapa.Location = new System.Drawing.Point(611, 175);
             this.checkTapa.Name = "checkTapa";
             this.checkTapa.Size = new System.Drawing.Size(67, 20);
             this.checkTapa.TabIndex = 9;
@@ -600,7 +631,7 @@
             this.checkPila.AutoSize = true;
             this.checkPila.Checked = true;
             this.checkPila.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkPila.Location = new System.Drawing.Point(348, 201);
+            this.checkPila.Location = new System.Drawing.Point(513, 176);
             this.checkPila.Name = "checkPila";
             this.checkPila.Size = new System.Drawing.Size(50, 20);
             this.checkPila.TabIndex = 8;
@@ -699,42 +730,6 @@
             this.lblFecha.Text = "10/10/2013";
             this.lblFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(70, 26);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(13, 16);
-            this.label13.TabIndex = 75;
-            this.label13.Text = "*";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(198, 26);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(13, 16);
-            this.label14.TabIndex = 76;
-            this.label14.Text = "*";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(128, 78);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(13, 16);
-            this.label15.TabIndex = 77;
-            this.label15.Text = "*";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(115, 131);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(13, 16);
-            this.label16.TabIndex = 78;
-            this.label16.Text = "*";
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -756,6 +751,25 @@
             this.label18.Size = new System.Drawing.Size(15, 20);
             this.label18.TabIndex = 80;
             this.label18.Text = "*";
+            // 
+            // txtIMEI
+            // 
+            this.txtIMEI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIMEI.Location = new System.Drawing.Point(332, 199);
+            this.txtIMEI.Name = "txtIMEI";
+            this.txtIMEI.Size = new System.Drawing.Size(148, 22);
+            this.txtIMEI.TabIndex = 78;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.White;
+            this.label16.Location = new System.Drawing.Point(328, 176);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(47, 20);
+            this.label16.TabIndex = 79;
+            this.label16.Text = "IMEI";
             // 
             // FormServicioCliente
             // 
@@ -851,11 +865,12 @@
         private System.Windows.Forms.CheckBox checkPila;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnBorrarPatron;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox txtIMEI;
+        private System.Windows.Forms.Label label16;
     }
 }

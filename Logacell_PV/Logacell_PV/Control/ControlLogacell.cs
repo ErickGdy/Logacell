@@ -1530,7 +1530,7 @@ namespace Logacell.Control
             {
                 string insertarSolicitud = "INSERT INTO solicitudServicio (Folio, NombreCliente, TelefonoCliente, Total, Anticipo, Pendiente, IDPuntoVenta) values ('"
                         + servicio.Folio + "','" + servicio.nombreCliente + "','" + servicio.telefonoCliente + "',"
-                        + Convert.ToInt32(servicio.total) + "," + Convert.ToInt32(servicio.anticipo) + "," + Convert.ToInt32(servicio.pendiente) + ", '" + idPV.id + "' ); ";
+                        + Convert.ToInt32(servicio.total) + "," + Convert.ToInt32(servicio.anticipo) + "," + Convert.ToInt32(servicio.pendiente) + ", '" + idPV.id + "'); ";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
 
@@ -1855,10 +1855,10 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "INSERT INTO servicioCliente (Folio, Descripcion, Estado, Presupuesto, Contrasena, Patron, Pila, Tapa, Memoria, Chip) values ('"
+                cmd.CommandText = "INSERT INTO servicioCliente (Folio, Descripcion, Estado, Presupuesto, Contrasena, Patron, Pila, Tapa, Memoria, Chip, IMEI) values ('"
                         + folio + "','" + servicio.descripcion + "','" + servicio.estado + "','"
                         + servicio.presupuesto + "','" + servicio.contrasena + "','" + servicio.patron +  "'," + servicio.pila + ","
-                        + servicio.tapa + "," + servicio.memoria + "," + servicio.chip + " )";
+                        + servicio.tapa + "," + servicio.memoria + "," + servicio.chip + ","+servicio.IMEI+" )";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -1909,6 +1909,8 @@ namespace Logacell.Control
                         aux.tapa = reader.GetBoolean(8);
                         aux.memoria = reader.GetBoolean(9);
                         aux.chip = reader.GetBoolean(10);
+                        aux.IMEI = reader.GetString(11);
+
                         conn.Close();
                         return aux;
                     }
@@ -2036,7 +2038,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT ID, Descripcion, Estado, Contrasena, Patron, Pila, Tapa, Memoria, Chip from servicioCliente where Folio = '"+folio+"'", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT ID, Descripcion, Estado, Contrasena, Patron, Pila, Tapa, Memoria, Chip, IMEI from servicioCliente where Folio = '"+folio+"'", conn);
                     conn.Close();
                     return mdaDatos;
                 }

@@ -57,9 +57,9 @@ namespace Logacell
                 // Se asigna el DataTable como origen de datos del DataGridView
                 dataGridView1.DataSource = dtDatos;
                 dataGridView1.Columns[0].Width = 50;
-                dataGridView1.Columns[1].Width = 240;
+                dataGridView1.Columns[1].Width = 190;
                 dataGridView1.Columns[1].HeaderText = "Descripción";
-                dataGridView1.Columns[2].Width = 70;
+                dataGridView1.Columns[2].Width = 100;
                 dataGridView1.Columns[3].HeaderText = "Contraseña";
                 dataGridView1.Columns[3].Width = 70;
                 dataGridView1.Columns[4].HeaderText = "Patrón";
@@ -68,6 +68,7 @@ namespace Logacell
                 dataGridView1.Columns[6].Width = 40;
                 dataGridView1.Columns[7].Width = 50;
                 dataGridView1.Columns[8].Width = 40;
+                dataGridView1.Columns[9].Width = 110;
                 // actualiza el valor de la etiqueta donde se muestra el total de productos
             }
             catch (Exception e)
@@ -141,7 +142,7 @@ namespace Logacell
             try
             {
                 String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                if (control.actualizarEstadoServicioCliente(id, "Terminado"))
+                if (control.actualizarEstadoServicioCliente(id, "Terminado Sin Éxito"))
                 {
                     MessageBox.Show("Estado actualizado");
                     actualizarTabla(control.obtenerDetalleServiciosClientesTable(lblFolio.Text));
@@ -188,5 +189,40 @@ namespace Logacell
             }
         }
 
+        private void terminadoConÉxitoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                if (control.actualizarEstadoServicioCliente(id, "Terminado Con Éxito"))
+                {
+                    MessageBox.Show("Estado actualizado");
+                    actualizarTabla(control.obtenerDetalleServiciosClientesTable(lblFolio.Text));
+                }
+                else MessageBox.Show("Error al actualizar estado servicio");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void sinAutorizarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                if (control.actualizarEstadoServicioCliente(id, "Sin Autorizar"))
+                {
+                    MessageBox.Show("Estado actualizado");
+                    actualizarTabla(control.obtenerDetalleServiciosClientesTable(lblFolio.Text));
+                }
+                else MessageBox.Show("Error al actualizar estado servicio");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
