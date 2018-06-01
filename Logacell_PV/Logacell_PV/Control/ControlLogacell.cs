@@ -2316,15 +2316,17 @@ namespace Logacell.Control
         }
 
         //---------------ABONO A CRÉDITO-----------------//
-        public bool agregarAbonoCredito(AbonoCredito abono)
+        public bool agregarAbonoCredito(AbonoCredito abono, string formapago)
         {
             try
             {
-                string insertarAbono = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta) values ('"
+                string insertarAbono = "INSERT INTO abono (Cliente,Abono,Empleado,Fecha,PuntoVenta,FormaPago) values ('"
                     + abono.cliente + "','" + abono.abono + "','"
                     + abono.empleado + "','" + formatearFecha(DateTime.Now) + "',"
-                    + idPV.id + "); ";
-                string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + abono.abono + " WHERE PuntoVenta=" + idPV.id + ";";
+                    + idPV.id + ", "+formapago+"); ";
+                string actualizarCaja = "";
+                if (formapago=="Efectivo")
+                    actualizarCaja = "UPDATE caja SET FondoActual= FondoActual +" + abono.abono + " WHERE PuntoVenta=" + idPV.id + ";";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
@@ -2824,6 +2826,7 @@ namespace Logacell.Control
                         c.fondoInicial = reader.GetDecimal(2);
                         c.estado = reader.GetString(3);
                         c.fondoActual = reader.GetDecimal(4);
+                        c.fecha = reader.GetDateTime(5);
                         conn.Close();
                         return c;
                     }
@@ -2876,7 +2879,7 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada' WHERE PuntoVenta=" + idPV.id + ";";
+                cmd.CommandText = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -2906,7 +2909,7 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE caja SET FondoActual= " + entrada + ", FondoInicial= " + entrada + ", Estado = 'Abierta' WHERE PuntoVenta=" + idPV.id + ";";
+                cmd.CommandText = "UPDATE caja SET FondoActual= " + entrada + ", FondoInicial= " + entrada + ", Estado = 'Abierta', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -2967,6 +2970,104 @@ namespace Logacell.Control
                 catch (Exception e)
                 {
                     throw new Exception("Error..! Error al agregar caja a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+
+        //---------------CORTE DE CAJA --------------- -//
+        public List<double> datosCorteCaja()
+        {
+            try
+            {
+                Caja caja = consultarCaja();
+                List<double> aux = new List<double>();
+                List<string> qwerys = new List<string>();
+                //ingreso
+                qwerys.Add("SELECT SUM(Pago)FROM movimientosCaja WHERE IDPuntoVenta = "+idPV.id+" and Tipo = 'Ingreso' and Fecha BETWEEN '"+formatearFecha(caja.fecha) +"' AND CURRENT_TIMESTAMP;");
+                //egreso
+                qwerys.Add("SELECT SUM(Pago) FROM movimientosCaja WHERE IDPuntoVenta = "+idPV.id+"  and Tipo = 'Egreso' and Fecha BETWEEN '"+ formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //compras
+                qwerys.Add("SELECT SUM(Total) FROM compra WHERE PuntoVenta = 1 and Fecha BETWEEN '"+ formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //servicios efectivo
+                qwerys.Add("SELECT SUM(Pago) FROM pagos WHERE PuntoVenta = " + idPV.id + "  and(Concepto = 'Pago servicio' OR Concepto = 'Anticipo servicio') and MetodoPago = 'Efectivo' and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //servicios tarjeta
+                qwerys.Add("SELECT SUM(Pago) FROM pagos WHERE PuntoVenta = " + idPV.id + "  and Concepto = 'Pago servicio' and (MetodoPago='Tarjeta de Crédito' OR MetodoPago='Tarjeta de Dédito') and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //ventas efectivo
+                qwerys.Add("SELECT SUM(Pago) FROM pagos WHERE PuntoVenta = " + idPV.id + "  and Concepto = 'Pago de venta' and MetodoPago = 'Efectivo' and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //ventas tarjeta
+                qwerys.Add("SELECT SUM(Pago) FROM pagos WHERE PuntoVenta = " + idPV.id + "  and Concepto = 'Pago de venta' and (MetodoPago = 'Tarjeta de Crédito' OR MetodoPago = 'Tarjeta de Dédito') and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //abonos efectivo
+                qwerys.Add("SELECT SUM(Abono)FROM abono WHERE PuntoVenta = " + idPV.id + "  and FormaPago = 'Efectivo' and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //total servicios
+                qwerys.Add("SELECT SUM(Pago)FROM pagos WHERE PuntoVenta = " + idPV.id + "  and (Concepto = 'Pago servicio' OR Concepto='Anticipo servicio') and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                //total ventas
+                qwerys.Add("SELECT SUM(Pago)FROM pagos WHERE PuntoVenta = " + idPV.id + "  and Concepto = 'Pago de venta' and Fecha BETWEEN '" + formatearFecha(caja.fecha) + "' AND CURRENT_TIMESTAMP;");
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                try
+                {
+                    foreach (string s in qwerys) {
+                        cmd.CommandText = s;
+                        conn.Open();
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            if (!reader.IsDBNull(0))
+                                aux.Add(reader.GetDouble(0));
+                            else aux.Add(0);
+                        }
+                        conn.Close();
+                    }
+                    return aux;
+                }
+                catch (Exception e)
+                {
+                    conn.Close();
+ 
+                    throw new Exception("Error..! Error al obtener datos de corte de caja de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool corteDeCaja(string salida)
+        {
+            try
+            {
+                Caja caja = consultarCaja();
+                string cerraCaja = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
+                string insertCorteCaja = "INSERT INTO corteCaja ( Total, PuntoVenta, Vendedor, FechaInicio) VALUES (" +
+                    salida + "," + idPV.id + "," + currentUser.empleado + "," + caja.fecha + ");";
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION; " +
+                                    insertCorteCaja +
+                                    cerraCaja +
+                                    " COMMIT;";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al realizar corte de caja");
                 }
             }
             catch (Exception e)
@@ -3073,7 +3174,7 @@ namespace Logacell.Control
         public string formatearFecha(DateTime fecha)
         {
             DateTime aux;
-            if (fecha != null)
+            if (fecha == null)
                 aux = DateTime.Now;
             else
                 aux = fecha;

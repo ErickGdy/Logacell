@@ -91,7 +91,7 @@ namespace Logacell
         {
             if (ControlLogacell.getInstance().consultarCaja().estado == "Abierta")
             {
-                CerrarCaja fc = new CerrarCaja();
+                FormCorteCaja fc = new FormCorteCaja();
             }
             else
                 MessageBox.Show("Error!: Debe abrir la caja primero");

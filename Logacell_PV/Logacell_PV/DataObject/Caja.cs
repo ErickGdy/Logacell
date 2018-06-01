@@ -13,5 +13,6 @@ namespace Logacell.DataObject
         public decimal fondoInicial { get; set; }
         public decimal fondoActual { get; set; }
         public string estado { get; set; }
+        public DateTime fecha { get; set; }
     }
 }

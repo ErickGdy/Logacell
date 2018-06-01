@@ -203,8 +203,7 @@
             this.cmbFormaPago.Items.AddRange(new object[] {
             "Efectivo",
             "Tarjeta de Crédito",
-            "Tarjeta de Débito",
-            "Cheque"});
+            "Tarjeta de Débito"});
             this.cmbFormaPago.Location = new System.Drawing.Point(239, 236);
             this.cmbFormaPago.Name = "cmbFormaPago";
             this.cmbFormaPago.Size = new System.Drawing.Size(149, 28);

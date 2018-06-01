@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVentasPagos));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSevicioClientePagos));
             this.lblFecha = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -205,8 +205,7 @@
             this.cmbFormaPago.Items.AddRange(new object[] {
             "Efectivo",
             "Tarjeta de Crédito",
-            "Tarjeta de Débito",
-            "Cheque"});
+            "Tarjeta de Débito"});
             this.cmbFormaPago.Location = new System.Drawing.Point(239, 236);
             this.cmbFormaPago.Name = "cmbFormaPago";
             this.cmbFormaPago.Size = new System.Drawing.Size(149, 28);
@@ -385,7 +384,7 @@
             this.label1.TabIndex = 89;
             this.label1.Text = "Folio:";
             // 
-            // FormVentasPagos
+            // FormSevicioClientePagos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -409,7 +408,7 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.pictureBox1);
-            this.Name = "FormVentasPagos";
+            this.Name = "FormSevicioClientePagos";
             this.Text = "FormVentasPagos";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
