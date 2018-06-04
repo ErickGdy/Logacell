@@ -2914,7 +2914,7 @@ namespace Logacell.Control
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "UPDATE caja SET FondoActual= " + entrada + ", FondoInicial= " + entrada + ", Estado = 'Abierta', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
+                cmd.CommandText = "UPDATE caja SET FondoActual= " + entrada + ", FondoInicial= " + entrada + ", Estado = 'Abierta', Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -3049,7 +3049,7 @@ namespace Logacell.Control
             try
             {
                 Caja caja = consultarCaja();
-                string cerraCaja = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', SET Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
+                string cerraCaja = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
                 string insertCorteCaja = "INSERT INTO corteCaja ( Total, PuntoVenta, Vendedor, FechaInicio) VALUES (" +
                     salida + "," + idPV.id + ",'" + currentUser.empleado + "','" + formatearFecha(caja.fecha) + "');";
                 conn = new MySqlConnection(builder.ToString());
@@ -3114,22 +3114,27 @@ namespace Logacell.Control
             string user = "";
             try
             {
-                //Pass the file path and file name to the StreamReader constructor
-                sr = new StreamReader("thumbs.txt");
-                //read de first line
-                line = sr.ReadLine();
-                //Continue to read until you reach end of file
-                while (line != null)
+                string archivo = "thumbs.txt";
+                // comprobar si el fichero ya existe
+                if (File.Exists(archivo))
                 {
-                    if (line == "us")
+                    //Pass the file path and file name to the StreamReader constructor
+                    sr = new StreamReader(archivo);
+                    //read de first line
+                    line = sr.ReadLine();
+                    //Continue to read until you reach end of file
+                    while (line != null)
                     {
-                        user  = sr.ReadLine();
-                        break;
+                        if (line == "us")
+                        {
+                            user = sr.ReadLine();
+                            break;
+                        }
                     }
+                    //close the file
+                    sr.Close();
+                    sr.Dispose();
                 }
-                //close the file
-                sr.Close();
-                sr.Dispose();
                 return user;
             }
             catch (Exception e)
@@ -3145,23 +3150,28 @@ namespace Logacell.Control
             string pv = "";
             try
             {
-                //Pass the file path and file name to the StreamReader constructor
-                sr = new StreamReader("thumbs.txt");
-                //read de first line
-                line = sr.ReadLine();
-                //Continue to read until you reach end of file
-                while (line != null)
+                string archivo = "thumbs.txt";
+                // comprobar si el fichero ya existe
+                if (File.Exists(archivo))
                 {
-                    if (line == "pv")
-                    {
-                        pv= sr.ReadLine();
-                        break;
-                    }
+                    //Pass the file path and file name to the StreamReader constructor
+                    sr = new StreamReader(archivo);
+                    //read de first line
                     line = sr.ReadLine();
+                    //Continue to read until you reach end of file
+                    while (line != null)
+                    {
+                        if (line == "pv")
+                        {
+                            pv = sr.ReadLine();
+                            break;
+                        }
+                        line = sr.ReadLine();
+                    }
+                    //close the file
+                    sr.Close();
+                    sr.Dispose();
                 }
-                //close the file
-                sr.Close();
-                sr.Dispose();
                 return pv;
             }
             catch (Exception e)
@@ -3175,9 +3185,14 @@ namespace Logacell.Control
             StreamWriter sw = null;
             try
             {
-
-                //Pass the filepath and filename to the StreamWriter Constructor
-                sw = new StreamWriter("thumbs.txt");
+                string archivo = "thumbs.txt";
+                // comprobar si el fichero ya existe
+                if (!File.Exists(archivo))
+                {
+                    File.Create(archivo).Close();
+                }
+                //Pass the file path and file name to the StreamReader constructor
+                sw = new StreamWriter(archivo);
                 //Write a line of text
                 if (currentUser.usuario != null)
                 {

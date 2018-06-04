@@ -245,6 +245,7 @@
             this.existNum.Name = "existNum";
             this.existNum.Size = new System.Drawing.Size(120, 26);
             this.existNum.TabIndex = 32;
+            this.existNum.Visible = false;
             // 
             // label7
             // 
@@ -257,6 +258,7 @@
             this.label7.TabIndex = 33;
             this.label7.Text = "Existencia:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label7.Visible = false;
             // 
             // FormProducto
             // 

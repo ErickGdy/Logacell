@@ -69,15 +69,21 @@ namespace Logacell
         {
             try
             {
-                if (control.corteDeCaja(txtFondoInicial.Text))
+                if (caja.fondoActual >= Convert.ToDecimal(txtFondoInicial.Text))
                 {
-                    MessageBox.Show("Corte de caja exitoso: La caja ha sido cerrada");
-                    Dispose();
+                    if (control.corteDeCaja(txtFondoInicial.Text))
+                    {
+                        MessageBox.Show("Corte de caja exitoso: La caja ha sido cerrada");
+                        control.setCaja();
+                        Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al realizar corte de caja");
+                    }
                 }
                 else
-                {
-                    MessageBox.Show("Error al realizar corte de caja");
-                }
+                    MessageBox.Show("No puede dar salida a una catidad mayor que el fondo actual");
             }
             catch (Exception ex)
             {

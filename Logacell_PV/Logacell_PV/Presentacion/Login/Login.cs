@@ -45,7 +45,7 @@ namespace Logacell.Presentacion
                 catch (Exception ex)
                 {
                     //Si fallo arroja una excepcion y la mostramos en un label
-                    MessageBox.Show("Ha ocurrido un error con la base de datos" + ex.ToString());
+                    MessageBox.Show("Ha ocurrido un error al intentar acceder a la base de datos");
                 }
                 //Si se agregó mostramos el mensaje en un label
 
