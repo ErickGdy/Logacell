@@ -235,7 +235,7 @@ namespace Logacell
 
         private void abrirCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ControlLogacell.caja.estado != "Abierta")
+            if (ControlLogacell.caja.estado == "Abierta")
             {
                 AbrirCaja ac = new AbrirCaja();
             }

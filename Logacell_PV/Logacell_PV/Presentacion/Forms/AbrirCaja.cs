@@ -88,6 +88,7 @@ namespace Logacell
                 if (control.abrirCaja(txtFondoInicial.Text))
                 {
                     MessageBox.Show("Caja abierta");
+                    control.setCaja();
                     Dispose();
                 }
                 else

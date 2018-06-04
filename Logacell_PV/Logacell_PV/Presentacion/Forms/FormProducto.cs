@@ -113,10 +113,10 @@ namespace Logacell.Presentacion
                     p.id = Convert.ToInt32(txtID.Text);
                     if (control.actualizarProducto(p))
                     {
-                        if (control.actualizarStockProducto(txtID.Text, Convert.ToInt32(existNum.Value)))
+                        //if (control.actualizarStockProducto(txtID.Text, Convert.ToInt32(existNum.Value)))
                             return true;
-                        else
-                            throw new Exception("Error al actualizar stock");
+                        //else
+                          //  throw new Exception("Error al actualizar stock");
                     }
                     else
                         throw new Exception("Error al actualizar producto");
@@ -125,10 +125,10 @@ namespace Logacell.Presentacion
                 {
                     if (control.agregarProducto(p))
                     {
-                        if (control.actualizarStockProducto(control.consultarUltimoIDProducto().ToString(), Convert.ToInt32(existNum.Value)))
+                        //if (control.actualizarStockProducto(control.consultarUltimoIDProducto().ToString(), Convert.ToInt32(existNum.Value)))
                             return true;
-                        else
-                            throw new Exception("Error al actualizar stock");
+                        //else
+                          //  throw new Exception("Error al actualizar stock");
                     }
                     else
                         throw new Exception("Error al agregar producto");
