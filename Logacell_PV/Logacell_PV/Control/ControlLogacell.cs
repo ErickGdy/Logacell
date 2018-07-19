@@ -19,8 +19,8 @@ namespace Logacell.Control
         string server = "logacell.com";
         string userID = "logacell_logamel";
         string password = "Logamel82";
-        string database = "logacell_logamysql";
-        //string database = "logacell_logacell";
+        //string database = "logacell_logamysql";
+        string database = "logacell_logacell";
         public static PuntoVenta idPV;
         public static Usuario currentUser;
         public static ControlLogacell instance;
@@ -450,7 +450,40 @@ namespace Logacell.Control
                         return x;
                     }
                     conn.Close();
-                    return -1;
+                    return 0;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al obtener el stock del Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
+        public int obtenerStockProducto(string id, int pv)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText =  "SELECT Cantidad FROM stockPV WHERE Producto='" + id +"' and PuntoVenta='" + pv+"';";
+                conn.Open();
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Productos";
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int x = reader.GetInt32(0);
+                        conn.Close();
+                        return x;
+                    }
+                    conn.Close();
+                    return 0;
                 }
                 catch (Exception e)
                 {
@@ -1861,7 +1894,7 @@ namespace Logacell.Control
                 cmd.CommandText = "INSERT INTO servicioCliente (Folio, Descripcion, Estado, Presupuesto, Contrasena, Patron, Pila, Tapa, Memoria, Chip, IMEI) values ('"
                         + folio + "','" + servicio.descripcion + "','" + servicio.estado + "','"
                         + servicio.presupuesto + "','" + servicio.contrasena + "','" + servicio.patron +  "'," + servicio.pila + ","
-                        + servicio.tapa + "," + servicio.memoria + "," + servicio.chip + ","+servicio.IMEI+" )";
+                        + servicio.tapa + "," + servicio.memoria + "," + servicio.chip + ",'"+servicio.IMEI+"' )";
                 //cmd.CommandText = "SELECT * FROM Servicios";
                 conn.Open();
                 try
@@ -2576,6 +2609,7 @@ namespace Logacell.Control
             {
                 string insertDetallesCompra = "";
                 string updateStocks = "";
+                string insertStocks = "";
                 string folioCompra = this.folioCompra();
                 foreach (Producto p in lista)
                 {
@@ -2583,6 +2617,7 @@ namespace Logacell.Control
                         p.id + ",'"+ folioCompra + "'," + p.cantidad + "," + Convert.ToDecimal(p.precio)*Convert.ToDecimal(p.cantidad) + "); ";
                     updateStocks += "UPDATE stockPV SET Cantidad = Cantidad + " + p.cantidad +
                         " WHERE Producto= " + p.id + " and PuntoVenta = " + idPV.id + "; ";
+                    insertStocks += "INSERT INTO stockPV(Cantidad, Producto, PuntoVenta) SELECT '0', '" + p.id+ "', '" + idPV.id + "' FROM DUAL WHERE NOT EXISTS(SELECT * FROM stockPV WHERE Producto = '" + p.id + "' AND PuntoVenta = '" + idPV.id +"'); ";
                 }
                 string actualizarCaja = "UPDATE caja SET FondoActual= FondoActual -" + total + " WHERE PuntoVenta=" + idPV.id + ";";
                 string insertCompra = "INSERT INTO compra (ID,Fecha, Total,PuntoVenta, Estado, Empleado) values ('" +
@@ -2593,6 +2628,7 @@ namespace Logacell.Control
                 cmd.CommandText = "START TRANSACTION; " +
                                     insertCompra +
                                     insertDetallesCompra +
+                                    insertStocks +
                                     updateStocks +
                                     actualizarCaja +
                                     " COMMIT;";
@@ -2664,7 +2700,7 @@ namespace Logacell.Control
                     Compra c = new Compra();
                     while (reader.Read())
                     {
-                        c.id = reader.GetInt32(0);
+                        c.id = reader.GetString(0);
                         c.fecha = reader.GetDateTime(1);
                         c.total = reader.GetDouble(2);
                         c.idPV = reader.GetInt32(3);
@@ -2695,7 +2731,7 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM compra WHERE PuntoVenta=" + idPV.id + ";", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT C.ID, C.Fecha,C.Total,P.Nombre AS 'PuntoVenta',C.Estado,C.Empleado FROM compra C, puntoVenta P WHERE  P.ID=C.PuntoVenta AND PuntoVenta=" + idPV.id + ";", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -2718,11 +2754,11 @@ namespace Logacell.Control
                 conn.Open();
                 try
                 {
-                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT * FROM compra WHERE " +
-                        "( Fecha LIKE '%" + param + "%' OR " +
-                        "Empleado LIKE '%" + param + "%' OR " +
-                        "Total LIKE '%" + param +
-                        "%') AND PuntoVenta=" + idPV.id + ";", conn);
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT C.ID, C.Fecha,C.Total,P.Nombre AS 'PuntoVenta',C.Estado,C.Empleado FROM compra C, puntoVenta P WHERE " +
+                        "( C.Fecha LIKE '%" + param + "%' OR " +
+                        "C.Empleado LIKE '%" + param + "%' OR " +
+                        "C.Total LIKE '%" + param +
+                        "%') AND P.ID=C.PuntoVenta AND C.PuntoVenta=" + idPV.id + ";", conn);
                     conn.Close();
                     return mdaDatos;
                 }
@@ -2737,6 +2773,30 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
+        public MySqlDataAdapter obtenerDetalleComprasTable(string folio)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT P.Nombre AS 'Producto', DC.Cantidad, (DC.Total/DC.Cantidad) AS 'Precio de compra' , DC.Total FROM detalleCompra DC INNER JOIN producto P ON P.ID = DC.Producto WHERE DC.Compra='" + folio + "'", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Compra de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+
         public string folioCompra()
         {
             try
@@ -2801,7 +2861,7 @@ namespace Logacell.Control
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("Error..! Error al agregar Credito Cliente a la Base de Datos");
+                    throw new Exception("Error..! Error al agregar Caja a la Base de Datos");
                 }
             }
             catch (Exception e)
@@ -2984,7 +3044,7 @@ namespace Logacell.Control
             }
         }
 
-        //---------------CORTE DE CAJA --------------- -//
+        //---------------CORTE DE CAJA------------------//
         public List<double> datosCorteCaja()
         {
             try
@@ -3050,8 +3110,8 @@ namespace Logacell.Control
             {
                 Caja caja = consultarCaja();
                 string cerraCaja = "UPDATE caja SET FondoActual= FondoActual-" + salida + ", Estado = 'Cerrada', Fecha=CURRENT_TIMESTAMP WHERE PuntoVenta=" + idPV.id + ";";
-                string insertCorteCaja = "INSERT INTO corteCaja ( Total, PuntoVenta, Vendedor, FechaInicio) VALUES (" +
-                    salida + "," + idPV.id + ",'" + currentUser.empleado + "','" + formatearFecha(caja.fecha) + "');";
+                string insertCorteCaja = "INSERT INTO corteCaja ( Total, PuntoVenta, Vendedor, FechaInicio, FondoInicial,TotalEnCaja) VALUES (" +
+                    salida + "," + idPV.id + ",'" + currentUser.empleado + "','" + formatearFecha(caja.fecha) + "',"+caja.fondoInicial+","+caja.fondoActual+");";
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
                 cmd.CommandText = "START TRANSACTION; " +
@@ -3106,7 +3166,7 @@ namespace Logacell.Control
         }
 
 
-        //----------------------CONFG--------------///
+        //---------------------CONFG-------------------//
         public string leerUserDoc()
         {
             String line;

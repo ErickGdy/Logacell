@@ -107,6 +107,7 @@
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.White;
             this.btnAceptar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAceptar.Enabled = false;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);

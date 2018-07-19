@@ -98,6 +98,12 @@
     <Compile Include="Presentacion\Forms\AbrirCaja.designer.cs">
       <DependentUpon>AbrirCaja.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presentacion\Forms\DetalleDeCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\DetalleDeCompra.designer.cs">
+      <DependentUpon>DetalleDeCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\DetalleDeVenta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +288,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentacion\Forms\AbrirCaja.resx">
       <DependentUpon>AbrirCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\DetalleDeCompra.resx">
+      <DependentUpon>DetalleDeCompra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\DetalleDeVenta.resx">
       <DependentUpon>DetalleDeVenta.cs</DependentUpon>

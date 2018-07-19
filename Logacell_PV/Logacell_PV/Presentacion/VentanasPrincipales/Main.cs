@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -235,13 +236,19 @@ namespace Logacell
 
         private void abrirCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ControlLogacell.caja.estado == "Abierta")
+            if (ControlLogacell.caja.estado != "Abierta")
             {
                 AbrirCaja ac = new AbrirCaja();
             }
             else
                 MessageBox.Show("La caja se encuentra abierta");
 
+        }
+
+        private void toolStripMenuAdmin_Click(object sender, EventArgs e)
+        {
+            //proyecto2.frmVentas frmShared = new proyecto2.frmVentas();
+            //frmShared.show();
         }
     }
 }

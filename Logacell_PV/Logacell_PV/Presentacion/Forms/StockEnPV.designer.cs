@@ -47,6 +47,8 @@
             this.lblID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblModelo = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Stock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -73,12 +75,15 @@
             this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Stock});
             this.dataGridView1.Location = new System.Drawing.Point(275, 52);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(268, 131);
+            this.dataGridView1.Size = new System.Drawing.Size(269, 131);
             this.dataGridView1.TabIndex = 55;
             // 
             // pictureBox9
@@ -249,6 +254,19 @@
             this.lblModelo.TabIndex = 56;
             this.lblModelo.Text = "asdasd";
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Punto Venta";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 150;
+            // 
+            // Stock
+            // 
+            this.Stock.HeaderText = "Stock";
+            this.Stock.Name = "Stock";
+            this.Stock.ReadOnly = true;
+            // 
             // StockEnPV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,5 +326,7 @@
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblModelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Stock;
     }
 }

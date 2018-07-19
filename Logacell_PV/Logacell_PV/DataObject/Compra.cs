@@ -10,7 +10,7 @@ namespace Logacell_PV.DataObject
     public class Compra
     {
 
-        public int id { get; set; }
+        public string id { get; set; }
         public List<Producto> productos { get; set; }
         public string Empleado { get; set; }
         public double total { get; set; }
