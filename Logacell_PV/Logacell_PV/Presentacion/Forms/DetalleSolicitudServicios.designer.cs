@@ -37,8 +37,10 @@
             this.estadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.esperaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enProgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.terminadoConÉxitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.terminadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entregadoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sinAutorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
@@ -58,8 +60,7 @@
             this.lblPego = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.terminadoConÉxitoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sinAutorizarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificarCotizaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuTabla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -91,15 +92,16 @@
             this.menuTabla.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.menuTabla.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.eliminarToolStripMenuItem,
-            this.estadoToolStripMenuItem});
+            this.estadoToolStripMenuItem,
+            this.modificarCotizaciónToolStripMenuItem});
             this.menuTabla.Name = "menuTabla";
-            this.menuTabla.Size = new System.Drawing.Size(153, 74);
+            this.menuTabla.Size = new System.Drawing.Size(221, 98);
             // 
             // eliminarToolStripMenuItem
             // 
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
-            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
             this.eliminarToolStripMenuItem.Text = "Cancelar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
@@ -114,7 +116,7 @@
             this.sinAutorizarToolStripMenuItem});
             this.estadoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("estadoToolStripMenuItem.Image")));
             this.estadoToolStripMenuItem.Name = "estadoToolStripMenuItem";
-            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
+            this.estadoToolStripMenuItem.Size = new System.Drawing.Size(141, 24);
             this.estadoToolStripMenuItem.Text = "Estado";
             // 
             // esperaToolStripMenuItem
@@ -131,6 +133,13 @@
             this.enProgresoToolStripMenuItem.Text = "En progreso";
             this.enProgresoToolStripMenuItem.Click += new System.EventHandler(this.enProgresoToolStripMenuItem_Click);
             // 
+            // terminadoConÉxitoToolStripMenuItem
+            // 
+            this.terminadoConÉxitoToolStripMenuItem.Name = "terminadoConÉxitoToolStripMenuItem";
+            this.terminadoConÉxitoToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
+            this.terminadoConÉxitoToolStripMenuItem.Text = "Terminado con éxito";
+            this.terminadoConÉxitoToolStripMenuItem.Click += new System.EventHandler(this.terminadoConÉxitoToolStripMenuItem_Click);
+            // 
             // terminadoToolStripMenuItem
             // 
             this.terminadoToolStripMenuItem.Name = "terminadoToolStripMenuItem";
@@ -144,6 +153,13 @@
             this.entregadoToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
             this.entregadoToolStripMenuItem.Text = "Entregado";
             this.entregadoToolStripMenuItem.Click += new System.EventHandler(this.entregadoToolStripMenuItem_Click);
+            // 
+            // sinAutorizarToolStripMenuItem
+            // 
+            this.sinAutorizarToolStripMenuItem.Name = "sinAutorizarToolStripMenuItem";
+            this.sinAutorizarToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
+            this.sinAutorizarToolStripMenuItem.Text = "Sin autorizar";
+            this.sinAutorizarToolStripMenuItem.Click += new System.EventHandler(this.sinAutorizarToolStripMenuItem_Click);
             // 
             // lblTelefono
             // 
@@ -169,7 +185,7 @@
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(531, 62);
+            this.pictureBox8.Location = new System.Drawing.Point(516, 62);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(20, 23);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -189,7 +205,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
-            this.pictureBox6.Location = new System.Drawing.Point(530, 129);
+            this.pictureBox6.Location = new System.Drawing.Point(515, 129);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(20, 23);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -226,7 +242,7 @@
             this.lblPendiente.AutoSize = true;
             this.lblPendiente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPendiente.ForeColor = System.Drawing.Color.White;
-            this.lblPendiente.Location = new System.Drawing.Point(638, 131);
+            this.lblPendiente.Location = new System.Drawing.Point(623, 131);
             this.lblPendiente.Name = "lblPendiente";
             this.lblPendiente.Size = new System.Drawing.Size(54, 16);
             this.lblPendiente.TabIndex = 65;
@@ -238,7 +254,7 @@
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(554, 129);
+            this.label10.Location = new System.Drawing.Point(539, 129);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 18);
             this.label10.TabIndex = 64;
@@ -272,7 +288,7 @@
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.ForeColor = System.Drawing.Color.White;
-            this.lblTotal.Location = new System.Drawing.Point(602, 65);
+            this.lblTotal.Location = new System.Drawing.Point(587, 65);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(47, 16);
             this.lblTotal.TabIndex = 61;
@@ -284,7 +300,7 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(553, 63);
+            this.label6.Location = new System.Drawing.Point(538, 63);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 18);
             this.label6.TabIndex = 60;
@@ -329,7 +345,7 @@
             this.lblPego.AutoSize = true;
             this.lblPego.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPego.ForeColor = System.Drawing.Color.White;
-            this.lblPego.Location = new System.Drawing.Point(602, 98);
+            this.lblPego.Location = new System.Drawing.Point(587, 98);
             this.lblPego.Name = "lblPego";
             this.lblPego.Size = new System.Drawing.Size(54, 16);
             this.lblPego.TabIndex = 76;
@@ -338,7 +354,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(531, 93);
+            this.pictureBox1.Location = new System.Drawing.Point(516, 93);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 23);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -353,26 +369,20 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(553, 96);
+            this.label4.Location = new System.Drawing.Point(538, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 18);
             this.label4.TabIndex = 74;
             this.label4.Text = "Pago:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // terminadoConÉxitoToolStripMenuItem
+            // modificarCotizaciónToolStripMenuItem
             // 
-            this.terminadoConÉxitoToolStripMenuItem.Name = "terminadoConÉxitoToolStripMenuItem";
-            this.terminadoConÉxitoToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
-            this.terminadoConÉxitoToolStripMenuItem.Text = "Terminado con éxito";
-            this.terminadoConÉxitoToolStripMenuItem.Click += new System.EventHandler(this.terminadoConÉxitoToolStripMenuItem_Click);
-            // 
-            // sinAutorizarToolStripMenuItem
-            // 
-            this.sinAutorizarToolStripMenuItem.Name = "sinAutorizarToolStripMenuItem";
-            this.sinAutorizarToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
-            this.sinAutorizarToolStripMenuItem.Text = "Sin autorizar";
-            this.sinAutorizarToolStripMenuItem.Click += new System.EventHandler(this.sinAutorizarToolStripMenuItem_Click);
+            this.modificarCotizaciónToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("modificarCotizaciónToolStripMenuItem.Image")));
+            this.modificarCotizaciónToolStripMenuItem.Name = "modificarCotizaciónToolStripMenuItem";
+            this.modificarCotizaciónToolStripMenuItem.Size = new System.Drawing.Size(220, 24);
+            this.modificarCotizaciónToolStripMenuItem.Text = "Modificar Cotización";
+            this.modificarCotizaciónToolStripMenuItem.Click += new System.EventHandler(this.modificarCotizaciónToolStripMenuItem_Click);
             // 
             // DetalleSolicitudServicios
             // 
@@ -401,7 +411,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "DetalleSolicitudServicios";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -450,5 +460,6 @@
         private System.Windows.Forms.ToolStripMenuItem entregadoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terminadoConÉxitoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sinAutorizarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem modificarCotizaciónToolStripMenuItem;
     }
 }

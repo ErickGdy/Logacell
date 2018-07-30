@@ -1,4 +1,5 @@
 ﻿using Logacell.Control;
+using Logacell.DataObject;
 using Logacell.Presentacion;
 using System;
 using System.Collections.Generic;
@@ -247,8 +248,21 @@ namespace Logacell
 
         private void toolStripMenuAdmin_Click(object sender, EventArgs e)
         {
-            //proyecto2.frmVentas frmShared = new proyecto2.frmVentas();
-            //frmShared.show();
+            try
+            {
+                Empleado emp = ControlLogacell.getInstance().consultarEmpleado(ControlLogacell.currentUser.empleado);
+                if (emp.puesto == "Administrador" || emp.puesto == "Encargado de envios")
+                {
+                    Logacell_Admin.MainForm main = Logacell_Admin.MainForm.getInstance(emp.correo);
+                    main.Show();
+                }
+                else
+                {
+                    Logacell_Admin.Login log = new Logacell_Admin.Login();
+                    log.Show();
+                }
+            }
+            catch (Exception ex) { }
         }
     }
 }

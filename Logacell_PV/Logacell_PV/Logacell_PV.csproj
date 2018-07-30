@@ -92,6 +92,194 @@
     <Compile Include="DataObject\Usuario.cs" />
     <Compile Include="DataObject\PagosVentas.cs" />
     <Compile Include="DataObject\Venta.cs" />
+    <Compile Include="Logacell_admin\Control\ControlLogacell_Admin.cs" />
+    <Compile Include="Logacell_admin\Control\DataGridViewPrinter.cs" />
+    <Compile Include="Logacell_admin\DataObject\AbonoCredito.cs" />
+    <Compile Include="Logacell_admin\DataObject\Bitacora.cs" />
+    <Compile Include="Logacell_admin\DataObject\Caja.cs" />
+    <Compile Include="Logacell_admin\DataObject\Cliente.cs" />
+    <Compile Include="Logacell_admin\DataObject\Compra.cs" />
+    <Compile Include="Logacell_admin\DataObject\CreditoCliente.cs" />
+    <Compile Include="Logacell_admin\DataObject\DetalleVenta.cs" />
+    <Compile Include="Logacell_admin\DataObject\Empleado.cs" />
+    <Compile Include="Logacell_admin\DataObject\IngresoEgreso.cs" />
+    <Compile Include="Logacell_admin\DataObject\PagosVentas.cs" />
+    <Compile Include="Logacell_admin\DataObject\Producto.cs" />
+    <Compile Include="Logacell_admin\DataObject\PuntoVenta.cs" />
+    <Compile Include="Logacell_admin\DataObject\Servicio.cs" />
+    <Compile Include="Logacell_admin\DataObject\ServicioCliente.cs" />
+    <Compile Include="Logacell_admin\DataObject\SolicitudServicio.cs" />
+    <Compile Include="Logacell_admin\DataObject\StockPuntoVenta.cs" />
+    <Compile Include="Logacell_admin\DataObject\Usuario.cs" />
+    <Compile Include="Logacell_admin\DataObject\Venta.cs" />
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleDeCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleDeCompra.designer.cs">
+      <DependentUpon>DetalleDeCompra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleDeVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleDeVenta.designer.cs">
+      <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleSolicitudServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\DetalleSolicitudServicios.designer.cs">
+      <DependentUpon>DetalleSolicitudServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormCliente.designer.cs">
+      <DependentUpon>FormCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormCorteCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormCorteCaja.designer.cs">
+      <DependentUpon>FormCorteCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormEmpleado.designer.cs">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormLimiteCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormLimiteCredito.designer.cs">
+      <DependentUpon>FormLimiteCredito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormPagos.designer.cs">
+      <DependentUpon>FormPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormProducto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormProducto.designer.cs">
+      <DependentUpon>FormProducto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormPuntoVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormPuntoVenta.designer.cs">
+      <DependentUpon>FormPuntoVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\FormServicio.designer.cs">
+      <DependentUpon>FormServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\ProductosMinMax.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\ProductosMinMax.designer.cs">
+      <DependentUpon>ProductosMinMax.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\StockEnPV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\StockEnPV.designer.cs">
+      <DependentUpon>StockEnPV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\StockModificarPV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Forms\StockModificarPV.designer.cs">
+      <DependentUpon>StockModificarPV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainForm_Admin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainForm_Admin.Designer.cs">
+      <DependentUpon>MainForm_Admin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainAdministracion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainAdministracion.designer.cs">
+      <DependentUpon>MainAdministracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCaja.designer.cs">
+      <DependentUpon>MainCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCliente.designer.cs">
+      <DependentUpon>MainCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCompras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCompras.designer.cs">
+      <DependentUpon>MainCompras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainEmpleado.designer.cs">
+      <DependentUpon>MainEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainFinanzas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainFinanzas.designer.cs">
+      <DependentUpon>MainFinanzas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainInventarioProductos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainInventarioProductos.designer.cs">
+      <DependentUpon>MainInventarioProductos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainMovimientosCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainMovimientosCaja.designer.cs">
+      <DependentUpon>MainMovimientosCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainPuntoVenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainPuntoVenta.designer.cs">
+      <DependentUpon>MainPuntoVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServicios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServicios.designer.cs">
+      <DependentUpon>MainServicios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServiciosCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServiciosCliente.designer.cs">
+      <DependentUpon>MainServiciosCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainVentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainVentas.designer.cs">
+      <DependentUpon>MainVentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentacion\Forms\AbrirCaja.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +339,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormVenta.designer.cs">
       <DependentUpon>FormVenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormServicioClienteCotizacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormServicioClienteCotizacion.Designer.cs">
+      <DependentUpon>FormServicioClienteCotizacion.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormVentaDescuentoDialog.cs">
       <SubType>Form</SubType>
@@ -286,6 +480,90 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\DetalleDeCompra.resx">
+      <DependentUpon>DetalleDeCompra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\DetalleDeVenta.resx">
+      <DependentUpon>DetalleDeVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\DetalleSolicitudServicios.resx">
+      <DependentUpon>DetalleSolicitudServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormCliente.resx">
+      <DependentUpon>FormCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormCorteCaja.resx">
+      <DependentUpon>FormCorteCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormEmpleado.resx">
+      <DependentUpon>FormEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormLimiteCredito.resx">
+      <DependentUpon>FormLimiteCredito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormPagos.resx">
+      <DependentUpon>FormPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormProducto.resx">
+      <DependentUpon>FormProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormPuntoVenta.resx">
+      <DependentUpon>FormPuntoVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\FormServicio.resx">
+      <DependentUpon>FormServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\ProductosMinMax.resx">
+      <DependentUpon>ProductosMinMax.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\StockEnPV.resx">
+      <DependentUpon>StockEnPV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Forms\StockModificarPV.resx">
+      <DependentUpon>StockModificarPV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainForm_Admin.resx">
+      <DependentUpon>MainForm_Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainAdministracion.resx">
+      <DependentUpon>MainAdministracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCaja.resx">
+      <DependentUpon>MainCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCliente.resx">
+      <DependentUpon>MainCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainCompras.resx">
+      <DependentUpon>MainCompras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainEmpleado.resx">
+      <DependentUpon>MainEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainFinanzas.resx">
+      <DependentUpon>MainFinanzas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainInventarioProductos.resx">
+      <DependentUpon>MainInventarioProductos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainMovimientosCaja.resx">
+      <DependentUpon>MainMovimientosCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainPuntoVenta.resx">
+      <DependentUpon>MainPuntoVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServicios.resx">
+      <DependentUpon>MainServicios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServiciosCliente.resx">
+      <DependentUpon>MainServiciosCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainVentas.resx">
+      <DependentUpon>MainVentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\AbrirCaja.resx">
       <DependentUpon>AbrirCaja.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +593,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVenta.resx">
       <DependentUpon>FormVenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormServicioClienteCotizacion.resx">
+      <DependentUpon>FormServicioClienteCotizacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormVentaDescuentoDialog.resx">
       <DependentUpon>FormVentaDescuentoDialog.cs</DependentUpon>
@@ -420,6 +701,8 @@
   <ItemGroup>
     <Content Include="img\Icon.ico" />
     <Content Include="img\iconLogacell.ico" />
+    <Content Include="Logacell_admin\img\Icon.ico" />
+    <Content Include="Logacell_admin\img\iconLogacell.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

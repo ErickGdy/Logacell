@@ -48,26 +48,33 @@ namespace Logacell_PV.Presentacion.Forms
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            try
             {
-                if (dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
+                for (int i = 0; i < dataGridView1.RowCount; i++)
                 {
-                    dataGridView1.Rows[i].Cells[1].Value = Convert.ToDecimal(dataGridView1.Rows[i].Cells[1].Value.ToString()) + txtCantidad.Value;
-                    return;
+                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == cmbFormaPago.SelectedItem.ToString())
+                    {
+                        dataGridView1.Rows[i].Cells[1].Value = Convert.ToDecimal(dataGridView1.Rows[i].Cells[1].Value.ToString()) + txtCantidad.Value;
+                        return;
+                    }
                 }
+                dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
+                lblRestante.Text = (Convert.ToDecimal(lblRestante.Text) - (txtCantidad.Value)).ToString("F2");
+                cmbFormaPago.SelectedIndex = 0;
+                double totalEnPagos = 0;
+                for (int i = 0; i < dataGridView1.RowCount; i++)
+                {
+                    totalEnPagos += Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString());
+                }
+                if (totalEnPagos - Convert.ToDouble(lblTotal.Text) <= 0)
+                    lblCambio.Text = "0";
+                else
+                    lblCambio.Text = (totalEnPagos - Convert.ToDouble(lblTotal.Text)).ToString();
             }
-            dataGridView1.Rows.Insert(dataGridView1.RowCount, txtPago.Value, cmbFormaPago.SelectedItem.ToString());
-            lblRestante.Text = (Convert.ToDecimal(lblRestante.Text) - (txtCantidad.Value)).ToString("F2");
-            cmbFormaPago.SelectedIndex = 0;
-            double totalEnPagos = 0;
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            catch (Exception ex)
             {
-                totalEnPagos += Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value.ToString());
+
             }
-            if (totalEnPagos - Convert.ToDouble(lblTotal.Text) <= 0)
-                lblCambio.Text = "0";
-            else
-                lblCambio.Text = (totalEnPagos - Convert.ToDouble(lblTotal.Text)).ToString();
 
         }
 
