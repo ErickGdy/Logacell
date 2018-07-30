@@ -128,5 +128,10 @@ namespace Logacell
             fm.FormClosed += new FormClosedEventHandler(form_Closed);
             fm.Show();
         }
+
+        private void modificarCotizaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

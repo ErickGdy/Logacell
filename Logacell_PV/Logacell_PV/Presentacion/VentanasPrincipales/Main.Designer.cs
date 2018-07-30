@@ -70,9 +70,9 @@ namespace Logacell
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.egresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoIngresoEgresoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -353,6 +353,17 @@ namespace Logacell
             this.nuevoIngresoEgresoToolStripMenuItem.Text = "Nuevo Ingreso/Egreso";
             this.nuevoIngresoEgresoToolStripMenuItem.Click += new System.EventHandler(this.nuevoIngresoEgresoToolStripMenuItem_Click);
             // 
+            // toolStripMenuAdmin
+            // 
+            this.toolStripMenuAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuAdmin.ForeColor = System.Drawing.Color.White;
+            this.toolStripMenuAdmin.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuAdmin.Image")));
+            this.toolStripMenuAdmin.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripMenuAdmin.Name = "toolStripMenuAdmin";
+            this.toolStripMenuAdmin.Size = new System.Drawing.Size(170, 36);
+            this.toolStripMenuAdmin.Text = "Administrador";
+            this.toolStripMenuAdmin.Click += new System.EventHandler(this.toolStripMenuAdmin_Click);
+            // 
             // footer
             // 
             this.footer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
@@ -371,17 +382,6 @@ namespace Logacell
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
-            // 
-            // toolStripMenuAdmin
-            // 
-            this.toolStripMenuAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuAdmin.ForeColor = System.Drawing.Color.White;
-            this.toolStripMenuAdmin.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuAdmin.Image")));
-            this.toolStripMenuAdmin.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripMenuAdmin.Name = "toolStripMenuAdmin";
-            this.toolStripMenuAdmin.Size = new System.Drawing.Size(170, 36);
-            this.toolStripMenuAdmin.Text = "Administrador";
-            this.toolStripMenuAdmin.Click += new System.EventHandler(this.toolStripMenuAdmin_Click);
             // 
             // Main
             // 

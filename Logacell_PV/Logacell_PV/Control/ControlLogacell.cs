@@ -2066,6 +2066,43 @@ namespace Logacell.Control
             }
 
         }
+        public bool actualizarServicioClienteCotizacion(String id, string presupuesto, string folio)
+        {
+            try
+            {
+                string updateServicio = "UPDATE servicioCliente SET Presupuesto='" + presupuesto +
+                 "' WHERE ID='" + id + "';";
+                string updateSolicitud = "UPDATE solicitudServicio S SET S.Total = (SELECT SUM(C.Presupuesto) FROM servicioCliente C WHERE C.Folio = '" + folio + "' ), S.Pendiente = (SELECT SUM(C.Presupuesto) FROM servicioCliente C WHERE C.Folio = '"+folio+ "') - S.Anticipo WHERE S.Folio ='" + folio + "';";
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION;"+
+                    updateServicio+
+                    updateSolicitud+
+                    " COMMIT;";
+                try
+                {
+                    //cmd.CommandText = "SELECT * FROM Servicios";
+                    conn.Open();
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al actualizar Servicio Cliente de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
         public MySqlDataAdapter obtenerDetalleServiciosClientesTable(string folio)
         {
             try
