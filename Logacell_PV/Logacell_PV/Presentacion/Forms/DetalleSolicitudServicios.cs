@@ -224,5 +224,26 @@ namespace Logacell
                 MessageBox.Show(ex.Message);
             }
         }
-    }
+
+        private void modificarCotizaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormServicioClienteCotizacion fcm = new FormServicioClienteCotizacion(dataGridView1.CurrentRow.Cells[0].Value.ToString(),lblFolio.Text);
+            fcm.FormClosed += new FormClosedEventHandler(form_Closed);
+            fcm.Show();
+        }
+        private void form_Closed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                actualizarTabla(control.obtenerDetalleServiciosClientesTable(lblFolio.Text));
+                SolicitudServicio sc = control.consultarSolicitudServicio(lblFolio.Text);
+                lblTotal.Text = sc.total;
+                lblPendiente.Text = sc.pendiente;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+   }
 }

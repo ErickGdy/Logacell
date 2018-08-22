@@ -75,6 +75,7 @@
             // 
             // registrarPagoToolStripMenuItem
             // 
+            this.registrarPagoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("registrarPagoToolStripMenuItem.Image")));
             this.registrarPagoToolStripMenuItem.Name = "registrarPagoToolStripMenuItem";
             this.registrarPagoToolStripMenuItem.Size = new System.Drawing.Size(184, 24);
             this.registrarPagoToolStripMenuItem.Text = "Registrar Pago";

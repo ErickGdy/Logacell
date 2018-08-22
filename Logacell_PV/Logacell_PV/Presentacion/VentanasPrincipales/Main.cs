@@ -1,9 +1,11 @@
 ﻿using Logacell.Control;
+using Logacell.DataObject;
 using Logacell.Presentacion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,7 +39,6 @@ namespace Logacell
         private void btnClientes_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("Cliente");
             MainCliente mc = MainCliente.getInstance();
             configurarForm(mc);
             mc.Show();
@@ -45,14 +46,12 @@ namespace Logacell
 
         private void inicioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            inhabilitarBoton("");
             closeForms();
         }
 
         private void listaDeServiciosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("Servicios");
             MainServicios form = MainServicios.getInstance();
             configurarForm(form);
             form.Show();
@@ -61,7 +60,6 @@ namespace Logacell
         private void btnProgresoServicios_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("Progreso");
             MainServiciosCliente form = MainServiciosCliente.getInstance();
             configurarForm(form);
             form.Show();
@@ -70,7 +68,6 @@ namespace Logacell
 
         private void btnVenta_Click(object sender, EventArgs e)
         {
-            inhabilitarBoton("Venta");
             minimizeForms();
             MainVentas form = MainVentas.getInstance();
             configurarForm(form);
@@ -80,7 +77,6 @@ namespace Logacell
         private void listaDeProductosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("InvProductos");
             MainInventarioProductos form = MainInventarioProductos.getInstance();
             configurarForm(form);
             form.Show();
@@ -113,7 +109,6 @@ namespace Logacell
             {
                 aux.Hide();
             }
-            inhabilitarBoton("");
 
         }
         private void configurarForm(Form form)
@@ -132,18 +127,6 @@ namespace Logacell
         private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Dispose();
-        }
-
-        private void inhabilitarBoton(String boton)
-        {
-            switch (boton)
-            {
-                case "InvProductos":
-                    //prod.Enabled = false;
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void Main_SizeChanged(object sender, EventArgs e)
@@ -205,7 +188,6 @@ namespace Logacell
         private void egresoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("MovimientoCaja");
             MainMovimientosCaja mv = MainMovimientosCaja.getInstance();
             configurarForm(mv);
             mv.Show();
@@ -214,7 +196,6 @@ namespace Logacell
         private void listaDeComprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             minimizeForms();
-            inhabilitarBoton("MovimientoCaja");
             MainCompras mc = MainCompras.getInstance();
             configurarForm(mc);
             mc.Show();
@@ -235,13 +216,40 @@ namespace Logacell
 
         private void abrirCajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (ControlLogacell.caja.estado == "Abierta")
+            if (ControlLogacell.caja.estado != "Abierta")
             {
                 AbrirCaja ac = new AbrirCaja();
             }
             else
                 MessageBox.Show("La caja se encuentra abierta");
 
+        }
+
+        private void toolStripMenuAdmin_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Empleado emp = ControlLogacell.getInstance().consultarEmpleado(ControlLogacell.currentUser.empleado);
+                if (emp.puesto == "Administrador" || emp.puesto == "Encargado de envios")
+                {
+                    Logacell_Admin.MainForm main = Logacell_Admin.MainForm.getInstance(emp.correo);
+                    main.Show();
+                }
+                else
+                {
+                    Logacell_Admin.Login log = new Logacell_Admin.Login();
+                    log.Show();
+                }
+            }
+            catch (Exception ex) { }
+        }
+
+        private void trapasosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            minimizeForms();
+            MainTraspasos mc = MainTraspasos.getInstance();
+            configurarForm(mc);
+            mc.Show();
         }
     }
 }

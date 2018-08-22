@@ -94,9 +94,9 @@ namespace Logacell
         {
             try
             {
-                String idVenta = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-                //DetalleDeVenta dv = new DetalleDeVenta(control.consultarVenta(idVenta));
-                //dv.ShowDialog();
+                String id = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                DetalleDeCompra dv = new DetalleDeCompra(control.consultarCompra(id));
+                dv.ShowDialog();
             }
             catch (Exception ex)
             {

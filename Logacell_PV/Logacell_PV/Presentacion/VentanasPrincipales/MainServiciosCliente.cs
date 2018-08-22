@@ -98,9 +98,9 @@ namespace Logacell
             sc.Folio  = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             sc.nombreCliente = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             sc.telefonoCliente = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            sc.total = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            sc.anticipo = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-            sc.pendiente = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            sc.total = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            sc.anticipo = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            sc.pendiente = dataGridView1.CurrentRow.Cells[6].Value.ToString();
             DetalleSolicitudServicios dt = new DetalleSolicitudServicios(sc);
             dt.ShowDialog();
         }
@@ -127,6 +127,11 @@ namespace Logacell
             FormSevicioClientePagos fm = new FormSevicioClientePagos(dataGridView1.CurrentRow.Cells[0].Value.ToString());
             fm.FormClosed += new FormClosedEventHandler(form_Closed);
             fm.Show();
+        }
+
+        private void modificarCotizaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
