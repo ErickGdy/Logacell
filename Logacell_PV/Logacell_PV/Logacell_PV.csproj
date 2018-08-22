@@ -88,6 +88,7 @@
     <Compile Include="DataObject\Servicio.cs" />
     <Compile Include="DataObject\SolicitudServicio.cs" />
     <Compile Include="DataObject\ServicioCliente.cs" />
+    <Compile Include="DataObject\Traspaso.cs" />
     <Compile Include="DataObject\StockPuntoVenta.cs" />
     <Compile Include="DataObject\Usuario.cs" />
     <Compile Include="DataObject\PagosVentas.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Logacell_admin\DataObject\Empleado.cs" />
     <Compile Include="Logacell_admin\DataObject\IngresoEgreso.cs" />
     <Compile Include="Logacell_admin\DataObject\PagosVentas.cs" />
+    <Compile Include="Logacell_admin\DataObject\Traspaso.cs" />
     <Compile Include="Logacell_admin\DataObject\Producto.cs" />
     <Compile Include="Logacell_admin\DataObject\PuntoVenta.cs" />
     <Compile Include="Logacell_admin\DataObject\Servicio.cs" />
@@ -274,6 +276,12 @@
     <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServiciosCliente.designer.cs">
       <DependentUpon>MainServiciosCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainTraspasos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainTraspasos.designer.cs">
+      <DependentUpon>MainTraspasos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logacell_admin\Presentacion\VentanasPrincipales\MainVentas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -303,6 +311,12 @@
     </Compile>
     <Compile Include="Presentacion\Forms\FormCorteCaja.designer.cs">
       <DependentUpon>FormCorteCaja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormTraspasos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\Forms\FormTraspasos.designer.cs">
+      <DependentUpon>FormTraspasos.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\Forms\FormLimiteCredito.cs">
       <SubType>Form</SubType>
@@ -429,6 +443,12 @@
     </Compile>
     <Compile Include="Presentacion\Login\LoginPV.Designer.cs">
       <DependentUpon>LoginPV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainTraspasos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentacion\VentanasPrincipales\MainTraspasos.designer.cs">
+      <DependentUpon>MainTraspasos.cs</DependentUpon>
     </Compile>
     <Compile Include="Presentacion\VentanasPrincipales\MainMovimientosCaja.cs">
       <SubType>Form</SubType>
@@ -561,6 +581,9 @@
     <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainServiciosCliente.resx">
       <DependentUpon>MainServiciosCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainTraspasos.resx">
+      <DependentUpon>MainTraspasos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Logacell_admin\Presentacion\VentanasPrincipales\MainVentas.resx">
       <DependentUpon>MainVentas.cs</DependentUpon>
     </EmbeddedResource>
@@ -575,6 +598,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormCorteCaja.resx">
       <DependentUpon>FormCorteCaja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\Forms\FormTraspasos.resx">
+      <DependentUpon>FormTraspasos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Forms\FormLimiteCredito.resx">
       <DependentUpon>FormLimiteCredito.cs</DependentUpon>
@@ -638,6 +664,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\Login\LoginPV.resx">
       <DependentUpon>LoginPV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainTraspasos.resx">
+      <DependentUpon>MainTraspasos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentacion\VentanasPrincipales\MainMovimientosCaja.resx">
       <DependentUpon>MainMovimientosCaja.cs</DependentUpon>

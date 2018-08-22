@@ -587,7 +587,97 @@ namespace Logacell_Admin.Control
 
         }
 
-
+        //---------------------------TRASPASOS-----------------//
+        public Traspaso consultarTraspaso(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = " SELECT ID, Origen, Destino,Producto, Cantidad, Estado, Observaciones FROM traspaso WHERE ID='" + id + "';";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Traspaso tras = new Traspaso();
+                        tras.id = reader.GetInt32(0);
+                        tras.idOrigen = reader.GetInt32(1);
+                        tras.idDestino = reader.GetInt32(2);
+                        tras.producto = reader.GetInt32(3);
+                        tras.cantidad = reader.GetInt32(4);
+                        tras.estado = reader.GetString(5);
+                        tras.observaciones = reader.GetString(6);
+                        conn.Close();
+                        return tras;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al obtener traspaso a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre AS 'Producto' , T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosTable(string parametro)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre  AS 'Producto', T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE " +
+                        "(PV.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.ID LIKE '%" + parametro + "%' or " +
+                        "PV2.Nombre LIKE '%" + parametro + "%' or " +
+                        "P.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.Estado LIKE '%" + parametro + "%'" +
+                        ") AND PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
         //-------------------SERVICIOS------------------//
         public bool agregarServicios(Servicio servicio)
         {

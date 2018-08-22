@@ -19,14 +19,16 @@ namespace Logacell_Admin
     {
         public static MainForm instance;
         Usuario user;
+        ControlLogacell_Admin control;
         public MainForm(string empleado)
         {
             InitializeComponent();
-            ControlLogacell_Admin.getInstance().setCurrentUser(empleado);
+            control = ControlLogacell_Admin.getInstance();
+            control.setCurrentUser(empleado);
             usuarioToolStripMenuItem.Text = empleado;
             try
             {
-                if (ControlLogacell_Admin.getInstance().consultarEmpleado(ControlLogacell_Admin.currentUser.empleado).puesto != "Administrador")
+                if (control.consultarEmpleado(empleado).puesto != "Administrador")
                 {
                     btnServicios.Visible = false;
                     btnClientes.Visible = false;
@@ -37,6 +39,7 @@ namespace Logacell_Admin
                     btnEmpleados.Visible = false;
                     btnFinanzas.Visible = false;
                     btnAdministracion.Visible = false;
+
                 }
             }catch(Exception ex)
             {
@@ -174,6 +177,7 @@ namespace Logacell_Admin
             btnServicios.Enabled = true;
             btnCompras.Enabled = true;
             btnProgresoServicios.Enabled = true;
+            btnTraspasos.Enabled = true;
             switch (boton)
             {
                 case "Inventario":
@@ -206,6 +210,9 @@ namespace Logacell_Admin
                 case "Compras":
                     btnCompras.Enabled = false;
                     break;
+                case "Traspasos":
+                    btnTraspasos.Enabled = false;
+                    break;
                 default:
                     break;
             }
@@ -233,6 +240,14 @@ namespace Logacell_Admin
         {
             pnMenus.Height = this.Height;
             imgLogo.Location = new System.Drawing.Point(4, this.Height - 145);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            minimizeForms();
+            inhabilitarBoton("Traspasos");
+            MainTraspasos form = MainTraspasos.getInstance();
+            configurarForm(form);
         }
     }
 }

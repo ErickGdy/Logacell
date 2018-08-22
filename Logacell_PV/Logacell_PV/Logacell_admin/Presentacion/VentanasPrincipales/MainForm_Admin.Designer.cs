@@ -40,6 +40,7 @@ namespace Logacell_Admin
             this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnMenus = new System.Windows.Forms.Panel();
+            this.btnTraspasos = new System.Windows.Forms.Button();
             this.btnCompras = new System.Windows.Forms.Button();
             this.btnServicios = new System.Windows.Forms.Button();
             this.imgLogo = new System.Windows.Forms.PictureBox();
@@ -104,6 +105,7 @@ namespace Logacell_Admin
             // pnMenus
             // 
             this.pnMenus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(91)))), ((int)(((byte)(167)))));
+            this.pnMenus.Controls.Add(this.btnTraspasos);
             this.pnMenus.Controls.Add(this.btnCompras);
             this.pnMenus.Controls.Add(this.btnServicios);
             this.pnMenus.Controls.Add(this.imgLogo);
@@ -120,13 +122,25 @@ namespace Logacell_Admin
             this.pnMenus.Size = new System.Drawing.Size(190, 638);
             this.pnMenus.TabIndex = 17;
             // 
+            // btnTraspasos
+            // 
+            this.btnTraspasos.BackColor = System.Drawing.Color.White;
+            this.btnTraspasos.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnTraspasos.Location = new System.Drawing.Point(4, 55);
+            this.btnTraspasos.Name = "btnTraspasos";
+            this.btnTraspasos.Size = new System.Drawing.Size(183, 48);
+            this.btnTraspasos.TabIndex = 12;
+            this.btnTraspasos.Text = "Traspasos";
+            this.btnTraspasos.UseVisualStyleBackColor = false;
+            this.btnTraspasos.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btnCompras
             // 
             this.btnCompras.BackColor = System.Drawing.Color.White;
             this.btnCompras.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnCompras.Location = new System.Drawing.Point(4, 288);
+            this.btnCompras.Location = new System.Drawing.Point(4, 313);
             this.btnCompras.Name = "btnCompras";
-            this.btnCompras.Size = new System.Drawing.Size(183, 56);
+            this.btnCompras.Size = new System.Drawing.Size(183, 48);
             this.btnCompras.TabIndex = 11;
             this.btnCompras.Text = "Compras";
             this.btnCompras.UseVisualStyleBackColor = false;
@@ -137,9 +151,9 @@ namespace Logacell_Admin
             this.btnServicios.BackColor = System.Drawing.Color.Transparent;
             this.btnServicios.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnServicios.BackgroundImage")));
             this.btnServicios.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnServicios.Location = new System.Drawing.Point(4, 59);
+            this.btnServicios.Location = new System.Drawing.Point(4, 105);
             this.btnServicios.Name = "btnServicios";
-            this.btnServicios.Size = new System.Drawing.Size(183, 56);
+            this.btnServicios.Size = new System.Drawing.Size(183, 48);
             this.btnServicios.TabIndex = 10;
             this.btnServicios.Text = "Servicios";
             this.btnServicios.UseVisualStyleBackColor = false;
@@ -159,9 +173,9 @@ namespace Logacell_Admin
             // 
             this.btnVentas.BackColor = System.Drawing.Color.White;
             this.btnVentas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnVentas.Location = new System.Drawing.Point(3, 230);
+            this.btnVentas.Location = new System.Drawing.Point(3, 263);
             this.btnVentas.Name = "btnVentas";
-            this.btnVentas.Size = new System.Drawing.Size(183, 56);
+            this.btnVentas.Size = new System.Drawing.Size(183, 48);
             this.btnVentas.TabIndex = 8;
             this.btnVentas.Tag = "";
             this.btnVentas.Text = "Ventas";
@@ -172,9 +186,9 @@ namespace Logacell_Admin
             // 
             this.btnFinanzas.BackColor = System.Drawing.Color.White;
             this.btnFinanzas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnFinanzas.Location = new System.Drawing.Point(4, 461);
+            this.btnFinanzas.Location = new System.Drawing.Point(4, 463);
             this.btnFinanzas.Name = "btnFinanzas";
-            this.btnFinanzas.Size = new System.Drawing.Size(183, 56);
+            this.btnFinanzas.Size = new System.Drawing.Size(183, 48);
             this.btnFinanzas.TabIndex = 7;
             this.btnFinanzas.Text = "Finanzas";
             this.btnFinanzas.UseVisualStyleBackColor = false;
@@ -184,9 +198,9 @@ namespace Logacell_Admin
             // 
             this.btnTerminales.BackColor = System.Drawing.Color.White;
             this.btnTerminales.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnTerminales.Location = new System.Drawing.Point(4, 345);
+            this.btnTerminales.Location = new System.Drawing.Point(4, 363);
             this.btnTerminales.Name = "btnTerminales";
-            this.btnTerminales.Size = new System.Drawing.Size(183, 56);
+            this.btnTerminales.Size = new System.Drawing.Size(183, 48);
             this.btnTerminales.TabIndex = 4;
             this.btnTerminales.Text = "Puntos de Venta";
             this.btnTerminales.UseVisualStyleBackColor = false;
@@ -196,7 +210,7 @@ namespace Logacell_Admin
             // 
             this.btnProgresoServicios.BackColor = System.Drawing.Color.White;
             this.btnProgresoServicios.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProgresoServicios.Location = new System.Drawing.Point(4, 173);
+            this.btnProgresoServicios.Location = new System.Drawing.Point(4, 205);
             this.btnProgresoServicios.Name = "btnProgresoServicios";
             this.btnProgresoServicios.Size = new System.Drawing.Size(183, 56);
             this.btnProgresoServicios.TabIndex = 3;
@@ -209,9 +223,9 @@ namespace Logacell_Admin
             this.btnProductos.BackColor = System.Drawing.Color.Transparent;
             this.btnProductos.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProductos.BackgroundImage")));
             this.btnProductos.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnProductos.Location = new System.Drawing.Point(4, 3);
+            this.btnProductos.Location = new System.Drawing.Point(4, 5);
             this.btnProductos.Name = "btnProductos";
-            this.btnProductos.Size = new System.Drawing.Size(183, 56);
+            this.btnProductos.Size = new System.Drawing.Size(183, 48);
             this.btnProductos.TabIndex = 1;
             this.btnProductos.Text = "Productos";
             this.btnProductos.UseVisualStyleBackColor = false;
@@ -221,9 +235,9 @@ namespace Logacell_Admin
             // 
             this.btnAdministracion.BackColor = System.Drawing.Color.White;
             this.btnAdministracion.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnAdministracion.Location = new System.Drawing.Point(4, 519);
+            this.btnAdministracion.Location = new System.Drawing.Point(4, 513);
             this.btnAdministracion.Name = "btnAdministracion";
-            this.btnAdministracion.Size = new System.Drawing.Size(183, 56);
+            this.btnAdministracion.Size = new System.Drawing.Size(183, 48);
             this.btnAdministracion.TabIndex = 5;
             this.btnAdministracion.Text = "Administración";
             this.btnAdministracion.UseVisualStyleBackColor = false;
@@ -233,9 +247,9 @@ namespace Logacell_Admin
             // 
             this.btnClientes.BackColor = System.Drawing.Color.White;
             this.btnClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnClientes.Location = new System.Drawing.Point(4, 116);
+            this.btnClientes.Location = new System.Drawing.Point(4, 155);
             this.btnClientes.Name = "btnClientes";
-            this.btnClientes.Size = new System.Drawing.Size(183, 56);
+            this.btnClientes.Size = new System.Drawing.Size(183, 48);
             this.btnClientes.TabIndex = 2;
             this.btnClientes.Text = "Clientes";
             this.btnClientes.UseVisualStyleBackColor = false;
@@ -245,9 +259,9 @@ namespace Logacell_Admin
             // 
             this.btnEmpleados.BackColor = System.Drawing.Color.White;
             this.btnEmpleados.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.btnEmpleados.Location = new System.Drawing.Point(4, 403);
+            this.btnEmpleados.Location = new System.Drawing.Point(4, 413);
             this.btnEmpleados.Name = "btnEmpleados";
-            this.btnEmpleados.Size = new System.Drawing.Size(183, 56);
+            this.btnEmpleados.Size = new System.Drawing.Size(183, 48);
             this.btnEmpleados.TabIndex = 6;
             this.btnEmpleados.Text = "Empleados";
             this.btnEmpleados.UseVisualStyleBackColor = false;
@@ -294,6 +308,7 @@ namespace Logacell_Admin
         private System.Windows.Forms.PictureBox imgLogo;
         private System.Windows.Forms.Button btnServicios;
         private System.Windows.Forms.Button btnCompras;
+        private System.Windows.Forms.Button btnTraspasos;
     }
 }
 

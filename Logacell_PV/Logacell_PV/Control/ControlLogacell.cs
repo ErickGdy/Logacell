@@ -217,13 +217,55 @@ namespace Logacell.Control
             }
 
         }
+        public List<Producto> obtenerProductosByPV(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "SELECT p.ID, p.Categoria, p.Nombre, p.Marca, p.Modelo,p.Precio, s.Cantidad FROM producto p INNER JOIN stockPV s on p.ID = s.Producto where s.PuntoVenta="+id+" and s.Cantidad > 0 ORDER BY p.Nombre ASC;";
+                conn.Open();
+                try
+                {
+                    //int rowsAfected = cmd.ExecuteNonQuery();
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    List<Producto> aux = new List<Producto>();
+                    while (reader.Read())
+                    {
+                        Producto p = new Producto();
+
+                        p.id = reader.GetInt32(0);
+                        p.categoria = reader.GetString(1);
+                        p.nombre = reader.GetString(2);
+                        p.modelo = reader.GetString(4);
+                        p.marca = reader.GetString(3);
+                        p.precio = reader.GetString(5);
+                        p.cantidad = reader.GetInt32(6);
+                        aux.Add(p);
+                    }
+                    conn.Close();
+                    if (aux.Count != 0) return aux;
+                    else return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de Producto de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+
+        }
         public List<Producto> obtenerProductosByPV()
         {
             try
             {
                 conn = new MySqlConnection(builder.ToString());
                 cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT p.ID, p.Categoria, p.Nombre, p.Marca, p.Modelo,p.Precio, s.Cantidad FROM producto p INNER JOIN stockPV s on p.ID = s.Producto where s.PuntoVenta="+idPV.id+" and s.Cantidad > 0;";
+                cmd.CommandText = "SELECT p.ID, p.Categoria, p.Nombre, p.Marca, p.Modelo,p.Precio, s.Cantidad FROM producto p INNER JOIN stockPV s on p.ID = s.Producto where s.PuntoVenta="+idPV.id+" and s.Cantidad > 0 ORDER BY p.Nombre ASC;";
                 conn.Open();
                 try
                 {
@@ -520,6 +562,276 @@ namespace Logacell.Control
                 throw new Exception("Error al establecer conexión con el servidor");
             }
         }
+
+        //---------------------------TRASPASOS-----------------//
+        public Traspaso consultarTraspaso(string id)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = " SELECT ID, Origen, Destino,Producto, Cantidad, Estado, Observaciones FROM traspaso WHERE ID='"+id+"';";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Traspaso tras = new Traspaso();
+                        tras.id = reader.GetInt32(0);
+                        tras.idOrigen = reader.GetInt32(1);
+                        tras.idDestino = reader.GetInt32(2);
+                        tras.producto = reader.GetInt32(3);
+                        tras.cantidad = reader.GetInt32(4);
+                        tras.estado = reader.GetString(5);
+                        tras.observaciones = reader.GetString(6);
+                        conn.Close();
+                        return tras;
+                    }
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al obtener traspaso a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool agregarTraspaso(Traspaso traspaso)
+        {
+            try
+            {
+                string agregarTraspaso = "INSERT INTO traspaso (Origen, Destino,Producto, Cantidad, Estado, Observaciones) values ('"
+                    + traspaso.idOrigen + "','" + traspaso.idDestino + "','" + traspaso.producto + "','" + traspaso.cantidad + "','Enviado','" + traspaso.observaciones + "');";
+                string stock = "UPDATE stockPV SET Cantidad= Cantidad -"+traspaso.cantidad+" WHERE Producto=" + traspaso.producto + " and PuntoVenta =" + traspaso.idOrigen+";";
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION;" +
+                                    agregarTraspaso +
+                                    stock +
+                                    "COMMIT;";
+                //cmd.CommandText = "SELECT * FROM Servicios";
+                conn.Open();
+                try
+                {
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    //MySqlDataReader reader = cmd.ExecuteReader();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al agregar traspaso a la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public bool aceptarTraspaso(Traspaso traspaso)
+        {
+            try
+            {
+                string agregarTraspaso = "UPDATE traspaso SET Estado='Recibido' , Observaciones='" + traspaso.observaciones + "' WHERE ID = '" + traspaso.id + "';";
+                string stock = "UPDATE stockPV SET Cantidad= Cantidad +" + traspaso.cantidad + " WHERE Producto=" + traspaso.producto + " and PuntoVenta =" + traspaso.idDestino + ";";
+                string insertStocks = "INSERT INTO stockPV(Cantidad, Producto, PuntoVenta) SELECT '0', '" + traspaso.producto + "', '" + traspaso.idDestino + "' FROM DUAL WHERE NOT EXISTS(SELECT * FROM stockPV  WHERE Producto='" + traspaso.producto + "' and PuntoVenta ='" + traspaso.idDestino +"'); ";
+                conn = new MySqlConnection(builder.ToString());
+                cmd = conn.CreateCommand();
+                cmd.CommandText = "START TRANSACTION;" +
+                                    agregarTraspaso +
+                                    insertStocks +
+                                    stock +
+                                    "COMMIT;";
+                conn.Open();
+                try
+                {
+
+                    int rowsAfected = cmd.ExecuteNonQuery();
+                    conn.Close();
+                    if (rowsAfected > 0)
+                        return true;
+                    else
+                        return false;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error..! Error al recibir traspaso de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre AS 'Producto' , T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosTable(string parametro)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre  AS 'Producto', T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE " +
+                        "(PV.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.ID LIKE '%" + parametro + "%' or " +
+                        "PV2.Nombre LIKE '%" + parametro + "%' or " +
+                        "P.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.Estado LIKE '%" + parametro + "%'" +
+                        ") AND PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID", conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosPVDestinoTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre AS 'Producto' , T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID AND T.Destino =" + idPV.id, conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosPVDestinoTable(string parametro)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID, PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre  AS 'Producto', T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE " +
+                        "(PV.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.ID LIKE '%" + parametro + "%' or " +
+                        "PV2.Nombre LIKE '%" + parametro + "%' or " +
+                        "P.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.Estado LIKE '%" + parametro + "%'" +
+                        ") AND PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID AND T.Destino =" + idPV.id, conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosPVOrigenTable()
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID,PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre AS 'Producto' , T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID AND T.Origen =" + idPV.id, conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+        public MySqlDataAdapter obtenerTraspasosPVOrigenTable(string parametro)
+        {
+            try
+            {
+                conn = new MySqlConnection(builder.ToString());
+                conn.Open();
+                try
+                {
+                    MySqlDataAdapter mdaDatos = new MySqlDataAdapter("SELECT T.ID,PV.Nombre AS 'Origen', PV2.Nombre AS 'Destino', T.Cantidad, P.Nombre AS 'Producto' , T.Estado, T.Observaciones FROM traspaso T, producto P, puntoVenta PV ,puntoVenta PV2 WHERE " +
+                        "(PV.Nombre LIKE '%" + parametro + "%' or " +
+                        "PV2.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.ID LIKE '%" + parametro + "%' or " +
+                        "P.Nombre LIKE '%" + parametro + "%' or " +
+                        "T.Estado LIKE '%" + parametro + "%'" +
+                        ") AND PV.ID=T.Origen AND PV2.ID=T.Destino AND T.Producto = P.ID AND T.Origen =" + idPV.id, conn);
+                    conn.Close();
+                    return mdaDatos;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Error al obtener datos de traspasos de la Base de Datos");
+                }
+            }
+            catch (Exception e)
+            {
+                conn.Close();
+                throw new Exception("Error al establecer conexión con el servidor");
+            }
+        }
+
 
         //-------------------SERVICIOS------------------//
         public bool agregarServicios(Servicio servicio)

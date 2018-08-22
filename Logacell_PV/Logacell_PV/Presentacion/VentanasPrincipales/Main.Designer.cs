@@ -73,6 +73,7 @@ namespace Logacell
             this.toolStripMenuAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.footer = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.trapasosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.footer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -141,7 +142,8 @@ namespace Logacell
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.listaDeProductosToolStripMenuItem});
+            this.listaDeProductosToolStripMenuItem,
+            this.trapasosToolStripMenuItem});
             this.toolStripMenuItem7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem7.ForeColor = System.Drawing.Color.White;
             this.toolStripMenuItem7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem7.Image")));
@@ -383,6 +385,15 @@ namespace Logacell
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
+            // trapasosToolStripMenuItem
+            // 
+            this.trapasosToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(60)))), ((int)(((byte)(40)))));
+            this.trapasosToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+            this.trapasosToolStripMenuItem.Name = "trapasosToolStripMenuItem";
+            this.trapasosToolStripMenuItem.Size = new System.Drawing.Size(271, 28);
+            this.trapasosToolStripMenuItem.Text = "Trapasos";
+            this.trapasosToolStripMenuItem.Click += new System.EventHandler(this.trapasosToolStripMenuItem_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -438,6 +449,7 @@ namespace Logacell
         private System.Windows.Forms.ToolStripMenuItem nuevoIngresoEgresoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirCajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuAdmin;
+        private System.Windows.Forms.ToolStripMenuItem trapasosToolStripMenuItem;
     }
 }
 
