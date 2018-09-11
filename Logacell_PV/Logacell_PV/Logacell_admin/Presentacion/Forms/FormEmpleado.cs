@@ -16,12 +16,14 @@ namespace Logacell_Admin
     {
         ControlLogacell_Admin control;
         bool modificacion = false;
+        Empleado c = new Empleado();
         public FormEmpleado(Empleado empleado, Usuario usuario)
         {
             InitializeComponent();
             control = ControlLogacell_Admin.getInstance();
             if(empleado != null)
             {
+                c = empleado;
                 modificacion = true;
                 txtCorreo.Text = empleado.correo;
                 txtDireccion.Text = empleado.direcion;
@@ -41,7 +43,6 @@ namespace Logacell_Admin
         {
             if (validarCampos())
             {
-                Empleado c = new Empleado();
                 c.nombre = txtNombre.Text;
                 c.direcion = txtDireccion.Text;
                 c.telefono = txtTelefono.Text;
