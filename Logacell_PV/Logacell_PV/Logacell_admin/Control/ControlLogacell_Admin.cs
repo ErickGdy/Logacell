@@ -1282,10 +1282,10 @@ namespace Logacell_Admin.Control
                string emp = "UPDATE empleado SET Nombre= '" + empleado.nombre +
                 "',Direccion='" + empleado.direcion + "',Telefono='" + empleado.telefono +
                 "',Puesto='" + empleado.puesto +
-                "', Estado = 1 WHERE Correo='" + empleado.correo + "'";
+                "', Estado = 1 WHERE Correo='" + empleado.correo + "';";
                 string user = "UPDATE usuario SET Usuario= '" + usuario +
                 "',Contrasena='" + contrasena +
-                "',Estado = "+acceso+" WHERE Empleado='" + empleado.correo + "'";
+                "',Estado = "+acceso+" WHERE Empleado='" + empleado.correo + "';";
                 cmd.CommandText = "START TRANSACTION; " +
                                     emp +
                                     user +
